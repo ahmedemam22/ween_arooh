@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Container(
         height: SizeConfig.screenHeight,
-        color: background_color,
+        color: backgroundColor,
 
         child: Padding(
           padding:  EdgeInsets.only(top:SizeConfig.screenWidth*s175),

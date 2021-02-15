@@ -13,9 +13,9 @@
   "first_name": " first name",
   "last_name": "last name",
   "choose_file": "choose file",
-  "add_image": "Add Image"
-
-
-
+  "add_image": "Add Image",
+  "sorry": "Sorry!",
+  "register_error": "This mobile is already used",
+  "login_error": "This mobile is not register ً"
 
 }

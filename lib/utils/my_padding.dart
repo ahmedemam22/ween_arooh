@@ -8,7 +8,7 @@ import 'size_config.dart';
 
 //padding
 ///////////////////
-EdgeInsets PADDING_symmetric({double horizontalFactor,double verticalFactor}) {
+EdgeInsets paddingSymmetric({double horizontalFactor,double verticalFactor}) {
   if(horizontalFactor!=null&&verticalFactor!=null)
   {
     return  EdgeInsets.symmetric(
@@ -35,7 +35,7 @@ EdgeInsets PADDING_symmetric({double horizontalFactor,double verticalFactor}) {
 
 }
 
-EdgeInsets PADDING_only({double left,double right,double top,double bottom}) {
+EdgeInsets paddingOnly({double left,double right,double top,double bottom}) {
 
   return  EdgeInsets.only(
     left: left!=null? SizeConfig.safeBlockHorizontal * left :0,
@@ -47,7 +47,7 @@ EdgeInsets PADDING_only({double left,double right,double top,double bottom}) {
 
 }
 
-EdgeInsets PADDING_all({double factor}) {
+EdgeInsets paddingAll({double factor}) {
   return EdgeInsets.all( SizeConfig.safeBlockHorizontal*factor );
 }
 

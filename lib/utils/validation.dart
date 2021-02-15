@@ -3,7 +3,7 @@
 import 'package:localize_and_translate/localize_and_translate.dart';
 
 //////////////////////////////////////////////////////////////////
-String FN_validEmail(String email) {
+String fnValidEmail(String email) {
   print('email is $email');
   if ((email == null) || email.length < 3) {
     return translator.currentLanguage == 'en' ? 'enter valid email' : "ادخل بريد الكتروني صحيح";
@@ -15,7 +15,7 @@ String FN_validEmail(String email) {
   }
 }
 
-String FN_validName(String name) {
+String fnValidName(String name) {
   if ((name == null) || name.length < 3) {
     return    translator.currentLanguage == 'en' ? 'name must\'t be less than 3 char ' : "الاسم لايقل عن 3 احرف";
 
@@ -26,7 +26,7 @@ String FN_validName(String name) {
   }
 }
 
-String FN_validPhone(String phone) {
+String fnValidPhone(String phone) {
   if (phone == null||phone.length!=9 ) {
     return   translator.currentLanguage == 'en' ? '"mobile number must be 9 digits" ' : "رقم الهاتف يجب ان يكون 9 ارقام";
 
@@ -37,7 +37,7 @@ String FN_validPhone(String phone) {
   }
 }
 
-String FN_validPassword(String password) {
+String fnValidPass(String password) {
   if (password == null || password == '' || password.length < 8) {
     return translator.currentLanguage == 'en' ? "password is very short " : "الرقم السري قصير جدا";
     // return "password is very short ";
@@ -46,7 +46,7 @@ String FN_validPassword(String password) {
   }
 }
 
-String FN_validConfPass(String confPassword, String password) {
+String fnValidConfPass(String confPassword, String password) {
   if (confPassword == null || confPassword == "" || password != confPassword) {
     return "doesn't match the password ";
   } else {

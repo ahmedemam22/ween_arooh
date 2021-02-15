@@ -3,6 +3,9 @@ import 'package:ween_arooh/utils/colors.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 class CodePinShape extends StatelessWidget {
+  final controller;
+
+  const CodePinShape({Key key, this.controller}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return  Center(
@@ -11,6 +14,7 @@ class CodePinShape extends StatelessWidget {
         child: Directionality(
           textDirection: TextDirection.ltr,
           child: PinCodeTextField(
+            controller: controller,
             textInputType: TextInputType.numberWithOptions(),
         //    controller: _pinCodeController,
             length: 4,
@@ -23,15 +27,15 @@ class CodePinShape extends StatelessWidget {
             pinTheme: PinTheme(
               shape: PinCodeFieldShape.underline,
 //            borderRadius: BorderRadius.circular(12),
-              activeColor: dark_blue,
-              inactiveColor: light_blue,
+              activeColor: darkBlue,
+              inactiveColor: lightBlue,
               activeFillColor: white,
               fieldHeight: 50,
               fieldWidth: SizeConfig.screenWidth/8,
-              disabledColor: dark_blue,
+              disabledColor: darkBlue,
               inactiveFillColor: white,
-              selectedFillColor: light_blue,
-              selectedColor: dark_blue,
+              selectedFillColor: lightBlue,
+              selectedColor: darkBlue,
             ),
             /*onChanged: (value) {
               setState(() {

@@ -4,7 +4,11 @@ import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/widgets/country_code.dart';
+import 'package:ween_arooh/utils/validation.dart';
 class TextPhoneShape extends StatelessWidget {
+  final controller;
+
+  const TextPhoneShape({Key key, this.controller}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,9 +26,10 @@ class TextPhoneShape extends StatelessWidget {
                   width: SizeConfig.screenWidth * 0.65,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 10),
-                    child: TextField(
+                    child: TextFormField(
                       textDirection: TextDirection.ltr,
-                    //  controller: _mobile_Controller,
+                      controller: controller,
+                     validator: fnValidPhone,
                      // style: mobileResult == null ? TX_STYLE_black_14Point5.copyWith(color: gray,fontFamily: 'Schelyer') : TX_STYLE_black_14Point5.copyWith(color: red,fontFamily: 'Schelyer'),
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -42,7 +47,7 @@ class TextPhoneShape extends StatelessWidget {
         Container(
           width: SizeConfig.screenWidth * 0.9,
           height: 1,
-          color: dark_grey,
+          color: darkGrey,
         ),
       ],
     );

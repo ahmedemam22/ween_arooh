@@ -13,7 +13,11 @@
   "first_name": "الاسم الاول",
   "last_name": "الاسم الاخير",
   "choose_file": "اختار ملف",
-  "add_image": "اضف صورة"
+  "add_image": "اضف صورة",
+  "sorry": "عذرا!",
+  "register_error": "هذا الجوال  مستخدم مسبقاً",
+  "login_error": "هذا الجوال غير موجود ً"
+
 
 
 

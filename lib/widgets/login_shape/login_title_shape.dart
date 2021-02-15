@@ -15,14 +15,14 @@ class LoginTilteShape extends StatelessWidget {
           children: [
             Text(text,
               style: TX_STYLE_white_16.copyWith(
-                  color: light_grey
+                  color: lightGrey
               ),
             ),
             SizedBox(height: 2,),
             Container(
               width: SizeConfig.blockSizeHorizontal * 40,
               height: 1,
-              color: light_grey,
+              color: lightGrey,
             ),
           ],
         ));

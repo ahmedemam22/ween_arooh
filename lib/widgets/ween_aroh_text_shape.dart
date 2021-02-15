@@ -17,7 +17,7 @@ class WenArohTextShape extends StatelessWidget {
         Text(
           translator.translate('ween_aroh'),
           style: TX_STYLE_white_16.copyWith(fontFamily: "DROID",
-              color: register!=null?background_color:white,
+              color: register!=null?backgroundColor:white,
               fontSize: SizeConfig.screenWidth*s41),
         ),
         SizedBox(width: SizeConfig.screenWidth*s15,),

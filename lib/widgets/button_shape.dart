@@ -12,10 +12,7 @@ class ButtonShape extends StatelessWidget {
   ButtonShape(this.text, this.color);
   @override
   Widget build(BuildContext context) {
-    return   GestureDetector(
-//      onTap: ()=>navigateAndKeepStack(context, PinCodeVerificationScreen("01069686072")),
-      onTap: () => null,
-      child: Card(
+    return   Card(
         elevation: 10,
         child: Container(
           width: SizeConfig.screenWidth * 0.7,
@@ -24,7 +21,7 @@ class ButtonShape extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(10))
           ),
           child: Padding(
-            padding: PADDING_symmetric(verticalFactor: 2),
+            padding: paddingSymmetric(verticalFactor: 2),
             child: Center(
               child: Text(
                 text,
@@ -34,7 +31,7 @@ class ButtonShape extends StatelessWidget {
           ),
         ),
         color: color,
-      ),
+
     );
   }
 }

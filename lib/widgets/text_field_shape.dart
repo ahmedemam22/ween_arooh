@@ -6,9 +6,11 @@ import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/text_style.dart';
 import 'package:ween_arooh/widgets/text_field.dart';
 class TextFieldShape extends StatelessWidget {
-  final String name;
+  final String hintName;
+  final TextEditingController controller;
+  final validate ;
 
-  TextFieldShape({this.name});
+  TextFieldShape({this.hintName, this.controller, this.validate});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,7 +18,7 @@ class TextFieldShape extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Text(translator.translate(name),
+            child: Text(translator.translate(hintName),
               style: TX_STYLE_black_15,
 
             ),
@@ -29,7 +31,7 @@ class TextFieldShape extends StatelessWidget {
 
             ),
           ),
-          TextFeld(),
+          TextFeld(controller: controller,validate: validate,hintText: hintName,),
         ],
       ),
     );

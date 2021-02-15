@@ -11,7 +11,7 @@ class LoginContainerShape extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: SizeConfig.screenHeight/3.2,
-      color: color??background_color,
+      color: color??backgroundColor,
       child:WenArohTextShape(register: register!=null?"register":null,)
 
     );
