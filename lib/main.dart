@@ -2,16 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
+import 'package:ween_arooh/screens/settingScreen.dart';
+import 'package:ween_arooh/screens/aboutUsScreen.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/login/login_screen.dart';
+import 'screens/mainScreen.dart';
 import 'screens/login/registration_screen.dart';
+import 'screens/offersScreen.dart';
 import 'screens/login/splash_screen.dart';
 import 'services/provider/registerProvider.dart';
 import 'screens/login/verfication_code_screen.dart';
 import 'package:provider/provider.dart';
+
 
 Future<void>  main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,13 +65,17 @@ class _MyAppState extends State<MyApp> {
             GlobalCupertinoLocalizations.delegate,
             DefaultCupertinoLocalizations.delegate,
           ],
-          initialRoute: "/login",
+          initialRoute: "/about_us",
 
           routes: {
             '/splash': (context) => SplashScreen(),
             '/login': (context) => LoginScreen(),
             '/verfication': (context) => VerficationCodeScreen(),
             '/register': (context) => RegistrationScreen(),
+            '/main': (context) => MainScreen(),
+            '/offers': (context) => OffersScreen(),
+            '/setting': (context) => SettingScreen(),
+            '/about_us': (context) => AboutUsScreen(),
           },
           debugShowCheckedModeBanner: false,
 

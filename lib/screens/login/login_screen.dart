@@ -33,14 +33,22 @@ class LoginScreen extends StatelessWidget {
                   child: TextPhoneShape(controller: _mobileController,)),
               SizedBox(height: SizeConfig.screenWidth*s80,),
 
-              InkWell(
-                  onTap: (){
-                    if(_formKey.currentState.validate()){
-                      Provider.of<RegisterProvider>(context,listen: false).login(mobile:_mobileController.text,context: context);
-                    }
+    Selector<RegisterProvider, bool>(
+    selector: (context, login) =>
+    login.waitLogin,
+    builder: (context, value, child) {
+      return value?Center(child: CircularProgressIndicator(),):InkWell(
+          onTap: () {
+            if (_formKey.currentState.validate()) {
+              Provider.of<RegisterProvider>(context, listen: false).login(
+                  mobile: _mobileController.text, context: context);
+            }
+          }
+          ,
+          child: ButtonShape(
+              translator.translate('login_enter'), backgroundColor));
 
-                  }
-                  ,child: ButtonShape(translator.translate('login_enter'),backgroundColor)),
+    }),
               SizedBox(height: SizeConfig.screenWidth*s22,),
               InkWell(
                   onTap: ()=>  Navigator.pushNamed(context, '/register')

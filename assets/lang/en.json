@@ -16,6 +16,15 @@
   "add_image": "Add Image",
   "sorry": "Sorry!",
   "register_error": "This mobile is already used",
-  "login_error": "This mobile is not register ً"
+  "login_error": "This mobile is not register ً",
+  "main": "Home",
+  "offers": "Offers",
+  "information": "My information",
+  "save": "Save",
+  "about_us": "About Us"
+
+
+
+
 
 }

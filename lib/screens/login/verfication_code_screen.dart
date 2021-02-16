@@ -9,11 +9,12 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 import '../../widgets/login_shape/code_pin_shape.dart';
 import '../../widgets/login_shape/login_container_shape.dart';
 import '../../widgets/login_shape/login_title_shape.dart';
+import 'package:ween_arooh/model/verficationModel.dart';
 class VerficationCodeScreen extends StatelessWidget {
   final _mobileController=TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final _mobile=ModalRoute.of(context).settings.arguments;
+    final VerficationModel _model=ModalRoute.of(context).settings.arguments;
     return Scaffold(
       body: Column(
         children: [
@@ -21,7 +22,7 @@ class VerficationCodeScreen extends StatelessWidget {
           LoginTilteShape(translator.translate('welcome')),
           Padding(
               padding:  EdgeInsets.only(top:SizeConfig.screenWidth*s50),
-              child: Text(translator.translate('code_send')+"  $_mobile",
+              child: Text(translator.translate('code_send')+_model.mobile  ,
                 style: TX_STYLE_black_15.copyWith(
                     color: lightGrey
                 ),
@@ -37,10 +38,15 @@ class VerficationCodeScreen extends StatelessWidget {
               )),
           SizedBox(height: SizeConfig.screenWidth*s26,),
 
-          ButtonShape(translator.translate('number_editing'), backgroundColor),
+          InkWell(
+              onTap: ()=>       Navigator.pushNamed(context, '/login')
+              ,
+              child: ButtonShape(translator.translate('number_editing'), backgroundColor)),
           SizedBox(height: SizeConfig.screenWidth*s26,),
 
-          ButtonShape(translator.translate('send_code_again'), darkGrey),
+        InkWell(
+            onTap: ()=>  Navigator.pushNamed(context, '/login'),
+            child: ButtonShape(translator.translate('send_code_again'), darkGrey)),
 
 
 
