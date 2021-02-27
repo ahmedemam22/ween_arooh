@@ -8,6 +8,8 @@ import 'package:ween_arooh/utils/text_style.dart';
 import 'package:ween_arooh/widgets/companyInfoShape.dart';
 import 'package:ween_arooh/widgets/addImageShape.dart';
 import 'package:ween_arooh/widgets/descriptionShape.dart';
+import 'package:ween_arooh/widgets/button_shape.dart';
+import 'package:ween_arooh/utils/colors.dart';
 class AddActivityScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,12 @@ class AddActivityScreen extends StatelessWidget {
                   DescriptionShape(title: "وصف تفصيلى",maxLine: 3,),
                 ]),
               ),
-            )
+            ),
+            Container(child: Card(
+             child: AddImageShape(title: "اضف كوبون خصم",),
+
+            ),),
+            ButtonShape("حفظ",backgroundColor)
 
 
           ]),
