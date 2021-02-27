@@ -6,6 +6,7 @@ import 'package:ween_arooh/screens/settingScreen.dart';
 import 'package:ween_arooh/screens/aboutUsScreen.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:provider/provider.dart';
+import "screens/addActivityScreen.dart";
 
 import 'screens/login/login_screen.dart';
 import 'screens/mainScreen.dart';
@@ -65,7 +66,7 @@ class _MyAppState extends State<MyApp> {
             GlobalCupertinoLocalizations.delegate,
             DefaultCupertinoLocalizations.delegate,
           ],
-          initialRoute: "/about_us",
+          initialRoute: "/add_activity",
 
           routes: {
             '/splash': (context) => SplashScreen(),
@@ -76,6 +77,7 @@ class _MyAppState extends State<MyApp> {
             '/offers': (context) => OffersScreen(),
             '/setting': (context) => SettingScreen(),
             '/about_us': (context) => AboutUsScreen(),
+            '/add_activity': (context) => AddActivityScreen(),
           },
           debugShowCheckedModeBanner: false,
 
