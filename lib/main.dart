@@ -4,17 +4,20 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ween_arooh/screens/settingScreen.dart';
 import 'package:ween_arooh/screens/aboutUsScreen.dart';
+import 'package:ween_arooh/screens/addActivityScreen.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:provider/provider.dart';
-
 import 'screens/login/login_screen.dart';
 import 'screens/mainScreen.dart';
+import 'screens/marketsScreen.dart';
 import 'screens/login/registration_screen.dart';
 import 'screens/offersScreen.dart';
+import 'screens/chatScreen.dart';
 import 'screens/login/splash_screen.dart';
 import 'services/provider/registerProvider.dart';
+import 'services/provider/homeProvider.dart';
 import 'screens/login/verfication_code_screen.dart';
-import 'package:provider/provider.dart';
+import 'screens/rateScreen.dart';
 
 
 Future<void>  main() async{
@@ -45,6 +48,7 @@ class _MyAppState extends State<MyApp> {
       MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => RegisterProvider()),
+          ChangeNotifierProvider(create: (_) => HomeProvider()),
 
 
         ],
@@ -65,7 +69,7 @@ class _MyAppState extends State<MyApp> {
             GlobalCupertinoLocalizations.delegate,
             DefaultCupertinoLocalizations.delegate,
           ],
-          initialRoute: "/about_us",
+          initialRoute: "/add_activity",
 
           routes: {
             '/splash': (context) => SplashScreen(),
@@ -73,9 +77,14 @@ class _MyAppState extends State<MyApp> {
             '/verfication': (context) => VerficationCodeScreen(),
             '/register': (context) => RegistrationScreen(),
             '/main': (context) => MainScreen(),
-            '/offers': (context) => OffersScreen(),
+            '/markets': (context) => MarketsScreen(),
+           // '/offers': (context) => OffersScreen(),
             '/setting': (context) => SettingScreen(),
             '/about_us': (context) => AboutUsScreen(),
+            '/chat': (context) => ChatScreen(),
+            '/rate': (context) => RateScreen(),
+            '/add_activity': (context) => AddActivityScreen(),
+
           },
           debugShowCheckedModeBanner: false,
 

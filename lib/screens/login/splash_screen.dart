@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ween_arooh/utils/colors.dart';
 import 'package:ween_arooh/utils/size_config.dart';
+import 'package:ween_arooh/services/provider/homeProvider.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/widgets/ween_aroh_text_shape.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -13,8 +15,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    Provider.of<HomeProvider>(context,listen: false).getMainCategories();
     Future.delayed(Duration(seconds: 2), () {
-      Navigator.pushReplacementNamed(context, '/register');
+      Navigator.pushReplacementNamed(context, '/main');
     });
   }
   @override

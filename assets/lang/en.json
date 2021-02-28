@@ -21,7 +21,38 @@
   "offers": "Offers",
   "information": "My information",
   "save": "Save",
-  "about_us": "About Us"
+  "about_us": "About Us",
+  "record_service": "تسجيل خدمة ",
+  "call_us": "Call Us",
+  "language": "Lamguage",
+  "logout": "Logout",
+  "markets": "Markets",
+  "contact_us": "Contact Us",
+  "copoun_symbol": "Coupon symbol",
+  "copoun_copy": "Coupon copy",
+  "rate": "Rate",
+  "add_activity": "Add Activity",
+  "choose_activity": "Choose Activity",
+  "company_name": "Company Name",
+  "responsibillity": "Administrator",
+  "country": "Country",
+  "administration_location": "Administration Location",
+  "branches_location": "Branches Location",
+  "fax": "Fax",
+  "website": "Website",
+  "social_media": "Social Media",
+  "brief_description": "Brief Description",
+  "detailed_description": "Detailed Description",
+  "company_logo": "Company Logo",
+  "main_banner": "Main Banner",
+  "add_offers": "Add Offers",
+  "add_copoun": "Add Copoun",
+  "telephone": "Telephone",
+  "email": "Email"
+
+
+
+
 
 
 

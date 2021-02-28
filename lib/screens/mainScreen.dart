@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ween_arooh/utils/size_config.dart';
-import 'package:ween_arooh/widgets/imageSlider.dart';
-import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-import 'package:ween_arooh/widgets/appBarShape.dart';
-import 'package:ween_arooh/widgets/mainCategoryShape.dart';
+import 'package:ween_arooh/widgets/drawer.dart';
+import 'package:ween_arooh/screens/homeScreen.dart';
+import 'package:ween_arooh/screens/offersScreen.dart';
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -12,11 +11,15 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _index=0;
+  static final   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(); // ADD THIS LINE
+List<Widget>_widgets=[HomeScreen(_scaffoldKey),HomeScreen(_scaffoldKey),OffersScreen(_scaffoldKey)];
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Scaffold(
+      key: _scaffoldKey,
+        drawer: AppDrawer(),
         bottomNavigationBar: BottomNavigationBar(
       onTap: (index){
         setState(() {
@@ -39,31 +42,12 @@ class _MainScreenState extends State<MainScreen> {
             )
           ],
         ),
-     body: Column(children: [
-       AppBarShape(translator.translate('main')),
-       SizedBox(height:SizeConfig.screenWidth*s8),
-       ImageSlider(),
-       SizedBox(height:SizeConfig.screenWidth*s23),
-       Expanded(
-         child: GridView.builder(
-           padding:  EdgeInsets.all(SizeConfig.screenWidth/40),
-           itemCount: 30,
-           itemBuilder: (ctx, i) => MainCategoryShape(),
-           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-             crossAxisCount: 3,
-             childAspectRatio: (SizeConfig.screenWidth/4)/(SizeConfig.screenWidth/7),
-             mainAxisSpacing: SizeConfig.screenWidth/30,
-
-
-             crossAxisSpacing: SizeConfig.screenWidth/40,
-           ),
-         ),
-       ),
-
-
-     ],)
+     body:_widgets[_index]
 
 
     );
+  }
+  openDrawer(){
+    _scaffoldKey.currentState.openDrawer();
   }
 }

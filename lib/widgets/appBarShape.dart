@@ -7,7 +7,8 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 
 class AppBarShape extends StatelessWidget {
   final String title;
-  AppBarShape(this.title);
+  final GlobalKey<ScaffoldState> openDrawer;
+  AppBarShape({this.title, this.openDrawer});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,7 +29,9 @@ class AppBarShape extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-              Icon(Icons.menu,color: Colors.white,size: SizeConfig.screenWidth*s35,),
+              InkWell(
+                  onTap: openDrawer.currentState.openDrawer,
+                  child: Icon(Icons.menu,color: Colors.white,size: SizeConfig.screenWidth*s35,)),
 
    Container(
                         height: SizeConfig.screenWidth*s30,

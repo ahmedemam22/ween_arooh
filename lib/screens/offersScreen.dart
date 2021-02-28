@@ -4,13 +4,15 @@ import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/widgets/appBarShape.dart';
 class OffersScreen extends StatelessWidget {
+  final widgetKey;
+  OffersScreen(this.widgetKey);
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Scaffold(
       body: Column(
         children: [
-          AppBarShape(translator.translate('offers')),
+          AppBarShape(title:translator.translate('offers'),openDrawer: widgetKey.currentState.openDrawer,),
           Expanded(
             child: GridView.builder(
               padding:  EdgeInsets.fromLTRB(SizeConfig.screenWidth*s30,SizeConfig.screenWidth*s17,SizeConfig.screenWidth*s30
