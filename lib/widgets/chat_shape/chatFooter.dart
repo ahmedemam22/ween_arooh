@@ -4,6 +4,8 @@ import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/utils/colors.dart';
 import 'package:ween_arooh/utils/dialogs.dart';
+import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/chatProvider.dart';
 class ChatFooter extends StatelessWidget {
   TextEditingController _controller=TextEditingController();
   @override
@@ -42,6 +44,7 @@ class ChatFooter extends StatelessWidget {
 
               InkWell(
                   onTap: (){
+                    Provider.of<ChatProvider>(context,listen: false).sendMessages(_controller.text);
                     _controller.text="";
                   },
 

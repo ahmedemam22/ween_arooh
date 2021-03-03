@@ -11,7 +11,7 @@ class HomeProvider extends ChangeNotifier{
   List<Result> get mainCategoryItemsSearch=>_mainCategoryItemsSearch;
   bool _waitMainCategory=false;
   bool get waitMainCategory=>_waitMainCategory;
-  getMainCategories()async{
+  Future getMainCategories()async{
  try{
    _waitMainCategory=true;
    notifyListeners();

@@ -4,7 +4,7 @@ import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/colors.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-
+import 'package:flutter_svg/flutter_svg.dart';
 class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class AppDrawer extends StatelessWidget {
           SizedBox(height:SizeConfig.screenWidth*s40 ,),
           drawerShape(translator.translate('main'), 'ic_home'),
           drawerShape(translator.translate('record_service'), 'ic_record_service'),
-          drawerShape(translator.translate('call_us'), 'ic_call'),
+          drawerShape(translator.translate('call_us'), 'call'),
           drawerShape(translator.translate('language'), 'ic_lang'),
           drawerShape(translator.translate('information'), 'ic_person'),
           drawerShape(translator.translate('logout'), 'ic_logout'),
@@ -66,7 +66,9 @@ class AppDrawer extends StatelessWidget {
         title: Text(title,style: TextStyle(
           fontSize: SizeConfig.screenWidth*s17
         ),),
-        leading:    ImageIcon(AssetImage("assets/images/$imagePath.png",),size: SizeConfig.screenWidth*s40,),
+        leading:    SvgPicture.asset(
+
+        "assets/images/$imagePath.svg"),
 
       ),
     );

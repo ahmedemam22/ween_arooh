@@ -7,8 +7,9 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 
 class AppBarShape extends StatelessWidget {
   final String title;
+  final Function onChange;
   final GlobalKey<ScaffoldState> openDrawer;
-  AppBarShape({this.title, this.openDrawer});
+  AppBarShape({this.title, this.openDrawer, this.onChange});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,14 +45,14 @@ class AppBarShape extends StatelessWidget {
                                     width:title==translator.translate('offers')?SizeConfig.screenWidth*(s175):SizeConfig.screenWidth*(s200+s90),
                                     child:
 
-                                SearchTextField()),
+                                SearchTextField(onChange)),
 
                               if(title==translator.translate('offers'))
                                 SizedBox(width: SizeConfig.screenWidth*s20,),
                               if(title==translator.translate('offers'))
                                    Container(
                                        width: SizeConfig.screenWidth*(s90),
-                                       child: SearchTextField())
+                                       child: SearchTextField(onChange))
 
                             ],
                           ),

@@ -6,31 +6,44 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/widgets/appBarShape.dart';
 import 'package:ween_arooh/widgets/marketsShape.dart';
 import 'package:provider/provider.dart';
-import 'package:ween_arooh/services/provider/homeProvider.dart';
+import 'package:ween_arooh/services/provider/marketProvider.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
 import 'package:ween_arooh/widgets/filterShape.dart';
-class MarketsScreen extends StatelessWidget {
-  static final   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(); // ADD THIS LINE
+class MarketsScreen extends StatefulWidget {
+  static final   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
+  @override
+  _MarketsScreenState createState() => _MarketsScreenState();
+}
+
+class _MarketsScreenState extends State<MarketsScreen> {
+  @override
+  void initState() {
+    Provider.of<MarketProvider>(context,listen: false).getMarkets().then((value) => null);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Scaffold(
-        key: _scaffoldKey,
+        key: MarketsScreen._scaffoldKey,
         drawer: AppDrawer(),
     body:    Column(children: [
-    AppBarShape(title:translator.translate('markets'),openDrawer: _scaffoldKey,),
+    AppBarShape(title:translator.translate('markets'),openDrawer: MarketsScreen._scaffoldKey,onChange: Provider.of<MarketProvider>(context,listen: false).marketSearch,),
     SizedBox(height:SizeConfig.screenWidth*s8),
       FilterShape(),
       SizedBox(height:SizeConfig.screenWidth*s13),
-      Consumer<HomeProvider>(
-          builder: (context, category, child) {
-            bool search=(category.mainCategoryItemsSearch!=null&&category.mainCategoryItemsSearch.length>0);
-            return Expanded(
-              child: GridView.builder(
+      Expanded(
+              child:
+    Consumer<MarketProvider>(
+    builder: (context, market, child) {
+    bool search=(market.marketsFilter!=null&&market.marketsFilter.length>0);
+
+    return
+    market.markets==null?Center(child: CircularProgressIndicator(),): GridView.builder(
                 padding: EdgeInsets.all(SizeConfig.screenWidth / 40),
-                itemCount:8,
-                itemBuilder: (ctx, i) => MarketsShape(),
+                itemCount:search?  market.marketsFilter.length:market.markets.length,
+                itemBuilder: (ctx, i) => MarketsShape(search?  market.marketsFilter[i]:market.markets[i],i),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
 
@@ -39,13 +52,13 @@ class MarketsScreen extends StatelessWidget {
 
 
                 ),
-              ),
+
             );
           }),
 
 
 
 
-    ]));
+      )]));
   }
 }

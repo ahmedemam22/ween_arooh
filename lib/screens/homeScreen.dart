@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      AppBarShape(title:translator.translate('main'),openDrawer:   widgetKey,),
+      AppBarShape(title:translator.translate('main'),openDrawer:   widgetKey,onChange: Provider.of<HomeProvider>(context,listen: false).makeSearch,),
       SizedBox(height:SizeConfig.screenWidth*s8),
       ImageSlider(),
       Consumer<HomeProvider>(

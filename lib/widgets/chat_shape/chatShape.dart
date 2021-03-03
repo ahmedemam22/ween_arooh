@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ween_arooh/model/chatModel.dart';
 class ChatShape extends StatelessWidget {
+  ChatModel _chatModel;
+  ChatShape(this._chatModel);
   @override
   Widget build(BuildContext context) {
     return clip();
@@ -17,7 +20,7 @@ class ChatShape extends StatelessWidget {
        alignment: Alignment.centerRight,
        padding: EdgeInsets.only(right: 8),
        child: Container(
-         child: Text('ssssssssssssssss'),
+         child: Text(_chatModel.message),
 
        ),
      ),

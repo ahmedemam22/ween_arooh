@@ -4,12 +4,14 @@ import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/homeProvider.dart';
 class SearchTextField extends StatelessWidget {
+  final Function onChange;
+  SearchTextField(this.onChange);
   @override
   Widget build(BuildContext context) {
     return TextField(
-      onChanged: (title){
-        Provider.of<HomeProvider>(context,listen: false).makeSearch(title);
-      },
+      onChanged:
+        onChange
+      ,
 
       decoration: new InputDecoration(
         border: new OutlineInputBorder(

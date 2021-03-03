@@ -5,10 +5,12 @@ import 'package:http/http.dart' as http;
 
 
 class Api{
+  final String tokenn= 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvcmFpdG90ZWMub3JnXC93dGdcL2FwaVwvdmVyaWZ5IiwiaWF0IjoxNjEzOTA3MDc4LCJleHAiOjE2MTM5MTA2NzgsIm5iZiI6MTYxMzkwNzA3OCwianRpIjoiS3VFVFQxM096ZW9SaTF6dyIsInN1YiI6NSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.wSrwYZZbRYVfayqXlwR_z2-jY8oEDQ982_9WQOPm4WA'
+      ;
 
   Future<Map>get(url,[bool token=false])async {
     http.Response response = await http.get(url,headers: {'Content-Type': "application/json; charset=utf-8",
-    if(token)'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvcmFpdG90ZWMub3JnXC93dGdcL2FwaVwvdmVyaWZ5IiwiaWF0IjoxNjEzOTA3MDc4LCJleHAiOjE2MTM5MTA2NzgsIm5iZiI6MTYxMzkwNzA3OCwianRpIjoiS3VFVFQxM096ZW9SaTF6dyIsInN1YiI6NSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.wSrwYZZbRYVfayqXlwR_z2-jY8oEDQ982_9WQOPm4WA'
+    if(token)'Authorization': tokenn
     });
     print(json.decode(response.body));
 
@@ -25,6 +27,8 @@ class Api{
       url,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':tokenn
+
       },
 
       body:json.encode(data),

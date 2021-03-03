@@ -48,14 +48,13 @@
   "add_offers": "Add Offers",
   "add_copoun": "Add Copoun",
   "telephone": "Telephone",
-  "email": "Email"
-
-
-
-
-
-
-
-
-
+  "email": "Email",
+  "review": "visitors opinions",
+  "add_num":"Add Phone",
+  "share": "Share",
+  "add_rate":"Add Rate",
+  "follow_us": "Follow us",
+  "get_coupon": "Get discount coupon",
+  "our_location": "Our Location",
+  "call": "Call"
 }

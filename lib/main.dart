@@ -6,6 +6,7 @@ import 'package:ween_arooh/screens/settingScreen.dart';
 import 'package:ween_arooh/screens/aboutUsScreen.dart';
 import 'package:ween_arooh/screens/addActivityScreen.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
+import 'screens/marketDetailsScreen.dart';
 import 'package:provider/provider.dart';
 import 'screens/login/login_screen.dart';
 import 'screens/mainScreen.dart';
@@ -16,7 +17,10 @@ import 'screens/chatScreen.dart';
 import 'screens/login/splash_screen.dart';
 import 'services/provider/registerProvider.dart';
 import 'services/provider/homeProvider.dart';
+import 'services/provider/marketProvider.dart';
+import 'services/provider/chatProvider.dart';
 import 'screens/login/verfication_code_screen.dart';
+import 'package:ween_arooh/widgets/displayImage.dart';
 import 'screens/rateScreen.dart';
 
 
@@ -49,6 +53,8 @@ class _MyAppState extends State<MyApp> {
         providers: [
           ChangeNotifierProvider(create: (_) => RegisterProvider()),
           ChangeNotifierProvider(create: (_) => HomeProvider()),
+          ChangeNotifierProvider(create: (_) => MarketProvider()),
+          ChangeNotifierProvider(create: (_) => ChatProvider()),
 
 
         ],
@@ -69,7 +75,7 @@ class _MyAppState extends State<MyApp> {
             GlobalCupertinoLocalizations.delegate,
             DefaultCupertinoLocalizations.delegate,
           ],
-          initialRoute: "/add_activity",
+          initialRoute: "/chat",
 
           routes: {
             '/splash': (context) => SplashScreen(),
@@ -84,6 +90,8 @@ class _MyAppState extends State<MyApp> {
             '/chat': (context) => ChatScreen(),
             '/rate': (context) => RateScreen(),
             '/add_activity': (context) => AddActivityScreen(),
+            '/market_details': (context) => MarketDetailsScreen(),
+            '/display_image': (context) => DisplayImage(),
 
           },
           debugShowCheckedModeBanner: false,
