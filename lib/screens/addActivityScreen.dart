@@ -83,7 +83,7 @@ class AddActivityScreen extends StatelessWidget {
                     color: Colors.white,
                     child: Padding(
                       padding:  EdgeInsets.symmetric(horizontal:SizeConfig.screenWidth*s20),
-                      child: AddImageShape(title: translator.translate('add_copoun'),),
+                      child: AddImageShape(title: translator.translate('add_copoun'),addCoupoun: true,),
                     ),
 
                   ),
