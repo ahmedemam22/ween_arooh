@@ -5,3 +5,6 @@ const MAIN_CATEGORY="maincategores";
 const GET_MARKET="markets";
 const GET_MESSAGE="messages/";
 const SEND_MESSAGE="sendmessage";
+const ADD_ACTIVITY="savemarket";
+const UPDATE_PROFILE="updateProfile";
+const GET_OFFERS="offers";

@@ -8,9 +8,18 @@ import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/chatProvider.dart';
-class ChatScreen extends StatelessWidget {
-   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(); // ADD THIS LINE
+class ChatScreen extends StatefulWidget {
+  @override
+  _ChatScreenState createState() => _ChatScreenState();
+}
 
+class _ChatScreenState extends State<ChatScreen> {
+   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+   @override
+  void didChangeDependencies() {
+     Provider.of<ChatProvider>(context,listen: false).getMessages().then((value) => null);
+    super.didChangeDependencies();
+  }
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -24,8 +33,7 @@ class ChatScreen extends StatelessWidget {
           flex: 10,
           child:  Consumer<ChatProvider>(
     builder: (context, chat, child) {
-      return
-        ListView.builder(
+      return chat.waitMessage?Center(child: CircularProgressIndicator(),):        ListView.builder(
             itemCount: chat.allMessages.length,
             itemBuilder: (context, i) {
               return ChatShape(chat.allMessages[i]);

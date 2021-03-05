@@ -5,9 +5,12 @@ import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/widgets/dropDown.dart';
 import 'package:ween_arooh/utils/text_style.dart';
+import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/homeProvider.dart';
 import 'package:ween_arooh/widgets/companyInfoShape.dart';
 import 'package:ween_arooh/widgets/addImageShape.dart';
 import 'package:ween_arooh/widgets/descriptionShape.dart';
+import 'package:ween_arooh/widgets/marketDetails/addSocialMedia.dart';
 import 'package:ween_arooh/widgets/button_shape.dart';
 import 'package:ween_arooh/utils/colors.dart';
 class AddActivityScreen extends StatelessWidget {
@@ -42,11 +45,13 @@ class AddActivityScreen extends StatelessWidget {
                             maxLines: 1,
                           ),
                         ),
-                        Expanded(flex:1,child: DropDown())
+                        Expanded(flex:1,child: DropDown(items:Provider.of<HomeProvider>(context,listen: false).categoriesList()))
                         // urgentServices_TextFieldOptions( translator.currentLanguage == "en" ? 'Services Type' : "نوع الخدمة", black),
                       ],),
                   ),
                   CompanyInfoShape(),
+                  AddSocialMedia(),
+
                   Padding(
                     padding:  EdgeInsets.symmetric(vertical:8.0),
                     child: Container(

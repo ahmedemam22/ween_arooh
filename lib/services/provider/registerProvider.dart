@@ -6,8 +6,10 @@ import 'package:ween_arooh/utils/dialogs.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/model/verficationModel.dart';
+import 'package:ween_arooh/model/userModel.dart';
 import 'dart:convert';
 class RegisterProvider extends ChangeNotifier{
+
   bool _waitRegister=false;
   bool get waitRegister=>_waitRegister;
   bool _waitLogin=false;
@@ -77,5 +79,6 @@ Future login({String mobile,context})async{
      notifyListeners();
    }
 }
+
 
 }

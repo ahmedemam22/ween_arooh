@@ -8,7 +8,16 @@ import 'package:ween_arooh/utils/text_style.dart';
 import 'package:ween_arooh/utils/colors.dart';
 import 'package:ween_arooh/widgets/text_field.dart';
 class CompanyInfoShape extends StatelessWidget {
-  TextEditingController _controller=TextEditingController();
+  TextEditingController _companyNameCon=TextEditingController();
+  TextEditingController _responsibillityCon=TextEditingController();
+  TextEditingController _countryCon=TextEditingController();
+  TextEditingController _adLocationcon=TextEditingController();
+  TextEditingController _branLocationCon=TextEditingController();
+  TextEditingController _telphoneCon=TextEditingController();
+  TextEditingController _mobileCon=TextEditingController();
+  TextEditingController _faxCon=TextEditingController();
+  TextEditingController _emailCon=TextEditingController();
+  TextEditingController _websiteCon=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,11 +29,11 @@ class CompanyInfoShape extends StatelessWidget {
             vertical: SizeConfig.screenWidth*s20),
             child: Column(
                 children: [
-                  shape( "company_name",true),
-                  shape( "responsibillity",true),
-                  shape( "country",true),
-                  shape( "administration_location",true),
-                  shape("branches_location",),
+                  shape( "company_name",_companyNameCon,"title_ar",true),
+                  shape( "responsibillity",_responsibillityCon,"admin_id",true),
+                  shape( "country",_countryCon,"location",true),
+                  shape( "administration_location",_adLocationcon,"location",true),
+                  shape("branches_location",_branLocationCon,"branches"),
                 ],
               ),
           ),
@@ -39,11 +48,10 @@ class CompanyInfoShape extends StatelessWidget {
                 vertical: SizeConfig.screenWidth*s20),
             child: Column(
               children: [
-                shape( "telephone"),
-                shape( "mobile",true),
-                shape( "fax"),
-                shape( "email"),
-                shape("website",),
+                shape( "telephone",_telphoneCon,"telephone"),
+                shape( "mobile",_mobileCon,"mobile",true),
+                shape( "email",_emailCon,"email"),
+                shape("website",_websiteCon,"site_link"),
               ],
             ),
           ),
@@ -53,7 +61,7 @@ class CompanyInfoShape extends StatelessWidget {
       ],
     );
   }
-  shape(String title,[bool required=false]){
+  shape(String title,con,key,[bool required=false]){
    return Padding(
       padding:  EdgeInsets.only(top:SizeConfig.screenWidth*s10),
       child: Row(
@@ -72,7 +80,7 @@ class CompanyInfoShape extends StatelessWidget {
             ),
           ),
 
-          TextFeld(controller: _controller,validate: fnValidName,hintText: title,),
+          TextFeld(controller: con,validate: fnValidName,hintText: title,keyy: key,),
         ],
       ),
     );

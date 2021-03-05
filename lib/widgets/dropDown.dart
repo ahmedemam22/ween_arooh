@@ -3,8 +3,12 @@ import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/utils/customDropDown.dart';
+import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/homeProvider.dart';
 class DropDown extends StatefulWidget {
-  DropDown() : super();
+  final List<String>items;
+  final double size;
+  DropDown({this.items, this.size}) : super();
 
   final String title = "DropDown Demo";
 
@@ -12,26 +16,16 @@ class DropDown extends StatefulWidget {
   DropDownState createState() => DropDownState();
 }
 
-class Company {
-  int id;
-  String name;
 
-  Company(this.id, this.name);
-
-  static List<String> getCompanies() {
-    return ["نجارة","بويات","تكييف","كهرباء", "ماتور مياه",'سباكة'];
-  }
-}
 
 class DropDownState extends State<DropDown> {
   //
-  List<String> _companies = Company.getCompanies();
   List<DropdownMenuItem<String>> _dropdownMenuItems;
   String _selectedCompany;
 
   @override
   void initState() {
-    _dropdownMenuItems = buildDropdownMenuItems(_companies);
+    _dropdownMenuItems = buildDropdownMenuItems(widget.items);
     _selectedCompany = _dropdownMenuItems[0].value;
     super.initState();
   }
@@ -73,17 +67,16 @@ class DropDownState extends State<DropDown> {
               right: SizeConfig.safeAreaVertical * 0.5
           ),
           child: Container(
-            width: SizeConfig.screenWidth * 0.7,
+            width: widget.size??SizeConfig.screenWidth * 0.7,
 
             decoration: BoxDecoration(
               // borderRadius: BorderRadius.all(Radius.circular(10)),
-              color: Colors.white,
             ),
             child: CustomDropdownButton(
               value: _selectedCompany,
 
               items: _dropdownMenuItems,
-              hint: Center(child: Text("اختار الخدمة")),
+              hint: Center(child: Text(widget.size!=null?widget.items[0]:translator.translate('choose_activity'))),
               onChanged: onChangeDropdownItem,
 
             ),

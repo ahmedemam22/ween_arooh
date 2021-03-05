@@ -18,7 +18,9 @@ import 'screens/login/splash_screen.dart';
 import 'services/provider/registerProvider.dart';
 import 'services/provider/homeProvider.dart';
 import 'services/provider/marketProvider.dart';
+import 'services/provider/offersProviders.dart';
 import 'services/provider/chatProvider.dart';
+import 'services/provider/userProvider.dart';
 import 'screens/login/verfication_code_screen.dart';
 import 'package:ween_arooh/widgets/displayImage.dart';
 import 'screens/rateScreen.dart';
@@ -55,6 +57,8 @@ class _MyAppState extends State<MyApp> {
           ChangeNotifierProvider(create: (_) => HomeProvider()),
           ChangeNotifierProvider(create: (_) => MarketProvider()),
           ChangeNotifierProvider(create: (_) => ChatProvider()),
+          ChangeNotifierProvider(create: (_) => UserProvider()),
+          ChangeNotifierProvider(create: (_) => OffersProvider()),
 
 
         ],
@@ -75,7 +79,7 @@ class _MyAppState extends State<MyApp> {
             GlobalCupertinoLocalizations.delegate,
             DefaultCupertinoLocalizations.delegate,
           ],
-          initialRoute: "/chat",
+          initialRoute: "/splash",
 
           routes: {
             '/splash': (context) => SplashScreen(),

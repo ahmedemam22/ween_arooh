@@ -7,12 +7,14 @@ class ChatProvider extends ChangeNotifier{
   bool get waitMessage=>_waitMessage;
   List<ChatModel>_allMessages=[];
   List<ChatModel>get allMessages=>_allMessages;
-  getMessages()async{
+  Future getMessages()async{
    try{
      _waitMessage=true;
      notifyListeners();
-     var response= await api.get(BASE_URL+GET_MESSAGE+"1");
-   }
+     var response= await api.get(BASE_URL+GET_MESSAGE+"2");
+     for(int i=0;i<response['result'].length;i++){
+     _allMessages.add(ChatModel.fromJson(response['result'][i]));
+   }}
      catch(e){
      print("get message error::$e");
    }
@@ -23,9 +25,9 @@ class ChatProvider extends ChangeNotifier{
 
   }
   sendMessages(String msg)async{
-    _allMessages.add(ChatModel(message:msg, type: "",msg_type: "text",user_id: "1"));
+    _allMessages.add(ChatModel(message:msg, type: "",msg_type: "text",user_id: "2"));
     notifyListeners();
-   try{ await api.post(BASE_URL+SEND_MESSAGE+"",ChatModel(message:msg, type: "",msg_type: "text",user_id: "1").toJson()
+   try{ await api.post(BASE_URL+SEND_MESSAGE+"",ChatModel(message:msg, type: "",msg_type: "text",user_id: "2").toJson()
     );
 
   }

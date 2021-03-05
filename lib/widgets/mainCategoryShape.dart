@@ -12,22 +12,28 @@ class MainCategoryShape extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: [
-        FadeInImage.assetNetwork(
-        placeholder:"assets/images/ic_call.png",
-        image: item.path??"",
+      child: InkWell(
+        onTap: (){
+          Navigator.pushNamed(context, '/add_activity');
+
+        },
+        child: Column(
+          children: [
+          FadeInImage.assetNetwork(
+          placeholder:"assets/images/ic_call.png",
+          image: item.path??"",
 
 
-          width: SizeConfig.screenWidth*s43,
-          height: SizeConfig.screenWidth*s38,),
-          SizedBox(height:SizeConfig.screenWidth*s5),
+            width: SizeConfig.screenWidth*s43,
+            height: SizeConfig.screenWidth*s38,),
+            SizedBox(height:SizeConfig.screenWidth*s5),
 
-          Text(translator.currentLanguage=='en'?item.nameEn:item.nameAr,style: TextStyle(
-            fontSize: SizeConfig.screenWidth*s20,
-            color: categoryColor
-          ),)
-        ],
+            Text(translator.currentLanguage=='en'?item.nameEn:item.nameAr,style: TextStyle(
+              fontSize: SizeConfig.screenWidth*s20,
+              color: categoryColor
+            ),)
+          ],
+        ),
       ),
     );
   }

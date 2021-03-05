@@ -7,10 +7,10 @@ class ChatModel{
    ChatModel({this.message,this.level,this.type,this.user_id,this.msg_type});
    factory ChatModel.fromJson(Map<String, dynamic> json) => ChatModel(
      message: json["message"],
-     level: json["level"],
-     type: json["type"],
-     user_id: json["user_id"],
-     msg_type: json["msg_type"]
+     level: json["level"].toString(),
+     type: json["type"].toString(),
+     user_id: json["user_id"].toString(),
+     msg_type: json["msg_type"].toString()
 
    );
    Map<String, dynamic> toJson() => {

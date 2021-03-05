@@ -33,4 +33,10 @@ makeSearch(String title){
     _mainCategoryItemsSearch=temp.where((element) => translator.currentLanguage=='en'?element.nameEn.contains(title):element.nameAr.contains(title)).toList();
 notifyListeners();
   }
+  List<String> categoriesList(){
+    List<String>_categoryNames=[];
+    _mainCategoryItems.forEach((element) {_categoryNames.add(element.name);});
+    return _categoryNames;
+
+  }
 }
