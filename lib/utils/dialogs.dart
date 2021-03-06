@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:ween_arooh/widgets/addRateShape.dart';
 import 'package:ween_arooh/utils/text_style.dart';
 class Dialogs{
   awsomeDialog({context,type,title,desc}){
@@ -133,5 +134,19 @@ class Dialogs{
 
     ) ??
         false;
+  }
+
+  rateDialog(context){
+    showDialog(
+        context: context,
+        builder: (_) => new Dialog(
+          backgroundColor: Colors.transparent,
+          child: new Container(
+              alignment: FractionalOffset.center,
+              width: SizeConfig.screenWidth * (s200+s120),
+              padding: const EdgeInsets.all(20.0),
+              child:  AddRateShape()
+          ),
+        ));
   }
 }

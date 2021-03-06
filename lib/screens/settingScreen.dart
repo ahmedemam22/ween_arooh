@@ -6,6 +6,7 @@ import 'package:ween_arooh/utils/validation.dart';
 import 'package:ween_arooh/utils/colors.dart';
 import 'package:ween_arooh/widgets/userImageShape.dart';
 import 'package:ween_arooh/widgets/settingTextField.dart';
+import 'package:ween_arooh/widgets/drawer.dart';
 import 'package:ween_arooh/model/userModel.dart';
 import 'package:ween_arooh/widgets/button_shape.dart';
 import 'package:ween_arooh/services/provider/userProvider.dart';
@@ -23,14 +24,11 @@ class SettingScreen extends StatelessWidget {
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: backgroundColor,
         title: Center(child: Text(translator.translate('information'))),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(left:8.0,right: 8),
-            child: Icon(Icons.menu),
-          )
-        ],
+
       ),
+      drawer: AppDrawer(),
       body: SingleChildScrollView(
     child: Container(
     height: SizeConfig.screenHeight,

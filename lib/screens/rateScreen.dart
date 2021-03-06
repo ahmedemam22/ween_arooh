@@ -3,7 +3,7 @@ import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/colors.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
-import 'package:ween_arooh/widgets/appBarShape.dart';
+import 'file:///C:/flutterprojects/ween_arooh/lib/widgets/appBar/appBarShape.dart';
 import 'package:ween_arooh/widgets/rate_shape/rateHeader.dart';
 import 'package:ween_arooh/widgets/rate_shape/percentShape.dart';
 import 'package:ween_arooh/widgets/reviewShape.dart';
@@ -16,10 +16,14 @@ class RateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: backgroundColor,
+
+        title: Center(child: Text(translator.translate('rate'))),
+      ),
       key: _scaffoldKey,
       drawer: AppDrawer(),
       body: Column(children: [
-      AppBarShape(title:translator.translate('rate'),openDrawer: _scaffoldKey,),
     SizedBox(height:SizeConfig.screenWidth*s8),
         RateHeader(),
         PercentShape(),

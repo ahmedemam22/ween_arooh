@@ -3,6 +3,7 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/colors.dart';
+import 'package:ween_arooh/widgets/drawer.dart';
 class AboutUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -10,14 +11,11 @@ class AboutUsScreen extends StatelessWidget {
 
     return Scaffold(
      appBar: AppBar(
+       backgroundColor: backgroundColor,
         title: Center(child: Text(translator.translate('about_us'))),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(left:8.0,right: 8),
-            child: Icon(Icons.menu),
-          )
-        ],
+
       ),
+      drawer: AppDrawer(),
       body: Column(
         children: [
         Expanded(

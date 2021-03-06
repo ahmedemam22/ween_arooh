@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:ween_arooh/widgets/chat_shape/chatFooter.dart';
 import 'package:ween_arooh/widgets/chat_shape/chatShape.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
-import 'package:ween_arooh/widgets/appBarShape.dart';
+import 'file:///C:/flutterprojects/ween_arooh/lib/widgets/appBar/appBarShape.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/size_config.dart';
+import 'package:ween_arooh/utils/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/chatProvider.dart';
 class ChatScreen extends StatefulWidget {
@@ -24,10 +25,14 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: backgroundColor,
+
+          title: Center(child: Text(translator.translate('contact_us'))),
+        ),
           key: _scaffoldKey,
           drawer: AppDrawer(),
       body: Column(children: [
-      AppBarShape(title:translator.translate('contact_us'),openDrawer: _scaffoldKey,),
     SizedBox(height:SizeConfig.screenWidth*s8),
         Expanded(
           flex: 10,

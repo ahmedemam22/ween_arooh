@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
-import 'package:ween_arooh/widgets/appBarShape.dart';
+import 'package:ween_arooh/utils/colors.dart';
 import 'file:///C:/flutterprojects/ween_arooh/lib/widgets/marketDetails/locationShape.dart';
 import 'file:///C:/flutterprojects/ween_arooh/lib/widgets/marketDetails/getCouponShape.dart';
 import 'file:///C:/flutterprojects/ween_arooh/lib/widgets/marketDetails/socialMediaShareShape.dart';
@@ -24,8 +24,13 @@ class _MarketDetailsScreenState extends State<MarketDetailsScreen> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: AppDrawer(),
+      appBar: AppBar(
+        backgroundColor: backgroundColor,
+
+        title: Center(child: Text("اسواق العثيم")),
+
+      ),
       body: Column(children: [
-      AppBarShape(title:"اسواق العثيم",openDrawer: _scaffoldKey,),
         Expanded(
           child: ListView(
             children: [

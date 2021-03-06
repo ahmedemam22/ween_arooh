@@ -3,6 +3,7 @@ import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/colors.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:ween_arooh/utils/dialogs.dart';
 class OptionShape extends StatelessWidget {
 
   @override
@@ -13,12 +14,16 @@ class OptionShape extends StatelessWidget {
         shape(translator.translate('review'),Icons.rate_review),
        shape(translator.translate('add_num'),Icons.contact_phone),
         shape(translator.translate('share'),Icons.share),
-        shape(translator.translate('add_rate'),Icons.favorite),
+        InkWell(
+            onTap: (){
+             Dialogs().rateDialog(context);
+            },
+            child: shape(translator.translate('add_rate'),Icons.favorite)),
       ],
     );
 
   }
-  shape(String title,IconData icon){
+  Widget shape(String title,IconData icon){
     return
       Expanded(
         child: Padding(

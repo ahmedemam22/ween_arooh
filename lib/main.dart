@@ -79,7 +79,7 @@ class _MyAppState extends State<MyApp> {
             GlobalCupertinoLocalizations.delegate,
             DefaultCupertinoLocalizations.delegate,
           ],
-          initialRoute: "/splash",
+          initialRoute: "/market_details",
 
           routes: {
             '/splash': (context) => SplashScreen(),
