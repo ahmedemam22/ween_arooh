@@ -3,6 +3,10 @@ import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/colors.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:share/share.dart';
+import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/marketDetailsProvider.dart';
 import 'package:ween_arooh/utils/dialogs.dart';
 class OptionShape extends StatelessWidget {
 
@@ -11,38 +15,54 @@ class OptionShape extends StatelessWidget {
    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        shape(translator.translate('review'),Icons.rate_review),
-       shape(translator.translate('add_num'),Icons.contact_phone),
-        shape(translator.translate('share'),Icons.share),
+        InkWell(
+            onTap: (){
+              Navigator.pushNamed(context, "/rate");
+            },
+            child: shape(translator.translate('review'),"visitors_opinion")),
+       shape(translator.translate('add_num'),"contact"),
+        InkWell(
+            onTap: (){
+              Share.share(Provider.of<MarketDetailsProvider>(context,listen: false).marketDetails.siteLink);
+            },child: shape(translator.translate('share'),"share")),
         InkWell(
             onTap: (){
              Dialogs().rateDialog(context);
             },
-            child: shape(translator.translate('add_rate'),Icons.favorite)),
+            child: shape(translator.translate('add_rate'),"favorite")),
       ],
     );
 
   }
-  Widget shape(String title,IconData icon){
+  Widget shape(String title,String iconName){
     return
       Expanded(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal:3.0),
-          child: Container(
-            height: SizeConfig.screenWidth*s37,
-            width: SizeConfig.screenWidth*s95,
-            color: lightGray,
-            child: Row(
-              children: [
-                Icon(icon),
-                Text(title,      overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontSize: SizeConfig.screenWidth*s12
-                  ),),
-              ],
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal:3.0),
+            child: Container(
+              height: SizeConfig.screenWidth*s37,
+              width: SizeConfig.screenWidth*s95,
+              color: lightGray,
+              child: Row(
+                children: [
+                  SvgPicture.asset(
+
+                    "assets/images/$iconName.svg",
+                  ),
+                  SizedBox(width: 3,),
+                  Text(title,      overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontSize: SizeConfig.screenWidth*s12
+                    ),),
+                ],
 
 
 
+              ),
             ),
           ),
         ),

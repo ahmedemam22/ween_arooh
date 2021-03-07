@@ -6,6 +6,7 @@ import 'package:ween_arooh/screens/settingScreen.dart';
 import 'package:ween_arooh/screens/aboutUsScreen.dart';
 import 'package:ween_arooh/screens/addActivityScreen.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:ween_arooh/services/provider/marketDetailsProvider.dart';
 import 'screens/marketDetailsScreen.dart';
 import 'package:provider/provider.dart';
 import 'screens/login/login_screen.dart';
@@ -59,6 +60,7 @@ class _MyAppState extends State<MyApp> {
           ChangeNotifierProvider(create: (_) => ChatProvider()),
           ChangeNotifierProvider(create: (_) => UserProvider()),
           ChangeNotifierProvider(create: (_) => OffersProvider()),
+          ChangeNotifierProvider(create: (_) => MarketDetailsProvider()),
 
 
         ],

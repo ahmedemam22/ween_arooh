@@ -8,3 +8,6 @@ const SEND_MESSAGE="sendmessage";
 const ADD_ACTIVITY="savemarket";
 const UPDATE_PROFILE="updateProfile";
 const GET_OFFERS="offers";
+const RATE="saverecommendations";
+const SHOW_RATE="recommendations/";
+const MARKET_DETAILS="markets/";

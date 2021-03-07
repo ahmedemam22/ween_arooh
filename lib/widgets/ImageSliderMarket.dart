@@ -2,34 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
+import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/marketDetailsProvider.dart';
 class ImageSliderMarket extends StatefulWidget {
   @override
   _ImageSliderMarketState createState() => _ImageSliderMarketState();
 }
 
 class _ImageSliderMarketState extends State<ImageSliderMarket> {
-  int cur=0;
-  var items=[
-    Image.asset( "assets/images/imageSlider1.png",fit: BoxFit.cover,),
-    Image.asset( "assets/images/imageSlider1.png",fit: BoxFit.cover,),
-    Image.asset( "assets/images/imageSlider1.png",fit: BoxFit.cover,),
-    Image.asset( "assets/images/imageSlider1.png",fit: BoxFit.cover,),
-    Image.asset( "assets/images/imageSlider1.png",fit: BoxFit.cover,),
-    Image.asset( "assets/images/imageSlider1.png",fit: BoxFit.cover,),
+  int _cur=0;
 
-  ];
-
+List<String>_item;
   @override
   Widget build(BuildContext context) {
+     _item= Provider.of<MarketDetailsProvider>(context,listen: false).getImages();
     return Stack(
       children: [
         CarouselSlider(
-            items:items,
+            items:List.generate(_item.length, (index) =>
+                FadeInImage.assetNetwork(
+                  placeholder: 'assets/images/imageSlider1.png',
+                  image: _item[index],
+                  height: SizeConfig.screenHeight,
+                  width: SizeConfig.screenWidth,
+                  fit: BoxFit.fill,
+                ),
+            ),
 
             options: CarouselOptions(
               onPageChanged: (ind,v){
                 setState(() {
-                  cur=ind;
+                  _cur=ind;
                 });
 
               },
@@ -60,12 +63,12 @@ class _ImageSliderMarketState extends State<ImageSliderMarket> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
-          children: List.generate(items.length, (index) {
+          children: List.generate( _item.length, (index) {
             return Container(
               width: 10,
               height: 10,
               margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-              decoration: BoxDecoration(shape: BoxShape.circle, color: cur==index?Colors.white:Colors.grey),
+              decoration: BoxDecoration(shape: BoxShape.circle, color: _cur==index?Colors.white:Colors.grey),
             );
           }),
         ),

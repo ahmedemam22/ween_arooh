@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="19" height="16" viewBox="0 0 19 16">
+  <g id="Group_3664" data-name="Group 3664" transform="translate(-68 -288)">
+    <g id="like" transform="translate(57 251)">
+      <path id="Path_3566" data-name="Path 3566" d="M8.712,46.314a.508.508,0,0,1-.336-.126c-.743-.65-1.449-1.252-2.114-1.818C2.512,41.174,0,39.063,0,35.986A4.723,4.723,0,0,1,4.628,31a4.709,4.709,0,0,1,4.084,2.741A4.709,4.709,0,0,1,12.8,31a4.723,4.723,0,0,1,4.628,4.986c0,3.076-2.512,5.188-6.263,8.384-.665.566-1.371,1.169-2.114,1.818A.508.508,0,0,1,8.712,46.314Z" transform="translate(11 6)" fill="#8f8f91"/>
+    </g>
+    <g id="Ellipse_138" data-name="Ellipse 138" transform="translate(78 294)" fill="#fff" stroke="#8f8f91" stroke-width="1">
+      <circle cx="4.5" cy="4.5" r="4.5" stroke="none"/>
+      <circle cx="4.5" cy="4.5" r="4" fill="none"/>
+    </g>
+    <text id="_" data-name="+" transform="translate(80 301)" fill="#8f8f91" font-size="10" font-family="SegoeUI, Segoe UI" letter-spacing="0.014em"><tspan x="0" y="0">+</tspan></text>
+  </g>
+</svg>

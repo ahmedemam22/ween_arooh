@@ -3,11 +3,11 @@ import 'package:ween_arooh/widgets/rate_shape/rateShape.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
-import 'package:ween_arooh/utils/colors.dart';
 class RateHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isArabic=translator.currentLanguage=="ar";
+
     return Column(
       children: [
         Row(children: [

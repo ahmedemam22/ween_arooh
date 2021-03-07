@@ -3,9 +3,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
+import 'package:ween_arooh/utils/launcher.dart';
+import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/marketDetailsProvider.dart';
 class SocialMediaShareShape extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final _item=Provider.of<MarketDetailsProvider>(context,listen: false).marketDetails;
     return Container(
       child: Padding(
         padding:  EdgeInsets.symmetric(horizontal:SizeConfig.screenWidth*s22),
@@ -14,10 +18,10 @@ class SocialMediaShareShape extends StatelessWidget {
           children: [
             Text(translator.translate('follow_us')),
             Row(children: [
-              iconShape("facebook"),
-              iconShape("twitter"),
-              iconShape("linkedin"),
-              iconShape("youtube"),
+              iconShape("facebook",_item.facebook),
+              iconShape("twitter",_item.twitter),
+              iconShape("linkedin",_item.linkedin),
+              iconShape("youtube",_item.youtube),
             ],)
 
           ],
@@ -25,12 +29,18 @@ class SocialMediaShareShape extends StatelessWidget {
       ),
     );
   }
-  iconShape(String iconName){
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal:2.0),
-      child: SvgPicture.asset(
+  iconShape(String iconName,String link){
+    return InkWell(
+      onTap: ()async{
 
-          "assets/images/$iconName.svg",
+        await launchURL(link);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal:2.0),
+        child: SvgPicture.asset(
+
+            "assets/images/$iconName.svg",
+        ),
       ),
     );
 

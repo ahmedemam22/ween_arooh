@@ -4,8 +4,9 @@ import 'package:ween_arooh/utils/colors.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 class RateShape extends StatelessWidget {
   final double size;
+  final  value;
 
-  const RateShape({Key key, this.size}) : super(key: key);
+  const RateShape({Key key, this.size, this.value}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SmoothStarRating(
@@ -13,7 +14,7 @@ class RateShape extends StatelessWidget {
         onRated: (v) {
         },
         starCount: 5,
-        rating: 3,
+        rating: value??3,
         size:size?? SizeConfig.screenWidth*0.08,
         isReadOnly:true,
         color: backgroundColor,
