@@ -1,23 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:ween_arooh/widgets/text_field_shape.dart';
 import 'package:ween_arooh/utils/validation.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/utils/text_style.dart';
 import 'package:ween_arooh/utils/colors.dart';
 import 'package:ween_arooh/widgets/text_field.dart';
-class CompanyInfoShape extends StatelessWidget {
+import 'package:ween_arooh/widgets/dropDown.dart';
+class CompanyInfoShape extends StatefulWidget {
+  @override
+  _CompanyInfoShapeState createState() => _CompanyInfoShapeState();
+}
+
+class _CompanyInfoShapeState extends State<CompanyInfoShape> {
   TextEditingController _companyNameCon=TextEditingController();
+  TextEditingController _addBranchCon=TextEditingController();
+
   TextEditingController _responsibillityCon=TextEditingController();
-  TextEditingController _countryCon=TextEditingController();
-  TextEditingController _adLocationcon=TextEditingController();
-  TextEditingController _branLocationCon=TextEditingController();
+
   TextEditingController _telphoneCon=TextEditingController();
+
   TextEditingController _mobileCon=TextEditingController();
-  TextEditingController _faxCon=TextEditingController();
+
   TextEditingController _emailCon=TextEditingController();
+
   TextEditingController _websiteCon=TextEditingController();
+  bool addBranch=false;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,9 +41,26 @@ class CompanyInfoShape extends StatelessWidget {
                 children: [
                   shape( "company_name",_companyNameCon,"title_ar",true),
                   shape( "responsibillity",_responsibillityCon,"admin_id",true),
-                  shape( "country",_countryCon,"location",true),
-                  shape( "administration_location",_adLocationcon,"location",true),
-                  shape("branches_location",_branLocationCon,"branches"),
+                  shapeDropDown( "country"),
+                  shapeDropDown( "administration_location"),
+                  shapeDropDown( "branches_location",true),
+                  if(addBranch)Container(
+
+                      child: Column(
+                        children: [
+                          TextFeld(controller: _addBranchCon,),
+                          RaisedButton(
+
+                            onPressed: (){
+
+                            },
+                            color: backgroundColor,
+                            child: Text("Add",style: TextStyle(
+                              color: Colors.white
+                            ),),
+                          )
+                        ],
+                      ))
                 ],
               ),
           ),
@@ -61,6 +88,7 @@ class CompanyInfoShape extends StatelessWidget {
       ],
     );
   }
+
   shape(String title,con,key,[bool required=false]){
    return Padding(
       padding:  EdgeInsets.only(top:SizeConfig.screenWidth*s10),
@@ -81,6 +109,46 @@ class CompanyInfoShape extends StatelessWidget {
           ),
 
           TextFeld(controller: con,validate: fnValidName,hintText: title,keyy: key,),
+        ],
+      ),
+    );
+
+  }
+
+  shapeDropDown(title,[add=false]){
+    return Padding(
+      padding:  EdgeInsets.only(top:SizeConfig.screenWidth*s10),
+      child: Row(
+
+        children: [
+       Text("*",
+            style: TX_STYLE_black_15.copyWith(color: red),
+
+          ),
+
+          SizedBox(width: 8,),
+
+          Expanded(
+            child: Text(translator.translate(title),
+              style: TX_STYLE_black_15,
+
+            ),
+          ),
+DropDown(items: ["cairo","Giza","Alex"],),
+
+       if(add) InkWell(
+         onTap: (){
+           setState(() {
+             addBranch=!addBranch;
+
+           });
+
+         },
+         child: SvgPicture.asset(
+
+            "assets/images/add_branch.svg",
+          ),
+       ),
         ],
       ),
     );

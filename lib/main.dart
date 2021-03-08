@@ -13,7 +13,6 @@ import 'screens/login/login_screen.dart';
 import 'screens/mainScreen.dart';
 import 'screens/marketsScreen.dart';
 import 'screens/login/registration_screen.dart';
-import 'screens/offersScreen.dart';
 import 'screens/chatScreen.dart';
 import 'screens/login/splash_screen.dart';
 import 'services/provider/registerProvider.dart';
@@ -81,7 +80,7 @@ class _MyAppState extends State<MyApp> {
             GlobalCupertinoLocalizations.delegate,
             DefaultCupertinoLocalizations.delegate,
           ],
-          initialRoute: "/market_details",
+          initialRoute: "/splash",
 
           routes: {
             '/splash': (context) => SplashScreen(),
