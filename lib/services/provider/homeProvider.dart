@@ -39,4 +39,12 @@ notifyListeners();
     return _categoryNames;
 
   }
+  int getCategoryId(String title){
+    _mainCategoryItems.forEach((element) {
+      if(element.nameAr==title){
+        return element.id;
+      }
+    });
+
+  }
 }

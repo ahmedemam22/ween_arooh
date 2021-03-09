@@ -18,6 +18,8 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
   TextEditingController _addBranchCon=TextEditingController();
 
   TextEditingController _responsibillityCon=TextEditingController();
+  TextEditingController _countryCon=TextEditingController();
+  TextEditingController _adminstrationCon=TextEditingController();
 
   TextEditingController _telphoneCon=TextEditingController();
 
@@ -41,9 +43,9 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
                 children: [
                   shape( "company_name",_companyNameCon,"title_ar",true),
                   shape( "responsibillity",_responsibillityCon,"admin_id",true),
-                  shapeDropDown( "country"),
-                  shapeDropDown( "administration_location"),
-                  shapeDropDown( "branches_location",true),
+                  shape( "country",_countryCon,"location",true),
+                  shape( "administration_location",_adminstrationCon,"",true),
+                  shape( "branches_location",_addBranchCon,"",true,true),
                   if(addBranch)Container(
 
                       child: Column(
@@ -89,7 +91,7 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
     );
   }
 
-  shape(String title,con,key,[bool required=false]){
+  shape(String title,con,key,[bool required=false,add=false]){
    return Padding(
       padding:  EdgeInsets.only(top:SizeConfig.screenWidth*s10),
       child: Row(
@@ -108,7 +110,20 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
             ),
           ),
 
-          TextFeld(controller: con,validate: fnValidName,hintText: title,keyy: key,),
+          TextFeld(controller: con,validate: fnValidName,keyy: key,),
+          if(add) InkWell(
+            onTap: (){
+              setState(() {
+                addBranch=!addBranch;
+
+              });
+
+            },
+            child: SvgPicture.asset(
+
+              "assets/images/add_branch.svg",
+            ),
+          ),
         ],
       ),
     );
@@ -134,21 +149,9 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
 
             ),
           ),
-DropDown(items: ["cairo","Giza","Alex"],),
+DropDown(items: ["cairo","Giza","Alex"],size: SizeConfig.screenWidth*0.6,),
 
-       if(add) InkWell(
-         onTap: (){
-           setState(() {
-             addBranch=!addBranch;
 
-           });
-
-         },
-         child: SvgPicture.asset(
-
-            "assets/images/add_branch.svg",
-          ),
-       ),
         ],
       ),
     );

@@ -4,11 +4,14 @@ import 'package:ween_arooh/utils/size_config.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/utils/customDropDown.dart';
 import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/addActivityProvider.dart';
 import 'package:ween_arooh/services/provider/homeProvider.dart';
 class DropDown extends StatefulWidget {
   final List<String>items;
   final double size;
-  DropDown({this.items, this.size}) : super();
+  final String hint;
+  final  onChange;
+  DropDown({this.items, this.size, this.hint, this.onChange}) : super();
 
   final String title = "DropDown Demo";
 
@@ -50,6 +53,8 @@ class DropDownState extends State<DropDown> {
   onChangeDropdownItem( selectedCompany) {
     setState(() {
       _selectedCompany = selectedCompany;
+     Provider.of<AddActivityProvider>(context,listen: false).setData("category_id", Provider.of<HomeProvider>(context).getCategoryId(_selectedCompany));
+
 
     });
     // Provider.of<UrgentProvider>(context,listen: false).changeService_type( selectedCompany);
@@ -76,7 +81,7 @@ class DropDownState extends State<DropDown> {
               value: _selectedCompany,
 
               items: _dropdownMenuItems,
-              hint: Center(child: Text(widget.size!=null?widget.items[0]:translator.translate('choose_activity'))),
+              hint: Center(child: Text(widget.hint??"")),
               onChanged: onChangeDropdownItem,
 
             ),

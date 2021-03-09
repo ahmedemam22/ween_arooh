@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ween_arooh/services/provider/addActivityProvider.dart';
 import 'file:///C:/flutterprojects/ween_arooh/lib/widgets/appBar/appBarShape.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
@@ -51,7 +52,7 @@ class AddActivityScreen extends StatelessWidget {
                             maxLines: 1,
                           ),
                         ),
-                        Expanded(flex:1,child: DropDown(items:Provider.of<HomeProvider>(context,listen: false).categoriesList()))
+                        Expanded(flex:1,child: DropDown(items:Provider.of<HomeProvider>(context,listen: false).categoriesList(),hint: translator.translate('choose_activity'),))
                         // urgentServices_TextFieldOptions( translator.currentLanguage == "en" ? 'Services Type' : "نوع الخدمة", black),
                       ],),
                   ),
@@ -74,9 +75,17 @@ class AddActivityScreen extends StatelessWidget {
                       padding:  EdgeInsets.symmetric(horizontal:SizeConfig.screenWidth*s20),
                       child: Column(
                         children: [
-                          AddImageShape(title: translator.translate('company_logo'),),
-                          AddImageShape(title: translator.translate('main_banner'),),
-                          AddImageShape(title: translator.translate('add_offers'),),
+    Consumer<AddActivityProvider>(
+    builder: (context, add, child) {return Column(
+      children: [
+        AddImageShape(title: translator.translate('company_logo'),images: add.bannerImage,onSelectImage: Provider.of<AddActivityProvider>(context,listen: false).addImageBanner),
+        AddImageShape(title: translator.translate('main_banner'),images: add.bannerImage,onSelectImage:  Provider.of<AddActivityProvider>(context,listen: false).addImageBanner,),
+
+        AddImageShape(title: translator.translate('add_offers'),images: add.offerImage, onSelectImage: Provider.of<AddActivityProvider>(context,listen: false).addOffers),
+
+      ],
+    );}),
+
                         ],
                       ),
                     ),
