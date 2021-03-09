@@ -5,6 +5,8 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/widgets/text_field.dart';
 import 'package:ween_arooh/utils/selectImage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ween_arooh/utils/size_config.dart';
+import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/addActivityProvider.dart';
 class AddImageShape extends StatelessWidget {
@@ -48,12 +50,12 @@ class AddImageShape extends StatelessWidget {
 
                         Expanded(
                           child: Container(
-                            height: 100,
+                            height: SizeConfig.screenWidth*s100,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: images.length,
                               itemBuilder: (context, i) {
-                                return Image.file(images[i],width: 50,height: 50,);
+                                return Image.file(images[i],width: SizeConfig.screenWidth*s50,height: SizeConfig.screenWidth*s50,);
 
 
                               },

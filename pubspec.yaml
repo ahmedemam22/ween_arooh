@@ -70,6 +70,9 @@ dev_dependencies:
   google_maps_flutter: ^1.2.0
   #share by install apps
   share: 0.6.5+4
+  #location
+  geolocator: ^5.3.1
+  location: ^3.0.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -58,5 +58,7 @@
   "our_location": "Our Location",
   "call": "Call",
   "update_profile": "Your Profile is updated",
-  "success": "Success"
+  "success": "Success",
+  "choose_branch": "Choose Branch"
+
 }

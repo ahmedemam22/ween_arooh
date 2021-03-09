@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ween_arooh/screens/locationView.dart';
 import 'package:ween_arooh/utils/validation.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
@@ -6,6 +7,9 @@ import 'package:ween_arooh/utils/size_config.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/utils/text_style.dart';
 import 'package:ween_arooh/utils/colors.dart';
+import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/addActivityProvider.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ween_arooh/widgets/text_field.dart';
 import 'package:ween_arooh/widgets/dropDown.dart';
 class CompanyInfoShape extends StatefulWidget {
@@ -29,6 +33,8 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
 
   TextEditingController _websiteCon=TextEditingController();
   bool addBranch=false;
+  LatLng savedLocation;
+  String savedAddress;
 
   @override
   Widget build(BuildContext context) {
@@ -46,23 +52,31 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
                   shape( "country",_countryCon,"location",true),
                   shape( "administration_location",_adminstrationCon,"",true),
                   shape( "branches_location",_addBranchCon,"",true,true),
-                  if(addBranch)Container(
+               Consumer<AddActivityProvider>(
+        builder: (context, add, child) {
+          return Container(
+            height:add.branchesAddress.length>0?100:0 ,
 
-                      child: Column(
-                        children: [
-                          TextFeld(controller: _addBranchCon,),
-                          RaisedButton(
+              child: ListView.builder(
+                itemCount: add.branchesAddress.length,
+                itemBuilder: (context, i) {
 
-                            onPressed: (){
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(add.branchesAddress[i]),
+                      InkWell(
 
-                            },
-                            color: backgroundColor,
-                            child: Text("Add",style: TextStyle(
-                              color: Colors.white
-                            ),),
-                          )
-                        ],
-                      ))
+                          child: Icon(Icons.close),onTap: (){
+                            add.removeBranch(i);
+                      },)
+                    ],
+                  );
+                },
+              )
+              );
+        } )
+
                 ],
               ),
           ),
@@ -113,10 +127,14 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
           TextFeld(controller: con,validate: fnValidName,keyy: key,),
           if(add) InkWell(
             onTap: (){
-              setState(() {
-                addBranch=!addBranch;
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LocationView(
+                  savedLocation: saveLocation,
+                )),
+              );
 
-              });
+
 
             },
             child: SvgPicture.asset(
@@ -155,6 +173,12 @@ DropDown(items: ["cairo","Giza","Alex"],size: SizeConfig.screenWidth*0.6,),
         ],
       ),
     );
+
+  }
+  saveLocation(LatLng Location, String address) {
+    print(address);
+    print("cccccccccccc");
+    Provider.of<AddActivityProvider>(context,listen: false).addBranch(Location,address);
 
   }
 }

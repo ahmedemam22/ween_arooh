@@ -71,37 +71,49 @@ class AddActivityScreen extends StatelessWidget {
 
                   Container(
                     color: Colors.white,
-                    child: Padding(
-                      padding:  EdgeInsets.symmetric(horizontal:SizeConfig.screenWidth*s20),
-                      child: Column(
-                        children: [
-    Consumer<AddActivityProvider>(
-    builder: (context, add, child) {return Column(
-      children: [
-        AddImageShape(title: translator.translate('company_logo'),images: add.bannerImage,onSelectImage: Provider.of<AddActivityProvider>(context,listen: false).addImageBanner),
-        AddImageShape(title: translator.translate('main_banner'),images: add.bannerImage,onSelectImage:  Provider.of<AddActivityProvider>(context,listen: false).addImageBanner,),
+                    child:  Consumer<AddActivityProvider>(
+                        builder: (context, add, child) {
+                          return Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: SizeConfig.screenWidth * s20),
+                                child: Column(
+                                  children: [
 
-        AddImageShape(title: translator.translate('add_offers'),images: add.offerImage, onSelectImage: Provider.of<AddActivityProvider>(context,listen: false).addOffers),
+                                    AddImageShape(title: translator.translate(
+                                        'company_logo'),
+                                        images: add.logoImage,
+                                        onSelectImage: add.addImageBanner),
+                                    AddImageShape(title: translator.translate(
+                                        'main_banner'),
+                                      images: add.bannerImage,
+                                      onSelectImage: add.addImageBanner,),
 
-      ],
-    );}),
+                                    AddImageShape(title: translator.translate(
+                                        'add_offers'),
+                                        images: add.offerImage,
+                                        onSelectImage: add.addOffers),
+                                    SizedBox(
+                                      height: SizeConfig.screenWidth * s10,),
 
-                        ],
-                      ),
-                    ),
+
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                color: Colors.white,
+                                child: Padding(
+                                  padding:  EdgeInsets.symmetric(horizontal:SizeConfig.screenWidth*s20),
+                                  child: AddImageShape(title: translator.translate('add_copoun'),addCoupoun: true,images: add.copounImage,onSelectImage: add.addCopoun,),
+                                ),
+
+                              ),
+                            ],
+                          );
+                        }),
                   ),
-                  SizedBox(height: SizeConfig.screenWidth*s10,),
 
-
-
-                  Container(
-                    color: Colors.white,
-                    child: Padding(
-                      padding:  EdgeInsets.symmetric(horizontal:SizeConfig.screenWidth*s20),
-                      child: AddImageShape(title: translator.translate('add_copoun'),addCoupoun: true,),
-                    ),
-
-                  ),
                   Padding(
                     padding:  EdgeInsets.symmetric(vertical:SizeConfig.screenWidth*s24),
                     child: Container(
