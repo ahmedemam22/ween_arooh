@@ -4,6 +4,8 @@ import 'package:ween_arooh/widgets/dropDown.dart';
 import 'package:ween_arooh/widgets/text_field.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
+import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/addActivityProvider.dart';
 class AddSocialMedia extends StatelessWidget {
   TextEditingController _socialCon=TextEditingController();
   @override
@@ -19,8 +21,11 @@ class AddSocialMedia extends StatelessWidget {
             Text(translator.translate('social_media')),
             Row(
               children: [
-                DropDown(items:["facebook","twitter","youtube","linkedin"],size:SizeConfig.screenWidth*s120),
-                TextFeld(controller: _socialCon,keyy: "social",),
+                DropDown(items:["facebook","twitter","youtube","linkedin"],size:SizeConfig.screenWidth*s120,hint: 'facebook',
+                onChange:Provider.of<AddActivityProvider>(context).addSocialMedia)
+                  ,
+    Consumer<AddActivityProvider>(
+    builder: (context, add, child){return TextFeld(controller: _socialCon,keyy: add.social,);}),
               ],
             ),
 

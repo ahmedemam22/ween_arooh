@@ -54,7 +54,9 @@ class AddActivityScreen extends StatelessWidget {
                             maxLines: 1,
                           ),
                         ),
-                        Expanded(flex:1,child: DropDown(items:Provider.of<HomeProvider>(context,listen: false).categoriesList(),hint: translator.translate('choose_activity'),))
+                        Expanded(flex:1,child: DropDown(items:Provider.of<HomeProvider>(context,listen: false).categoriesList(),hint: translator.translate('choose_activity'),
+                        onChange:Provider.of<AddActivityProvider>(context,listen: false).setData("category_id", Provider.of<HomeProvider>(context).getCategoryId)
+                          ,))
                         // urgentServices_TextFieldOptions( translator.currentLanguage == "en" ? 'Services Type' : "نوع الخدمة", black),
                       ],),
                   ),

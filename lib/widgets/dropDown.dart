@@ -53,8 +53,7 @@ class DropDownState extends State<DropDown> {
   onChangeDropdownItem( selectedCompany) {
     setState(() {
       _selectedCompany = selectedCompany;
-     Provider.of<AddActivityProvider>(context,listen: false).setData("category_id", Provider.of<HomeProvider>(context).getCategoryId(_selectedCompany));
-
+widget.onChange;
 
     });
     // Provider.of<UrgentProvider>(context,listen: false).changeService_type( selectedCompany);

@@ -22,6 +22,7 @@ class AddActivityProvider extends ChangeNotifier{
   Map<String,dynamic>_data={};
   bool _waitAddActivity=false;
   bool get waitAddActivity=>_waitAddActivity;
+  String social='facebook';
   setData(String key,value){
     if(_data.containsKey(key)){
 
@@ -115,6 +116,11 @@ addBranch(latlng,String address){
 
     });
     return item;
+  }
+  addSocialMedia(String value){
+    social=value;
+    notifyListeners();
+
   }
 
 }
