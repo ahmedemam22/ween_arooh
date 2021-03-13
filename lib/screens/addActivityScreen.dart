@@ -124,6 +124,7 @@ class AddActivityScreen extends StatelessWidget {
                                       height:  SizeConfig.screenWidth*s70,
                                       child:  Center(child:add.waitAddActivity?CircularProgressIndicator(): GestureDetector(
                                           onTap: ()async{
+                                            if(_formKey.currentState.validate())
                                              await add.addActivity(context);
 
 
