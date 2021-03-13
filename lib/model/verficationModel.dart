@@ -1,6 +1,6 @@
 class VerficationModel{
   final String mobile;
-  final String code;
+   String code;
 
   VerficationModel({this.mobile, this.code});
 }

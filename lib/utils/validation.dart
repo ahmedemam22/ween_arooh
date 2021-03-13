@@ -52,4 +52,12 @@ String fnValidConfPass(String confPassword, String password) {
   } else {
     return null;
   }
+
+}
+String fnEmpty(String value) {
+  if (value.isEmpty) {
+    return translator.translate('add_data');
+  } else {
+    return null;
+  }
 }

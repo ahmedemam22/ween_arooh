@@ -16,7 +16,13 @@ class TextFeld extends StatelessWidget {
       width: SizeConfig.screenWidth*0.58,
       child: TextFormField(
       controller: controller,
-        validator:validate ,
+        validator:(val){
+          if(val.length==0)return translator.translate('add_data');
+          else{
+
+            return
+              null;}
+        },
           keyboardType: hintText=="mobile"?TextInputType.number:TextInputType.name,
         onChanged: (value){
         Provider.of<AddActivityProvider>(context,listen: false).setData(keyy, value);

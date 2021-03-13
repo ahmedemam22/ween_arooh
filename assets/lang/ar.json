@@ -4,6 +4,7 @@
   "login": "تسجيل الدخول",
   "register": "تسجيل",
   "login_enter": "دخول",
+  "send_code_again": "اعادة ارسال الكود",
   "new_user": "مستخدم جديد",
   "mobile": "رقم الجوال",
   "telephone": "تليفون",
@@ -63,7 +64,8 @@
   "our_location": "موقعنا",
   "update_profile": "تم تحديث بياناتك",
   "success": "نجاح",
-  "choose_branch": "اختر موقع فرعك"
+  "choose_branch": "اختر موقع فرعك",
+  "add_data": "ادخل البيانات"
 
 
 

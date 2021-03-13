@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:provider/provider.dart';
 import 'package:ween_arooh/screens/settingScreen.dart';
 import 'package:ween_arooh/screens/aboutUsScreen.dart';
 import 'package:ween_arooh/screens/addActivityScreen.dart';
 import 'services/provider/addActivityProvider.dart';
-import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/services/provider/marketDetailsProvider.dart';
 import 'screens/marketDetailsScreen.dart';
-import 'package:provider/provider.dart';
 import 'screens/login/login_screen.dart';
 import 'screens/mainScreen.dart';
 import 'screens/marketsScreen.dart';
@@ -27,11 +27,13 @@ import 'package:ween_arooh/widgets/displayImage.dart';
 import 'screens/rateScreen.dart';
 
 
-Future<void>  main() async{
+Future<void> main() async {
+  // if your flutter > 1.7.8 :  ensure flutter activated
   WidgetsFlutterBinding.ensureInitialized();
-  LIST_OF_LANGS = ['ar', 'en'];
+
+  LIST_OF_LANGS = ['ar', 'en']; // define languages
   LANGS_DIR = 'assets/lang/'; // define directory
-  await translator.init(); // intialize/ intialize
+  await translator.init(); // intialize
 
   runApp(
     LocalizedApp(

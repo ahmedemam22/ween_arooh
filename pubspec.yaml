@@ -34,10 +34,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  localize_and_translate: ^1.1.1+6
   flutter_localizations:
     sdk: flutter
     #translation package
-  localize_and_translate: ^1.1.1+6
   #provider package
   provider: ^4.3.2+2
   #http package

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ween_arooh/utils/size_config.dart';
+import 'package:ween_arooh/widgets/appBar/appBarShape.dart';
 import 'package:ween_arooh/widgets/imageSlider.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-import 'file:///C:/flutterprojects/ween_arooh/lib/widgets/appBar/appBarShape.dart';
 import 'package:ween_arooh/widgets/mainCategoryShape.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/homeProvider.dart';
@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      AppBarShape(title:translator.translate('main'),openDrawer:   widgetKey,onChange: Provider.of<HomeProvider>(context,listen: false).makeSearch,),
+      AppBarShape(title:translator.translate('main'),openDrawer:   widgetKey,onChange: Provider.of<HomeProvider>(context,listen: false).makeSearch,back:false),
       SizedBox(height:SizeConfig.screenWidth*s8),
       ImageSlider(),
       Consumer<HomeProvider>(

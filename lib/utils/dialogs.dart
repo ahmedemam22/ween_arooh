@@ -7,14 +7,17 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/widgets/addRateShape.dart';
 import 'package:ween_arooh/utils/text_style.dart';
 class Dialogs{
-  awsomeDialog({context,type,title,desc}){
+  awsomeDialog({context,type,title,desc,onClick}){
     return AwesomeDialog(
       context: context,
       dialogType:type,
       animType: AnimType.BOTTOMSLIDE,
       title: title,
       desc: desc,
-      btnOkOnPress: () {},
+      btnOkOnPress: () {
+        onClick;
+
+      },
       btnOkColor: backgroundColor,
 
     )..show();

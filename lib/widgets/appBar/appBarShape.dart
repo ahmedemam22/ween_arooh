@@ -8,8 +8,9 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 class AppBarShape extends StatelessWidget {
   final String title;
   final Function onChange;
+  final bool back;
   final GlobalKey<ScaffoldState> openDrawer;
-  AppBarShape({this.title, this.openDrawer, this.onChange});
+  AppBarShape({this.title, this.openDrawer, this.onChange,this.back=true});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,38 +29,44 @@ class AppBarShape extends StatelessWidget {
               height: SizeConfig.screenWidth*s10,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
               InkWell(
                   onTap: openDrawer.currentState.openDrawer,
                   child: Icon(Icons.menu,color: Colors.white,size: SizeConfig.screenWidth*s35,)),
 
-   Container(
-                        height: SizeConfig.screenWidth*s30,
-                        width: SizeConfig.screenWidth*(s200+s90),
-                        child: ClipRect(
-                          child: Row(
-                            children: [
+   Center(
+     child: Container(
+                          height: SizeConfig.screenWidth*s30,
+                          width: SizeConfig.screenWidth*(s200+s90),
+                          child: ClipRect(
+                            child: Row(
+                              children: [
 
-                              Container(
-                                    width:title==translator.translate('offers')?SizeConfig.screenWidth*(s175):SizeConfig.screenWidth*(s200+s90),
-                                    child:
+                                Container(
+                                      width:title==translator.translate('offers')?SizeConfig.screenWidth*(s175):SizeConfig.screenWidth*(s200+s90),
+                                      child:
 
-                                SearchTextField(onChange)),
+                                  SearchTextField(onChange)),
 
-                              if(title==translator.translate('offers'))
-                                SizedBox(width: SizeConfig.screenWidth*s20,),
-                              if(title==translator.translate('offers'))
-                                   Container(
-                                       width: SizeConfig.screenWidth*(s90),
-                                       child: SearchTextField(onChange))
+                                if(title==translator.translate('offers'))
+                                  SizedBox(width: SizeConfig.screenWidth*s20,),
+                                if(title==translator.translate('offers'))
+                                     Container(
+                                         width: SizeConfig.screenWidth*(s90),
+                                         child: SearchTextField(onChange))
 
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
+   ),
 
-                Icon(Icons.arrow_back_ios_outlined,color: Colors.white,)
+              if(back)  InkWell(
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                    child: Icon(Icons.arrow_back_ios_outlined,color: Colors.white,))
 
               ],
                 ),

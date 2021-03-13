@@ -15,29 +15,34 @@ class OptionShape extends StatelessWidget {
    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        InkWell(
-            onTap: (){
-              Navigator.pushNamed(context, "/rate");
-            },
-            child: shape(translator.translate('review'),"visitors_opinion")),
+        Expanded(
+          child: InkWell(
+              onTap: (){
+                Navigator.pushNamed(context, "/rate");
+              },
+              child: shape(translator.translate('review'),"visitors_opinion")),
+        ),
        shape(translator.translate('add_num'),"contact"),
-        InkWell(
-            onTap: (){
-              Share.share(Provider.of<MarketDetailsProvider>(context,listen: false).marketDetails.siteLink);
-            },child: shape(translator.translate('share'),"share")),
-        InkWell(
-            onTap: (){
-             Dialogs().rateDialog(context);
-            },
-            child: shape(translator.translate('add_rate'),"favorite")),
+        Expanded(
+          child: InkWell(
+              onTap: (){
+                Share.share(Provider.of<MarketDetailsProvider>(context,listen: false).marketDetails.siteLink);
+              },child: shape(translator.translate('share'),"share")),
+        ),
+        Expanded(
+          child: InkWell(
+              onTap: (){
+               Dialogs().rateDialog(context);
+              },
+              child: shape(translator.translate('add_rate'),"favorite")),
+        ),
       ],
     );
 
   }
   Widget shape(String title,String iconName){
     return
-      Expanded(
-        child: Card(
+      Card(
           color: lightGray,
 
           shape: RoundedRectangleBorder(
@@ -67,7 +72,7 @@ class OptionShape extends StatelessWidget {
               ),
             ),
           ),
-        ),
+        
       );
   }
 }

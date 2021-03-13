@@ -13,6 +13,7 @@ class MarketDetailsProvider extends ChangeNotifier{
   bool get waitMakeRate=>_waitMakeRate;
   bool _waitRate=false;
   bool get waitRate=>_waitRate;
+  int _selectId;
   double rate;
   bool _waitMarketDetails=false;
   bool get waitMarketDetails=>_waitMarketDetails;
@@ -59,6 +60,10 @@ class MarketDetailsProvider extends ChangeNotifier{
 
    }
   }
+  selectId(id){
+    _selectId=id;
+    notifyListeners();
+  }
   Future getMarketDetails()async{
   try{
     _waitMarketDetails=true;
@@ -77,6 +82,8 @@ class MarketDetailsProvider extends ChangeNotifier{
   }
   List<String> getImages(){
     List<String>_images=[];
+    print(_marketDetails.images.length);
+    print("lllllllllllll");
     _marketDetails.images.forEach((element) {_images.add(element.path);});
     return _images;
   }

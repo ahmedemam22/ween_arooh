@@ -75,37 +75,37 @@ class Result {
   int id;
   String titleAr;
   String titleEn;
-  String minDecAr;
-  String minDecEn;
-  String decAr;
-  String decEn;
-  String latitude;
-  String longitude;
-  String location;
+  dynamic minDecAr;
+  dynamic minDecEn;
+  dynamic decAr;
+  dynamic decEn;
+  dynamic latitude;
+  dynamic longitude;
+  dynamic location;
   String siteLink;
-  String email;
+  dynamic email;
   String facebook;
   String youtube;
   String twitter;
   String linkedin;
-  int parentId;
+  dynamic parentId;
   int categoryId;
-  int adminId;
+  dynamic adminId;
   DateTime createdAt;
   DateTime updatedAt;
   dynamic deletedAt;
   int isManagement;
   String title;
-  String minDec;
-  String dec;
+  dynamic minDec;
+  dynamic dec;
   String logo;
   String panner;
-  dynamic visitscount;
+  String visitscount;
   double rate;
   List<Offer> offers;
   List<Image> images;
-  Admin admin;
-  List<Branch> branches;
+  dynamic admin;
+  List<dynamic> branches;
   List<Recomendation> recomendations;
   Category category;
 
@@ -113,37 +113,37 @@ class Result {
     id: json["id"],
     titleAr: json["title_ar"],
     titleEn: json["title_en"],
-    minDecAr: json["min_dec_ar"] == null ? null : json["min_dec_ar"],
-    minDecEn: json["min_dec_en"] == null ? null : json["min_dec_en"],
-    decAr: json["dec_ar"] == null ? null : json["dec_ar"],
-    decEn: json["dec_en"] == null ? null : json["dec_en"],
-    latitude: json["latitude"] == null ? null : json["latitude"],
-    longitude: json["longitude"] == null ? null : json["longitude"],
-    location: json["location"] == null ? null : json["location"],
+    minDecAr: json["min_dec_ar"],
+    minDecEn: json["min_dec_en"],
+    decAr: json["dec_ar"],
+    decEn: json["dec_en"],
+    latitude: json["latitude"],
+    longitude: json["longitude"],
+    location: json["location"],
     siteLink: json["site_link"],
-    email: json["email"] == null ? null : json["email"],
-    facebook: json["facebook"] == null ? null : json["facebook"],
-    youtube: json["youtube"] == null ? null : json["youtube"],
+    email: json["email"],
+    facebook: json["facebook"],
+    youtube: json["youtube"],
     twitter: json["twitter"],
     linkedin: json["linkedin"],
-    parentId: json["parent_id"] == null ? null : json["parent_id"],
+    parentId: json["parent_id"],
     categoryId: json["category_id"],
-    adminId: json["admin_id"] == null ? null : json["admin_id"],
+    adminId: json["admin_id"],
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
     deletedAt: json["deleted_at"],
     isManagement: json["is_management"],
     title: json["title"],
-    minDec: json["min_dec"] == null ? null : json["min_dec"],
-    dec: json["dec"] == null ? null : json["dec"],
-    logo: json["logo"] == null ? null : json["logo"],
+    minDec: json["min_dec"],
+    dec: json["dec"],
+    logo: json["logo"],
     panner: json["panner"],
     visitscount: json["visitscount"],
     rate: json["rate"].toDouble(),
     offers: List<Offer>.from(json["offers"].map((x) => Offer.fromJson(x))),
     images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
-    admin: json["admin"] == null ? null : Admin.fromJson(json["admin"]),
-    branches: List<Branch>.from(json["branches"].map((x) => Branch.fromJson(x))),
+    admin: json["admin"],
+    branches: List<dynamic>.from(json["branches"].map((x) => x)),
     recomendations: List<Recomendation>.from(json["recomendations"].map((x) => Recomendation.fromJson(x))),
     category: Category.fromJson(json["category"]),
   );
@@ -152,163 +152,39 @@ class Result {
     "id": id,
     "title_ar": titleAr,
     "title_en": titleEn,
-    "min_dec_ar": minDecAr == null ? null : minDecAr,
-    "min_dec_en": minDecEn == null ? null : minDecEn,
-    "dec_ar": decAr == null ? null : decAr,
-    "dec_en": decEn == null ? null : decEn,
-    "latitude": latitude == null ? null : latitude,
-    "longitude": longitude == null ? null : longitude,
-    "location": location == null ? null : location,
+    "min_dec_ar": minDecAr,
+    "min_dec_en": minDecEn,
+    "dec_ar": decAr,
+    "dec_en": decEn,
+    "latitude": latitude,
+    "longitude": longitude,
+    "location": location,
     "site_link": siteLink,
-    "email": email == null ? null : email,
-    "facebook": facebook == null ? null : facebook,
-    "youtube": youtube == null ? null : youtube,
+    "email": email,
+    "facebook": facebook,
+    "youtube": youtube,
     "twitter": twitter,
     "linkedin": linkedin,
-    "parent_id": parentId == null ? null : parentId,
+    "parent_id": parentId,
     "category_id": categoryId,
-    "admin_id": adminId == null ? null : adminId,
+    "admin_id": adminId,
     "created_at": createdAt.toIso8601String(),
     "updated_at": updatedAt.toIso8601String(),
     "deleted_at": deletedAt,
     "is_management": isManagement,
     "title": title,
-    "min_dec": minDec == null ? null : minDec,
-    "dec": dec == null ? null : dec,
-    "logo": logo == null ? null : logo,
+    "min_dec": minDec,
+    "dec": dec,
+    "logo": logo,
     "panner": panner,
     "visitscount": visitscount,
     "rate": rate,
     "offers": List<dynamic>.from(offers.map((x) => x.toJson())),
     "images": List<dynamic>.from(images.map((x) => x.toJson())),
-    "admin": admin == null ? null : admin.toJson(),
-    "branches": List<dynamic>.from(branches.map((x) => x.toJson())),
+    "admin": admin,
+    "branches": List<dynamic>.from(branches.map((x) => x)),
     "recomendations": List<dynamic>.from(recomendations.map((x) => x.toJson())),
     "category": category.toJson(),
-  };
-}
-
-class Admin {
-  Admin({
-    this.id,
-    this.fName,
-    this.lName,
-    this.mobile,
-    this.mobile2,
-    this.pic,
-    this.latitude,
-    this.longitude,
-    this.status,
-    this.emailVerifiedAt,
-    this.createdAt,
-    this.updatedAt,
-    this.code,
-    this.codeExp,
-    this.path,
-    this.address,
-    this.name,
-  });
-
-  int id;
-  String fName;
-  String lName;
-  String mobile;
-  String mobile2;
-  dynamic pic;
-  dynamic latitude;
-  dynamic longitude;
-  int status;
-  dynamic emailVerifiedAt;
-  DateTime createdAt;
-  DateTime updatedAt;
-  dynamic code;
-  dynamic codeExp;
-  dynamic path;
-  String address;
-  String name;
-
-  factory Admin.fromJson(Map<String, dynamic> json) => Admin(
-    id: json["id"],
-    fName: json["f_name"],
-    lName: json["l_name"],
-    mobile: json["mobile"],
-    mobile2: json["mobile2"],
-    pic: json["pic"],
-    latitude: json["latitude"],
-    longitude: json["longitude"],
-    status: json["status"],
-    emailVerifiedAt: json["email_verified_at"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
-    code: json["code"],
-    codeExp: json["codeExp"],
-    path: json["path"],
-    address: json["address"],
-    name: json["name"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "f_name": fName,
-    "l_name": lName,
-    "mobile": mobile,
-    "mobile2": mobile2,
-    "pic": pic,
-    "latitude": latitude,
-    "longitude": longitude,
-    "status": status,
-    "email_verified_at": emailVerifiedAt,
-    "created_at": createdAt.toIso8601String(),
-    "updated_at": updatedAt.toIso8601String(),
-    "code": code,
-    "codeExp": codeExp,
-    "path": path,
-    "address": address,
-    "name": name,
-  };
-}
-
-class Branch {
-  Branch({
-    this.id,
-    this.marketId,
-    this.latitude,
-    this.longitude,
-    this.location,
-    this.branchRate,
-    this.createdAt,
-    this.updatedAt,
-  });
-
-  int id;
-  int marketId;
-  String latitude;
-  String longitude;
-  String location;
-  int branchRate;
-  DateTime createdAt;
-  DateTime updatedAt;
-
-  factory Branch.fromJson(Map<String, dynamic> json) => Branch(
-    id: json["id"],
-    marketId: json["market_id"],
-    latitude: json["latitude"],
-    longitude: json["longitude"],
-    location: json["location"],
-    branchRate: json["branch_rate"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "market_id": marketId,
-    "latitude": latitude,
-    "longitude": longitude,
-    "location": location,
-    "branch_rate": branchRate,
-    "created_at": createdAt.toIso8601String(),
-    "updated_at": updatedAt.toIso8601String(),
   };
 }
 
@@ -422,7 +298,7 @@ class Image {
     marketId: json["market_id"],
     name: json["name"],
     type: json["type"],
-    periority: json["periority"] == null ? null : json["periority"],
+    periority: json["periority"],
     pageLoca: json["page_loca"],
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
@@ -435,7 +311,7 @@ class Image {
     "market_id": marketId,
     "name": name,
     "type": type,
-    "periority": periority == null ? null : periority,
+    "periority": periority,
     "page_loca": pageLoca,
     "created_at": createdAt.toIso8601String(),
     "updated_at": updatedAt.toIso8601String(),

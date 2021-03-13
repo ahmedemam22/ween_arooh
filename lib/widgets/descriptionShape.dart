@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/addActivityProvider.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/text_style.dart';
@@ -7,8 +9,9 @@ import 'package:ween_arooh/utils/my_padding.dart';
 class DescriptionShape extends StatelessWidget {
   final int maxLine;
   final String title;
+  final String keyy;
 
-  const DescriptionShape({Key key, this.maxLine, this.title}) : super(key: key);
+  const DescriptionShape({Key key, this.maxLine, this.title, this.keyy}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return     Padding(
@@ -43,6 +46,7 @@ class DescriptionShape extends StatelessWidget {
                   child: Center(
                     child: TextField(
                       onChanged: (value){
+                        Provider.of<AddActivityProvider>(context,listen: false).setData(keyy, value);
                       },
 
                       style: TX_STYLE_black_14,

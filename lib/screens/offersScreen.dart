@@ -25,7 +25,7 @@ class _OffersScreenState extends State<OffersScreen> {
     return Scaffold(
       body: Column(
         children: [
-          AppBarShape(title:translator.translate('offers'),openDrawer: widget.widgetKey,),
+          AppBarShape(title:translator.translate('offers'),openDrawer: widget.widgetKey,back: false,),
           Expanded(
             child:  Consumer<OffersProvider>(
           builder: (context, offers, child) {

@@ -61,7 +61,7 @@ class SettingScreen extends StatelessWidget {
           builder: (context, user, child) {
             return user.waitSetting ? Center(child: CircularProgressIndicator()) : InkWell(
                 onTap: ()async{
-               if(_formKey.currentState.validate()){   await user.updateProfile(UserModel(fName: _firstNameController.text
+               if(_formKey.currentState.validate()){   await user.updateProfile(User(fName: _firstNameController.text
                   ,lName: _lastNameController.text,mobile: _phoneController.text),context);
                 }},
                 child:

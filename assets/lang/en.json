@@ -1,5 +1,6 @@
 {
   "wtg": "WTG",
+  "ween_aroh": "Ween Arooh",
   "login": "Login",
   "login_enter": "Login",
   "register": "Register",
@@ -59,6 +60,6 @@
   "call": "Call",
   "update_profile": "Your Profile is updated",
   "success": "Success",
-  "choose_branch": "Choose Branch"
-
+  "choose_branch": "Choose Branch",
+  "add_data": "Add data"
 }

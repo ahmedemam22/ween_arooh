@@ -3,6 +3,7 @@ import 'package:ween_arooh/utils/size_config.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
 import 'package:ween_arooh/screens/homeScreen.dart';
+import 'package:ween_arooh/screens/login/registration_screen.dart';
 import 'package:ween_arooh/screens/offersScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/homeProvider.dart';
@@ -14,7 +15,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _index=0;
   static final   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(); // ADD THIS LINE
-List<Widget>_widgets=[HomeScreen(_scaffoldKey),HomeScreen(_scaffoldKey),OffersScreen(_scaffoldKey)];
+List<Widget>_widgets=[HomeScreen(_scaffoldKey),RegistrationScreen(),OffersScreen(_scaffoldKey)];
 
   @override
   Widget build(BuildContext context) {

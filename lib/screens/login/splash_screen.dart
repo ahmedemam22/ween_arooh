@@ -5,6 +5,9 @@ import 'package:ween_arooh/services/provider/homeProvider.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/widgets/ween_aroh_text_shape.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ween_arooh/model/userModel.dart';
+import 'package:ween_arooh/services/provider/userProvider.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -17,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Provider.of<HomeProvider>(context,listen: false).getMainCategories();
     Future.delayed(Duration(seconds: 2), () {
-      Navigator.pushReplacementNamed(context, '/main');
+      _check_savedUser();
     });
   }
   @override
@@ -47,5 +50,26 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
     );
+  }
+  _check_savedUser() {
+    SharedPreferences.getInstance().then((pref) {
+      // String ids_check =pref.getString("email");
+      try {
+       if( pref.getString('user')==null){
+         Navigator.pushNamed(context, '/login');
+       }
+       else{
+         Provider.of<UserProvider>(context, listen: false).getUser().then((value) =>Navigator.pushNamed(context, '/main')
+         );
+       }
+
+        /* else {
+          navigateAndClearStack(context, Log_In());
+        }*/
+      } catch (error) {
+        print('error 888811:: $error');
+      }
+      ;
+    });
   }
 }
