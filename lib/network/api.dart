@@ -5,12 +5,12 @@ import 'package:http/http.dart' as http;
 
 
 class Api{
-  final String tokenn= 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvcmFpdG90ZWMub3JnXC93dGdcL2FwaVwvdmVyaWZ5IiwiaWF0IjoxNjEzOTA3MDc4LCJleHAiOjE2MTM5MTA2NzgsIm5iZiI6MTYxMzkwNzA3OCwianRpIjoiS3VFVFQxM096ZW9SaTF6dyIsInN1YiI6NSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.wSrwYZZbRYVfayqXlwR_z2-jY8oEDQ982_9WQOPm4WA'
+  final String tokenn= 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvcmFpdG90ZWMub3JnXC93dGdcL2FwaVwvbG9naW4iLCJpYXQiOjE2MTYxNzE5OTcsIm5iZiI6MTYxNjE3MTk5NywianRpIjoicjU4azlUOEF5TzYzYlpUayIsInN1YiI6OCwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.jk467nFJ1OPuFO-FBD6Uclv8IPB3UKF5Zl0o8Ag7NAs'
       ;
 
   Future<Map>get(url,[bool token=false])async {
     http.Response response = await http.get(url,headers: {'Content-Type': "application/json; charset=utf-8",
-    if(token)'Authorization': tokenn
+    'Authorization': tokenn
     });
     print(json.decode(response.body));
 

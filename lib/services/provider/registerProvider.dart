@@ -39,7 +39,6 @@ class RegisterProvider extends ChangeNotifier{
        "longitude":"31",
      });
      print(json.decode(reponse.body));
-     print("sssssssssssssssss");
      if(reponse.statusCode==200){
        Navigator.pushNamed(context, '/login');
 

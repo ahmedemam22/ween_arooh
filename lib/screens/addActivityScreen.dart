@@ -60,82 +60,11 @@ class AddActivityScreen extends StatelessWidget {
                         // urgentServices_TextFieldOptions( translator.currentLanguage == "en" ? 'Services Type' : "نوع الخدمة", black),
                       ],),
                   ),
-                  Form(
-                      key: _formKey,
-                      child: CompanyInfoShape()),
-                  AddSocialMedia(),
 
-                  Padding(
-                    padding:  EdgeInsets.symmetric(vertical:8.0),
-                    child: Container(
-                      child:  Column(children: [
-                        DescriptionShape(title:translator.translate('brief_description') ,maxLine: 1,keyy:
-                        "min_dec_ar",),
-                        DescriptionShape(title: translator.translate('detailed_description'),maxLine: 3,keyy:  "dec_ar",),
-                      ]),
-                    ),
-                  ),
-
-                  Container(
-                    color: Colors.white,
-                    child:  Consumer<AddActivityProvider>(
-                        builder: (context, add, child) {
-                          return Column(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: SizeConfig.screenWidth * s20),
-                                child: Column(
-                                  children: [
-
-                                    AddImageShape(title: translator.translate(
-                                        'company_logo'),
-                                        images: add.logoImage,
-                                        onSelectImage: add.addImageBanner),
-                                    AddImageShape(title: translator.translate(
-                                        'main_banner'),
-                                      images: add.bannerImage,
-                                      onSelectImage: add.addImageBanner,),
-
-                                    AddImageShape(title: translator.translate(
-                                        'add_offers'),
-                                        images: add.offerImage,
-                                        onSelectImage: add.addOffers),
-                                    SizedBox(
-                                      height: SizeConfig.screenWidth * s10,),
+                          CompanyInfoShape(),
 
 
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                color: Colors.white,
-                                child: Padding(
-                                  padding:  EdgeInsets.symmetric(horizontal:SizeConfig.screenWidth*s20),
-                                  child: AddImageShape(title: translator.translate('add_copoun'),addCoupoun: true,images: add.copounImage,onSelectImage: add.addCopoun,),
-                                ),
 
-                              ),
-
-                              Padding(
-                                padding:  EdgeInsets.symmetric(vertical:SizeConfig.screenWidth*s24),
-                                child: Container(
-                                      width: SizeConfig.screenWidth*s175,
-                                      height:  SizeConfig.screenWidth*s70,
-                                      child:  Center(child:add.waitAddActivity?CircularProgressIndicator(): GestureDetector(
-                                          onTap: ()async{
-                                            if(_formKey.currentState.validate())
-                                             await add.addActivity(context);
-
-
-                                          },
-                                          child: ButtonShape(translator.translate('save'),backgroundColor)))),
-                                ),
-
-                            ],
-                          );
-                        }),
-                  ),
 
                 ],
               ),

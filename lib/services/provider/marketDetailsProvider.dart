@@ -82,8 +82,6 @@ class MarketDetailsProvider extends ChangeNotifier{
   }
   List<String> getImages(){
     List<String>_images=[];
-    print(_marketDetails.images.length);
-    print("lllllllllllll");
     _marketDetails.images.forEach((element) {_images.add(element.path);});
     return _images;
   }

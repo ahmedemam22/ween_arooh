@@ -7,11 +7,15 @@ import 'package:ween_arooh/utils/size_config.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/utils/text_style.dart';
 import 'package:ween_arooh/utils/colors.dart';
+import 'package:ween_arooh/widgets/companyInfoShape.dart';
+import 'package:ween_arooh/widgets/addImageShape.dart';
+import 'package:ween_arooh/widgets/descriptionShape.dart';
+import 'package:ween_arooh/widgets/marketDetails/addSocialMedia.dart';
+import 'package:ween_arooh/widgets/button_shape.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/addActivityProvider.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ween_arooh/widgets/text_field.dart';
-import 'package:ween_arooh/widgets/dropDown.dart';
 class CompanyInfoShape extends StatefulWidget {
 
   @override
@@ -36,75 +40,157 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
   bool addBranch=false;
   LatLng savedLocation;
   String savedAddress;
+  final _formKey = GlobalKey<FormState>();
+
 
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        children: [
-          Container(
-            color: Colors.white,
-            child: Padding(
-              padding:  EdgeInsets.symmetric(horizontal:SizeConfig.screenWidth*s10,
-              vertical: SizeConfig.screenWidth*s20),
-              child: Column(
+    return Form(
+      key: _formKey,
+      child: Column(
+          children: [
+            Container(
+              color: Colors.white,
+              child: Padding(
+                padding:  EdgeInsets.symmetric(horizontal:SizeConfig.screenWidth*s10,
+                vertical: SizeConfig.screenWidth*s20),
+                child: Column(
+                    children: [
+                      shape( "company_name",_companyNameCon,"title_ar",true),
+                      shape( "responsibillity",_responsibillityCon,"admin_id",true),
+                      shape( "country",_countryCon,"location",true),
+                      shape( "administration_location",_adminstrationCon,"",true),
+                      shape( "branches_location",_addBranchCon,"",true,true),
+                   Consumer<AddActivityProvider>(
+            builder: (context, add, child) {
+              return Container(
+                height:add.branchesAddress.length>0?100:0 ,
+
+                  child: ListView.builder(
+                    itemCount: add.branchesAddress.length,
+                    itemBuilder: (context, i) {
+
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(add.branchesAddress[i]),
+                          InkWell(
+
+                              child: Icon(Icons.close),onTap: (){
+                                add.removeBranch(i);
+                          },)
+                        ],
+                      );
+                    },
+                  )
+                  );
+            } )
+
+                    ],
+                  ),
+              ),
+
+
+            ),
+            SizedBox(height: 8,),
+            Container(
+              color: Colors.white,
+              child: Padding(
+                padding:  EdgeInsets.symmetric(horizontal:SizeConfig.screenWidth*s10,
+                    vertical: SizeConfig.screenWidth*s20),
+                child: Column(
                   children: [
-                    shape( "company_name",_companyNameCon,"title_ar",true),
-                    shape( "responsibillity",_responsibillityCon,"admin_id",true),
-                    shape( "country",_countryCon,"location",true),
-                    shape( "administration_location",_adminstrationCon,"",true),
-                    shape( "branches_location",_addBranchCon,"",true,true),
-                 Consumer<AddActivityProvider>(
-          builder: (context, add, child) {
-            return Container(
-              height:add.branchesAddress.length>0?100:0 ,
-
-                child: ListView.builder(
-                  itemCount: add.branchesAddress.length,
-                  itemBuilder: (context, i) {
-
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(add.branchesAddress[i]),
-                        InkWell(
-
-                            child: Icon(Icons.close),onTap: (){
-                              add.removeBranch(i);
-                        },)
-                      ],
-                    );
-                  },
-                )
-                );
-          } )
-
+                    shape( "telephone",_telphoneCon,"telephone"),
+                    shape( "mobile",_mobileCon,"mobile",true),
+                    shape( "email",_emailCon,"email"),
+                    shape("website",_websiteCon,"site_link"),
                   ],
                 ),
-            ),
-
-
-          ),
-          SizedBox(height: 8,),
-          Container(
-            color: Colors.white,
-            child: Padding(
-              padding:  EdgeInsets.symmetric(horizontal:SizeConfig.screenWidth*s10,
-                  vertical: SizeConfig.screenWidth*s20),
-              child: Column(
-                children: [
-                  shape( "telephone",_telphoneCon,"telephone"),
-                  shape( "mobile",_mobileCon,"mobile",true),
-                  shape( "email",_emailCon,"email"),
-                  shape("website",_websiteCon,"site_link"),
-                ],
               ),
+
+
             ),
 
+        AddSocialMedia(),
 
+        Padding(
+          padding:  EdgeInsets.symmetric(vertical:8.0),
+          child: Container(
+            child:  Column(children: [
+              DescriptionShape(title:translator.translate('brief_description') ,maxLine: 1,keyy:
+              "min_dec_ar",),
+              DescriptionShape(title: translator.translate('detailed_description'),maxLine: 3,keyy:  "dec_ar",),
+            ]),
           ),
-        ],
+        ),
 
+        Container(
+          color: Colors.white,
+          child:  Consumer<AddActivityProvider>(
+              builder: (context, add, child) {
+                return Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: SizeConfig.screenWidth * s20),
+                      child: Column(
+                        children: [
+
+                          AddImageShape(title: translator.translate(
+                              'company_logo'),
+                              images: add.logoImage,
+                              onSelectImage: add.addImageBanner),
+                          AddImageShape(title: translator.translate(
+                              'main_banner'),
+                            images: add.bannerImage,
+                            onSelectImage: add.addImageBanner,),
+
+                          AddImageShape(title: translator.translate(
+                              'add_offers'),
+                              images: add.offerImage,
+                              onSelectImage: add.addOffers),
+                          SizedBox(
+                            height: SizeConfig.screenWidth * s10,),
+
+
+                        ],
+                      ),
+                    ),
+                    Container(
+                      color: Colors.white,
+                      child: Padding(
+                        padding:  EdgeInsets.symmetric(horizontal:SizeConfig.screenWidth*s20),
+                        child: AddImageShape(title: translator.translate('add_copoun'),addCoupoun: true,images: add.copounImage,onSelectImage: add.addCopoun,),
+                      ),
+
+                    ),
+
+                    Padding(
+                      padding:  EdgeInsets.symmetric(vertical:SizeConfig.screenWidth*s24),
+                      child: Container(
+                          width: SizeConfig.screenWidth*s175,
+                          height:  SizeConfig.screenWidth*s70,
+                          child:  Center(child:add.waitAddActivity?CircularProgressIndicator(): InkWell(
+                              onTap: ()async{
+                                if(_formKey.currentState.validate()){
+                                  await add.addActivity(context);}
+                                else{
+                                  print("ssssssssssssss");
+                                }
+
+
+                              },
+
+                              child: ButtonShape(translator.translate('save'),backgroundColor)))),
+                    ),
+
+                  ],
+                );
+              }),
+        ),
+
+      ]),
     );
   }
 
@@ -127,7 +213,7 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
             ),
           ),
 
-          TextFeld(controller: con,validate: fnEmpty,keyy: key,),
+          TextFeld(controller: con,validate: required?fnEmpty:null,keyy: key,),
           if(add) InkWell(
             onTap: (){
               Navigator.push(
@@ -151,33 +237,7 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
 
   }
 
-  shapeDropDown(title,[add=false]){
-    return Padding(
-      padding:  EdgeInsets.only(top:SizeConfig.screenWidth*s10),
-      child: Row(
 
-        children: [
-       Text("*",
-            style: TX_STYLE_black_15.copyWith(color: red),
-
-          ),
-
-          SizedBox(width: 8,),
-
-          Expanded(
-            child: Text(translator.translate(title),
-              style: TX_STYLE_black_15,
-
-            ),
-          ),
-DropDown(items: ["cairo","Giza","Alex"],size: SizeConfig.screenWidth*0.6,),
-
-
-        ],
-      ),
-    );
-
-  }
   saveLocation(LatLng Location, String address) {
     print(address);
     print("cccccccccccc");

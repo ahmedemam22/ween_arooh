@@ -61,13 +61,13 @@ class UserProvider extends ChangeNotifier{
       }
     }
   }
-Future setUser(User user)async{
+Future setUser([User user])async{
     _user=user;
     GlopalApp.user=_user;
     notifyListeners();
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool result = await prefs.setString('user', jsonEncode(user));
+    bool result = await prefs.setString('user',user==null?null: jsonEncode(user));
 
 
 }
