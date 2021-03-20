@@ -125,7 +125,7 @@ class _AppDrawerState extends State<AppDrawer> {
       Navigator.pushNamed(_context, '/setting');
     } else if (name == "login") {
       Provider.of<UserProvider>(context,listen: false).setUser();
-      Navigator.pushNamed(_context, '/login');
+      Navigator.pushReplacementNamed(_context, '/login');
 
 
     } else if (name == "main") {

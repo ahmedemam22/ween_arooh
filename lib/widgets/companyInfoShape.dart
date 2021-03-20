@@ -7,7 +7,8 @@ import 'package:ween_arooh/utils/size_config.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/utils/text_style.dart';
 import 'package:ween_arooh/utils/colors.dart';
-import 'package:ween_arooh/widgets/companyInfoShape.dart';
+import 'package:ween_arooh/utils/dialogs.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:ween_arooh/widgets/addImageShape.dart';
 import 'package:ween_arooh/widgets/descriptionShape.dart';
 import 'package:ween_arooh/widgets/marketDetails/addSocialMedia.dart';
@@ -173,11 +174,15 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
                           height:  SizeConfig.screenWidth*s70,
                           child:  Center(child:add.waitAddActivity?CircularProgressIndicator(): InkWell(
                               onTap: ()async{
-                                if(_formKey.currentState.validate()){
+                                if(!add.data.containsKey('category_id')){
+                                  Dialogs().awsomeDialog(context: context,title: translator.translate('sorry'),desc:translator.translate('valid_activity'),type: DialogType.ERROR);
+                                }
+                               else{ if(_formKey.currentState.validate()){
+
                                   await add.addActivity(context);}
                                 else{
                                   print("ssssssssssssss");
-                                }
+                                }}
 
 
                               },

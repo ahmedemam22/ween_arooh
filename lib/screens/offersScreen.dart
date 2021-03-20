@@ -36,13 +36,22 @@ class _OffersScreenState extends State<OffersScreen> {
                   , 0),
               itemCount: offers.offersItems.length,
               itemBuilder: (ctx, i) =>
-                  Container(
-                    width: SizeConfig.screenWidth * s165,
-                    height: SizeConfig.screenWidth * (s200 + s36),
-                    child: Image.network(offers.offersItems[i].panner??""
-                      , width: SizeConfig.screenWidth * s165,
-                      fit: BoxFit.fill,
-                      height: SizeConfig.screenWidth * (s200 + s200),
+                  InkWell(
+                    onTap: (){
+                      Navigator.pushNamed(context, '/display_image',arguments: i);
+                    },
+                    child: Container(
+                      width: SizeConfig.screenWidth * s165,
+                      height: SizeConfig.screenHeight/3,
+                     child: FadeInImage.assetNetwork(
+                        placeholder:"assets/images/offers.jpg",
+                        fit: BoxFit.fill,
+                        image: offers.offersItems[i].panner??"",
+
+
+                        width:  SizeConfig.screenWidth * s165,
+                        height: SizeConfig.screenHeight/3,),
+
                     ),
                   ),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

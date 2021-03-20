@@ -17,6 +17,8 @@ try {
     "category_id": "1", // op.
     "market_id": "1", // op.
   });
+  print(json.decode(response.body));
+  print("sssssssssssss");
   _offersModel=OffersModel.fromJson(json.decode(response.body));
   _offersItems=_offersModel.result;
 }
