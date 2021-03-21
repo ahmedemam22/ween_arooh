@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ween_arooh/services/provider/addActivityProvider.dart';
-import 'file:///C:/flutterprojects/ween_arooh/lib/widgets/appBar/appBarShape.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';

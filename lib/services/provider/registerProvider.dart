@@ -38,8 +38,6 @@ class RegisterProvider extends ChangeNotifier{
        "latitude":"30",
        "longitude":"31",
      });
-     print(json.decode(reponse.body));
-     print("sssssssssssssssss");
      if(reponse.statusCode==200){
        Navigator.pushNamed(context, '/login');
 
@@ -65,6 +63,8 @@ class RegisterProvider extends ChangeNotifier{
    }
   }
 Future login({String mobile,context})async{
+    print(mobile);
+    print("ssssssssssssssss");
    try {
      _waitLogin=true;
      notifyListeners();

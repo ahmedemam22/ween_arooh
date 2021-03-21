@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-import 'file:///C:/flutterprojects/ween_arooh/lib/widgets/appBar/appBarShape.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/offersProviders.dart';
+import 'package:ween_arooh/widgets/appBar/appBarShape.dart';
 class OffersScreen extends StatefulWidget {
   final widgetKey;
   OffersScreen(this.widgetKey);

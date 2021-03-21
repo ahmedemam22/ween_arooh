@@ -30,8 +30,7 @@ String fnValidPhone(String phone) {
   if (phone == null||phone.length!=9 ) {
     return   translator.currentLanguage == 'en' ? '"mobile number must be 9 digits" ' : "رقم الهاتف يجب ان يكون 9 ارقام";
 
-  } else if (RegExp(r"^[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$").hasMatch(phone) != true) {
-    return "must enter a valid number";
+
   } else {
     return null;
   }

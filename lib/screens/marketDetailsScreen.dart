@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
 import 'package:ween_arooh/utils/colors.dart';
-import 'file:///C:/flutterprojects/ween_arooh/lib/widgets/marketDetails/locationShape.dart';
-import 'file:///C:/flutterprojects/ween_arooh/lib/widgets/marketDetails/getCouponShape.dart';
-import 'file:///C:/flutterprojects/ween_arooh/lib/widgets/marketDetails/socialMediaShareShape.dart';
+
 import 'package:ween_arooh/widgets/ImageSliderMarket.dart';
 import 'package:ween_arooh/utils/size_config.dart';
-import 'file:///C:/flutterprojects/ween_arooh/lib/widgets/marketDetails/displayOffersShape.dart';
-import 'file:///C:/flutterprojects/ween_arooh/lib/widgets/marketDetails/optionShape.dart';
-import 'file:///C:/flutterprojects/ween_arooh/lib/widgets/marketDetails/marketsInfo.dart';
-import 'file:///C:/flutterprojects/ween_arooh/lib/widgets/marketDetails/contactShape.dart';
+
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/marketDetailsProvider.dart';
+import 'package:ween_arooh/widgets/marketDetails/contactShape.dart';
+import 'package:ween_arooh/widgets/marketDetails/displayOffersShape.dart';
+import 'package:ween_arooh/widgets/marketDetails/getCouponShape.dart';
+import 'package:ween_arooh/widgets/marketDetails/locationShape.dart';
+import 'package:ween_arooh/widgets/marketDetails/marketsInfo.dart';
+import 'package:ween_arooh/widgets/marketDetails/optionShape.dart';
+import 'package:ween_arooh/widgets/marketDetails/socialMediaShareShape.dart';
 class MarketDetailsScreen extends StatefulWidget {
   @override
   _MarketDetailsScreenState createState() => _MarketDetailsScreenState();

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ween_arooh/widgets/chat_shape/chatFooter.dart';
 import 'package:ween_arooh/widgets/chat_shape/chatShape.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
-import 'file:///C:/flutterprojects/ween_arooh/lib/widgets/appBar/appBarShape.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/size_config.dart';

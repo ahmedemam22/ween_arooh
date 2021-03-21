@@ -61,10 +61,12 @@ class OptionShape extends StatelessWidget {
                     "assets/images/$iconName.svg",
                   ),
                   SizedBox(width: 3,),
-                  Text(title,      overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontSize: SizeConfig.screenWidth*s12
-                    ),),
+                  Expanded(
+                    child: Text(title,
+                      style: TextStyle(
+                          fontSize: SizeConfig.screenWidth*s12
+                      ),),
+                  ),
                 ],
 
 
