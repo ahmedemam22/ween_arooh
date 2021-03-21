@@ -6,6 +6,8 @@ import 'package:ween_arooh/utils/colors.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ween_arooh/utils/glopal_app.dart';
+import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/userProvider.dart';
 class AppDrawer extends StatefulWidget {
 
   @override
@@ -122,8 +124,10 @@ class _AppDrawerState extends State<AppDrawer> {
       Navigator.pop(context);
       Navigator.pushNamed(_context, '/setting');
     } else if (name == "login") {
-      Navigator.pop(context);
-      Navigator.pushNamed(_context, '/login');
+      Provider.of<UserProvider>(context,listen: false).setUser();
+      Navigator.pushReplacementNamed(_context, '/login');
+
+
     } else if (name == "main") {
       Navigator.pop(context);
       Navigator.pushNamed(_context, '/main');

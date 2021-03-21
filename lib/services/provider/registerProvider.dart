@@ -38,6 +38,7 @@ class RegisterProvider extends ChangeNotifier{
        "latitude":"30",
        "longitude":"31",
      });
+     print(json.decode(reponse.body));
      if(reponse.statusCode==200){
        Navigator.pushNamed(context, '/login');
 
@@ -63,8 +64,6 @@ class RegisterProvider extends ChangeNotifier{
    }
   }
 Future login({String mobile,context})async{
-    print(mobile);
-    print("ssssssssssssssss");
    try {
      _waitLogin=true;
      notifyListeners();
@@ -123,7 +122,7 @@ verfiy(context,code)async{
        "code": code, // 4 digits
      });
     if(response.statusCode==200){
-      Provider.of<UserProvider>(context,listen: false).setUser(UserModel.fromJson(json.decode(response.body)).result).then((value) => Navigator.pushNamed(context, '/main'));
+      Provider.of<UserProvider>(context,listen: false).setUser(UserModel.fromJson(json.decode(response.body)).result).then((value) => Navigator.pushReplacementNamed(context, '/main'));
 
     }
     else{

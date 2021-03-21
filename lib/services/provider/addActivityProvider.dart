@@ -20,6 +20,7 @@ class AddActivityProvider extends ChangeNotifier{
   List<File>_couponImage=[];
   List<File>get copounImage=>_couponImage;
   Map<String,dynamic>_data={};
+  Map<String,dynamic>get data=>_data;
   bool _waitAddActivity=false;
   bool get waitAddActivity=>_waitAddActivity;
   String social='facebook';

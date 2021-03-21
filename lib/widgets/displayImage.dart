@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:provider/provider.dart';
-import 'package:ween_arooh/services/provider/marketProvider.dart';
+import 'package:ween_arooh/services/provider/offersProviders.dart';
 class DisplayImage extends StatefulWidget {
   @override
   _DisplayImageState createState() => _DisplayImageState();
@@ -12,7 +12,7 @@ int _currentIndex;
 
   @override
   Widget build(BuildContext context) {
-    final _market=Provider.of<MarketProvider>(context,listen: false).markets;
+    final _market=Provider.of<OffersProvider>(context,listen: false).offersItems;
      _currentIndex=ModalRoute.of(context).settings.arguments;
     return Scaffold(
       body: Container(

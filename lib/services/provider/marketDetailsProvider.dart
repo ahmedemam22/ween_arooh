@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:ween_arooh/network/constant.dart';
 import 'package:ween_arooh/network/api.dart';
-import 'dart:convert';
 import 'package:ween_arooh/model/rateModel.dart';
 import 'package:ween_arooh/model/marketDetailsResponse.dart';
 class MarketDetailsProvider extends ChangeNotifier{
@@ -48,7 +47,7 @@ class MarketDetailsProvider extends ChangeNotifier{
    try{
      _waitRate=true;
      notifyListeners();
-     var response=await api.get(BASE_URL+SHOW_RATE+"1",true);
+     var response=await api.get(BASE_URL+SHOW_RATE+"1");
    _rateModel=RateModel.fromJson(response);
    _rates=_rateModel.result.result;
    }
@@ -69,9 +68,7 @@ class MarketDetailsProvider extends ChangeNotifier{
   try{
     _waitMarketDetails=true;
     notifyListeners();
-    var response= await api.get(BASE_URL+MARKET_DETAILS+"1",true);
-    print(response);
-    print("rrrrrrrrrr");
+    var response= await api.get(BASE_URL+MARKET_DETAILS+"1");
   _marketDetails=MarketDetailsResponse.fromJson(response);
   }
   catch(e){
@@ -85,7 +82,6 @@ class MarketDetailsProvider extends ChangeNotifier{
   }
   List<String> getImages(){
     List<String>_images=[];
-
     _marketDetails.images.forEach((element) {_images.add(element.path);});
     return _images;
   }
