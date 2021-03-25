@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'dart:convert';
+import 'package:ween_arooh/utils/glopal_app.dart';
 import 'package:ween_arooh/utils/dialogs.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/homeProvider.dart';
@@ -73,7 +75,6 @@ addBranch(latlng,String address){
    _waitAddActivity=true;
    notifyListeners();
    print(Provider.of<HomeProvider>(context,listen: false).getCategoryId(category));
-   print('iddddddddddd');
    _data.putIfAbsent("category_id", () =>Provider.of<HomeProvider>(context,listen: false).getCategoryId(category));
    _data.putIfAbsent("location", () => "");
    _data.putIfAbsent( "images", () => getData(bannerImage));
@@ -81,11 +82,25 @@ addBranch(latlng,String address){
 
 
 
-   await   Dio().post(BASE_URL +ADD_ACTIVITY ,data:_data);
+   var response=await   Dio().post(BASE_URL +ADD_ACTIVITY ,data:_data,
+     options: Options(headers:{
+       HttpHeaders.authorizationHeader: 'Bearer ${GlopalApp.token}'
+     } ),
+     onSendProgress: (int sent, int total) {
+       print('send $sent::$total');
+     },);
    _waitAddActivity=false;
    notifyListeners();
    await Dialogs().awsomeDialog(context: context,desc: "تم اضافة نشاطك بنجاح",type:DialogType.SUCCES,title:"اضف نشاطك",);
+   print(jsonDecode(response.toString()));
+   Map valueMap = jsonDecode(response.toString());
 
+   if (valueMap['code'] == 200 && valueMap['message'] == 'success') {
+     print('sssssssssssssssssssssssssss');
+   }
+   else if(valueMap['code'] == 400 && valueMap['message'] == 'success'){
+     print("errorrrrrrr");
+   }
     }
  catch(e){
    print("add activity error ::$e");
