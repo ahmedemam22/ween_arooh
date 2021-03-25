@@ -53,7 +53,7 @@ class DropDownState extends State<DropDown> {
   onChangeDropdownItem( selectedCompany) {
     setState(() {
       _selectedCompany = selectedCompany;
-widget.onChange;
+widget.onChange(selectedCompany);
 
     });
     // Provider.of<UrgentProvider>(context,listen: false).changeService_type( selectedCompany);

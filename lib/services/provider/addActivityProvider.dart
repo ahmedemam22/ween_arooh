@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:ween_arooh/utils/dialogs.dart';
-import 'package:ween_arooh/network/api.dart';
+import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/homeProvider.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:ween_arooh/network/constant.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -15,15 +16,13 @@ class AddActivityProvider extends ChangeNotifier{
   List<File>_bannerImage=[];
   List<File>get logoImage=>_logoImage;
   List<File>get bannerImage=>_bannerImage;
-  List<File>_offerImage=[];
-  List<File>get offerImage=>_offerImage;
-  List<File>_couponImage=[];
-  List<File>get copounImage=>_couponImage;
+
   Map<String,dynamic>_data={};
   Map<String,dynamic>get data=>_data;
   bool _waitAddActivity=false;
   bool get waitAddActivity=>_waitAddActivity;
   String social='facebook';
+  String category;
   setData(String key,value){
     if(_data.containsKey(key)){
 
@@ -41,17 +40,9 @@ class AddActivityProvider extends ChangeNotifier{
     notifyListeners();
 
   }
-  addOffers(File image){
-    _offerImage.add(image);
-    notifyListeners();
 
-  }
-  addCopoun(File image){
-    _couponImage.add(image);
-    notifyListeners();
-  }
   addLogo(File image){
-    _logoImage.add(image);
+  if(_logoImage.length==0)  _logoImage.add(image);
     notifyListeners();
   }
 addBranch(latlng,String address){
@@ -65,20 +56,37 @@ addBranch(latlng,String address){
     _branchesAddress.removeAt(index);
     notifyListeners();
   }
+  removeImageBanner(int index){
+    _bannerImage.removeAt(index);
+    ;
+    notifyListeners();
+
+  }
+
+  removeLogo(int index){
+    _logoImage.removeAt(index);
+    notifyListeners();
+  }
   Future addActivity(context)async{
 
     try {
    _waitAddActivity=true;
    notifyListeners();
+   print(Provider.of<HomeProvider>(context,listen: false).getCategoryId(category));
+   print('iddddddddddd');
+   _data.putIfAbsent("category_id", () =>Provider.of<HomeProvider>(context,listen: false).getCategoryId(category));
    _data.putIfAbsent("location", () => "");
-   _data.putIfAbsent("offers", () =>  getData(offerImage));
    _data.putIfAbsent( "images", () => getData(bannerImage));
    _data.putIfAbsent("branches", () =>  getBranch());
 
 
 
    await   Dio().post(BASE_URL +ADD_ACTIVITY ,data:_data);
- }
+   _waitAddActivity=false;
+   notifyListeners();
+   await Dialogs().awsomeDialog(context: context,desc: "تم اضافة نشاطك بنجاح",type:DialogType.SUCCES,title:"اضف نشاطك",);
+
+    }
  catch(e){
    print("add activity error ::$e");
 
@@ -86,7 +94,6 @@ addBranch(latlng,String address){
  finally{
    _waitAddActivity=false;
    notifyListeners();
-   await Dialogs().awsomeDialog(context: context,desc: "تم اضافة نشاكط بنجاح",type:DialogType.SUCCES,title:"اضف نشاطك",onClick: Navigator.pushNamed(context, "/main"));
 
 
  }
@@ -121,6 +128,11 @@ addBranch(latlng,String address){
   addSocialMedia(String value){
     social=value;
     notifyListeners();
+
+  }
+  setCategory(value){
+    category=value;
+   notifyListeners();
 
   }
 

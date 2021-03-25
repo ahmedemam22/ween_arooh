@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:ween_arooh/network/constant.dart';
 import 'package:ween_arooh/network/api.dart';
 import 'package:ween_arooh/utils/dialogs.dart';
+import 'package:ween_arooh/services/provider/homeProvider.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
@@ -10,6 +11,7 @@ import 'package:ween_arooh/model/verficationModel.dart';
 import 'package:ween_arooh/services/provider/userProvider.dart';
 import 'package:ween_arooh/model/userModel.dart';
 import 'dart:convert';
+import 'package:ween_arooh/utils/glopal_app.dart';
 class RegisterProvider extends ChangeNotifier{
 
   bool _waitRegister=false;
@@ -19,6 +21,7 @@ class RegisterProvider extends ChangeNotifier{
   bool _waitResendCode=false;
   bool get waitResendCode=>_waitResendCode;
   File _image;
+  bool validPhone=false;
   File get image=>_image;
   bool _waitVerficationCode=false;
   bool get waitVerficationCode=>_waitVerficationCode;
@@ -122,6 +125,11 @@ verfiy(context,code)async{
        "code": code, // 4 digits
      });
     if(response.statusCode==200){
+      GlopalApp.token=json.decode(response.body)['result']['token'];
+      Provider.of<HomeProvider>(context,listen: false).getMainCategories(GlopalApp.token);
+      print(GlopalApp.token);
+      print('tokkkkkkkkkkkkk');
+
       Provider.of<UserProvider>(context,listen: false).setUser(UserModel.fromJson(json.decode(response.body)).result).then((value) => Navigator.pushReplacementNamed(context, '/main'));
 
     }
@@ -142,10 +150,10 @@ verfiy(context,code)async{
      notifyListeners();
    }
 }
-setUser(){
-
+changeValidPhone(value){
+    validPhone=value;
+    notifyListeners();
 }
-
 
 
 }

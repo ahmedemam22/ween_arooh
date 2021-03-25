@@ -16,7 +16,7 @@ class MainCategoryShape extends StatelessWidget {
       child: InkWell(
         onTap: (){
           Provider.of<MarketDetailsProvider>(context,listen: false).selectId(item.id);
-          Navigator.pushNamed(context, '/market_details');
+          Navigator.pushNamed(context, '/markets',arguments: translator.currentLanguage=='ar'?item.nameAr:item.nameEn);
 
         },
         child: Column(

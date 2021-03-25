@@ -20,13 +20,22 @@
   "sorry": "عذرا!",
   "register_error": "هذا الجوال  مستخدم مسبقاً",
   "login_error": "هذا الجوال غير موجود ً",
+  "general_error": "عفوا حدث خطأ حاول مرةاخرى",
+  "error_edit_data": "من فضلك عدل بياناتك اولا",
   "main": "الرئيسية",
   "offers": "العروض",
   "information": "معلوماتى",
   "save": "حفظ",
+  "enter_rate": "ادخل التقييم",
+  "send": "ارسال",
+  "valid_offers": "قم باختيار العروض او الخصومات",
+
+
   "about_us": "من نحن",
   "record_service": "تسجيل خدمة ",
   "call": "اتصال",
+  "ok": "حسنا",
+  "write_comment": "اكتب تعليق",
   "call_us": "اتصل بنا",
   "language": "اللغة",
   "logout": "خروج",
@@ -34,6 +43,7 @@
   "sort_by_alpha": "ترتيب ابجدى",
   "sort_by_location": "حسب الموقع",
   "sort_by_region": "حسب المنطقة",
+  "region": "بحث بالمنطقة",
   "sort_by_rate": "حسب التقييم",
   "contact_us": "تواصل معنا",
   "copoun_symbol": "رمز الكوبون",
@@ -54,6 +64,7 @@
   "company_logo": "شعار الشركة",
   "main_banner": "البانر الرئيسى",
   "add_offers": "اضف عروض",
+  "succes_add_offers": "تمت اضافت عروضك بنجاح",
   "add_copoun": "اضف كوبون خصم",
   "email": "بريد الكترونى",
   "review": "اراء الزائرين",
@@ -66,7 +77,9 @@
   "update_profile": "تم تحديث بياناتك",
   "success": "نجاح",
   "choose_branch": "اختر موقع فرعك",
-  "add_data": "ادخل البيانات"
+  "add_data": "ادخل البيانات",
+  "valid_phone": "رقم الهاتف يجب ان يكون 9 ارقام",
+  "success_rate": "تم اضافة تقييمك بنجاح"
 
 
 

@@ -7,8 +7,10 @@ import 'package:ween_arooh/utils/launcher.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/marketDetailsProvider.dart';
 class SocialMediaShareShape extends StatelessWidget {
+  BuildContext _context;
   @override
   Widget build(BuildContext context) {
+    _context=context;
     final _item=Provider.of<MarketDetailsProvider>(context,listen: false).marketDetails;
     return Container(
       child: Padding(
@@ -33,7 +35,7 @@ class SocialMediaShareShape extends StatelessWidget {
     return InkWell(
       onTap: ()async{
 
-        await launchURL(link);
+        await launchURL(link,_context);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal:2.0),

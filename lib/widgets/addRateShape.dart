@@ -4,6 +4,10 @@ import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/widgets/text_field.dart';
 import 'package:ween_arooh/utils/colors.dart';
+import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:ween_arooh/utils/dialogs.dart';
+import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/marketDetailsProvider.dart';
 class AddRateShape extends StatelessWidget {
@@ -24,7 +28,7 @@ class AddRateShape extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal:5.0,vertical: 4),
-                child: Text("ادخل التقييم",style: TextStyle(
+                child: Text(translator.translate('enter_rate'),style: TextStyle(
                   fontSize: SizeConfig.screenWidth*s21
                 ),),
               ),
@@ -51,7 +55,7 @@ class AddRateShape extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal:5.0,vertical: 4),
-                child: Text("اكتب تعليق",style: TextStyle(
+                child: Text(translator.translate('write_comment'),style: TextStyle(
                     fontSize: SizeConfig.screenWidth*s21
                 ),),
               ),
@@ -75,14 +79,18 @@ class AddRateShape extends StatelessWidget {
         decoration: BoxDecoration(
             border: Border.all(color: Colors.white)
         ),
-        child: RaisedButton(child: Text("ارسال",
+        child: RaisedButton(child: Text(translator.translate('send'),
 
           style: TextStyle(color: Colors.white),
         ), color: backgroundColor,
           onPressed: () async{
            await Provider.of<MarketDetailsProvider>(context, listen: false).addRate(
                 _commentCon.text);
+
+          /* await Dialogs().FN_showDetails_Dialog(context, translator.translate('success'), translator.translate('success_rate'),
+           );*/
            Navigator.pop(context);
+
           },
 
         ),

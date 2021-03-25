@@ -8,27 +8,40 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ween_arooh/utils/dialogs.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:ween_arooh/network/api.dart';
 class UserProvider extends ChangeNotifier{
   User _user=User();
   User get user=>_user;
   bool _waitSetting=false;
   bool get waitSetting=>_waitSetting;
+  bool _waitAbout=false;
+  String about;
+  bool get waitAbout=>_waitAbout;
   setImageProfile(image){
     _user.imgProfile=image;
     notifyListeners();
 
   }
   Future updateProfile(User userModel,context)async {
+    if(userModel.fName==GlopalApp.user.fName&&userModel.lName==GlopalApp.user.lName&&userModel.mobile==GlopalApp.user.mobile
+    &&_user.imgProfile==null){
+      Dialogs().awsomeDialog(context: context,
+          type: DialogType.ERROR,
+          desc: translator.translate('error_edit_data'),
+          title: translator.translate('sorry'));
+
+    }
+    else{
     userModel.imgProfile = _user.imgProfile;
     _user = userModel;
     Dio dio = Dio();
 
     FormData formData = FormData.fromMap({
-      "user_id": "2",
+      "user_id": GlopalApp.user.id,
       "f_name": _user.fName,
       "l_name": _user.lName,
-      "mobile": _user.mobile,
-      "profile_pic": await MultipartFile.fromFile(
+      if(_user.mobile!= GlopalApp.user.mobile)"mobile": _user.mobile,
+     if(userModel.imgProfile!=null) "profile_pic": await MultipartFile.fromFile(
           _user.imgProfile.path, filename: "${_user.imgProfile.path
           .split('/')
           .last}"),
@@ -48,6 +61,13 @@ class UserProvider extends ChangeNotifier{
     }
     catch (e) {
       print("update profile error::$e");
+      Dialogs().awsomeDialog(context: context,
+          type: DialogType.ERROR,
+          desc: translator.translate('general_error'),
+          title: translator.translate('sorry'));
+
+
+
     }
     finally {
       _waitSetting=false;
@@ -59,7 +79,15 @@ class UserProvider extends ChangeNotifier{
             desc: translator.translate('update_profile'),
             title: translator.translate('success'));
       }
-    }
+      else{
+        Dialogs().awsomeDialog(context: context,
+            type: DialogType.ERROR,
+            desc: translator.translate('general_error'),
+            title: translator.translate('sorry'));
+
+
+      }
+    }}
   }
 Future setUser([User user])async{
     _user=user;
@@ -68,6 +96,7 @@ Future setUser([User user])async{
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     bool result = await prefs.setString('user',user==null?null: jsonEncode(user));
+     prefs.setString('token', user==null?null:GlopalApp.token);
 
 
 }
@@ -83,9 +112,29 @@ Future getUser()async{
       final User user = User.fromJson(userMap);
       _user=user;
       GlopalApp.user=_user;
+      GlopalApp.token=prefs.getString('token');
+      print('glopaaaaaaaaaaaaal');
+      print(GlopalApp.token);
     }
 
   }
   notifyListeners();
+}
+aboutUs()async{
+   try {
+     _waitAbout=true;
+     notifyListeners();
+     var response=await api.get(BASE_URL + ABOUT);
+     about=response['result'][0]['text_ar'];
+
+}
+catch(e){
+     print('about us error $e');
+}
+finally{
+  _waitAbout=false;
+  notifyListeners();
+
+}
 }
 }

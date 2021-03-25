@@ -17,10 +17,12 @@ class PercentShape extends StatelessWidget {
         children: [
           Column(children: [
             Text("3.7",style: TextStyle(
-              fontSize: SizeConfig.screenWidth*s56
+              fontSize: SizeConfig.screenWidth*s40,
+                fontFamily: 'Schelyer'
             ),),
             Text("17 مشاهدة",style: TextStyle(
-                fontSize: SizeConfig.screenWidth*s15
+                fontSize: SizeConfig.screenWidth*s15,
+                fontFamily: 'Schelyer'
             ),),
           ],),
           SizedBox(

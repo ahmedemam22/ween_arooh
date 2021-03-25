@@ -3,6 +3,10 @@ import 'package:ween_arooh/network/api.dart';
 import 'package:ween_arooh/network/constant.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/model/mainCategoryResponse.dart';
+import 'package:ween_arooh/utils/glopal_app.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/userProvider.dart';
 class HomeProvider extends ChangeNotifier{
   MainCategoryResponse _mainCategoryResponse;
   List<Result> _mainCategoryItems=[];
@@ -11,11 +15,16 @@ class HomeProvider extends ChangeNotifier{
   List<Result> get mainCategoryItemsSearch=>_mainCategoryItemsSearch;
   bool _waitMainCategory=false;
   bool get waitMainCategory=>_waitMainCategory;
-  Future getMainCategories()async{
+  int count=0;
+  Future getMainCategories([token])async{
+    if(count==0){
  try{
+   print(++count);
+   _mainCategoryItems=[];
    _waitMainCategory=true;
-   notifyListeners();
-   var  response=await api.get(BASE_URL+MAIN_CATEGORY,true);
+
+   var  response=await api.get(BASE_URL+MAIN_CATEGORY,token);
+
  _mainCategoryResponse=MainCategoryResponse.fromJson(response);
  _mainCategoryItems=_mainCategoryResponse.result;
 
@@ -26,7 +35,9 @@ class HomeProvider extends ChangeNotifier{
  finally{
    _waitMainCategory=false;
    notifyListeners();
- }
+   print(_mainCategoryItems[0].nameAr);
+   print('nnnnnnnnnnnnnn');
+ }}
   }
 makeSearch(String title){
     var temp=_mainCategoryItems;

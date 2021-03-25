@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:ween_arooh/utils/size_config.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
 import 'package:ween_arooh/screens/homeScreen.dart';
-import 'package:ween_arooh/screens/login/registration_screen.dart';
+import 'package:ween_arooh/screens/addActivityScreen.dart';
 import 'package:ween_arooh/screens/offersScreen.dart';
+import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/homeProvider.dart';
+import 'package:ween_arooh/services/provider/userProvider.dart';
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -13,11 +16,17 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _index=0;
   static final   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(); // ADD THIS LINE
-List<Widget>_widgets=[HomeScreen(_scaffoldKey),RegistrationScreen(),OffersScreen(_scaffoldKey)];
+List<Widget>_widgets=[HomeScreen(_scaffoldKey),AddActivityScreen(),OffersScreen(_scaffoldKey)];
+@override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    Provider.of<HomeProvider>(context,listen: true).getMainCategories().then((value) => null);
+    Provider.of<UserProvider>(context,listen: false).aboutUs();
 
+}
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
     return Scaffold(
       key: _scaffoldKey,
         drawer: AppDrawer(),
@@ -30,15 +39,15 @@ List<Widget>_widgets=[HomeScreen(_scaffoldKey),RegistrationScreen(),OffersScreen
           currentIndex: _index, // this will be set when a new tab is tapped
           items: [
             BottomNavigationBarItem(
-              icon: new Icon(Icons.home),
+              icon: setIcon('home'),
               title: new Text(translator.translate('main')),
             ),
             BottomNavigationBarItem(
-              icon: new Icon(Icons.app_registration),
+              icon: setIcon('register'),
               title: new Text(translator.translate('register')),
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.local_offer),
+                icon: setIcon('offers'),
                 title: Text(translator.translate('offers'))
             )
           ],
@@ -50,5 +59,12 @@ List<Widget>_widgets=[HomeScreen(_scaffoldKey),RegistrationScreen(),OffersScreen
   }
   openDrawer(){
     _scaffoldKey.currentState.openDrawer();
+  }
+ Widget setIcon(String iconName){
+    return SvgPicture.asset(
+
+      "assets/images/$iconName.svg",
+
+    );
   }
 }

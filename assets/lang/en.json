@@ -5,10 +5,32 @@
   "login_enter": "Login",
   "register": "Register",
   "new_user": "New User",
+  "ok": "OK",
+  "enter_rate": "Enter Rate",
+  "send": "Send",
+  "valid_offers": "Choose offers or discounts",
+
+
   "valid_activity": "please choose Activity",
   "mobile": "Mobile",
   "code_send": "Code sent on",
   "welcome": "Welcome",
+  "general_error": "Sorry, an error occurred, try again",
+  "write_comment": "Write comment",
+  "sort_by_alpha": "By Alpha",
+  "sort_by_location": "By Location ",
+  "error_edit_data": "Please edit your data first",
+  "sort_by_region": "By Region ",
+  "region": "Region Search",
+  "valid_phone": "mobile number must be 9 digits",
+  "success_rate": "Your rating was added successfully",
+  "succes_add_offers": "Your offers have been added successfully",
+
+
+
+
+  "sort_by_rate": "By Rate ",
+
   "code_time_arrive": "Code Time Arrive:0 sec",
   "number_editing": "Edit Number",
   "send_code_again": "send code again",
@@ -24,9 +46,9 @@
   "information": "My information",
   "save": "Save",
   "about_us": "About Us",
-  "record_service": "تسجيل خدمة ",
+  "record_service": "Post Service ",
   "call_us": "Call Us",
-  "language": "Lamguage",
+  "language": "Language",
   "logout": "Logout",
   "markets": "Markets",
   "contact_us": "Contact Us",

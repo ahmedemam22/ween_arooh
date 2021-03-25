@@ -4,13 +4,15 @@ import 'package:ween_arooh/utils/colors.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/widgets/searchTextField.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:flutter_svg/svg.dart';
 
 class AppBarShape extends StatelessWidget {
   final String title;
   final Function onChange;
+  final Function onChangeOffer;
   final bool back;
   final GlobalKey<ScaffoldState> openDrawer;
-  AppBarShape({this.title, this.openDrawer, this.onChange,this.back=true});
+  AppBarShape({this.title, this.openDrawer, this.onChange,this.back=true, this.onChangeOffer});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,23 +24,23 @@ class AppBarShape extends StatelessWidget {
         child: Column(
           children: [
             Text(title,style: TextStyle(
-              fontSize: SizeConfig.screenWidth*s17,
-              color: Colors.white
+              fontSize: SizeConfig.screenWidth*s20,
+              color: Colors.white,
+              fontWeight: FontWeight.bold
             ),),
             SizedBox(
               height: SizeConfig.screenWidth*s10,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
               InkWell(
                   onTap: openDrawer.currentState.openDrawer,
                   child: Icon(Icons.menu,color: Colors.white,size: SizeConfig.screenWidth*s35,)),
-
+SizedBox(width:SizeConfig.screenWidth*s10 ,),
    Center(
      child: Container(
                           height: SizeConfig.screenWidth*s30,
-                          width: SizeConfig.screenWidth*(s200+s90),
+                          
                           child: ClipRect(
                             child: Row(
                               children: [
@@ -50,17 +52,17 @@ class AppBarShape extends StatelessWidget {
                                   SearchTextField(onChange)),
 
                                 if(title==translator.translate('offers'))
-                                  SizedBox(width: SizeConfig.screenWidth*s20,),
-                                if(title==translator.translate('offers'))
-                                     Container(
-                                         width: SizeConfig.screenWidth*(s90),
-                                         child: SearchTextField(onChange))
+                                  SizedBox(width: SizeConfig.screenWidth*s10,),
+                                if(title==translator.translate('offers'))offersShape()
+
+
 
                               ],
                             ),
                           ),
                         ),
    ),
+              if(back)SizedBox(width:SizeConfig.screenWidth*s15),
 
               if(back)  InkWell(
                     onTap: (){
@@ -79,4 +81,27 @@ class AppBarShape extends StatelessWidget {
 
     );
   }
+  Widget offersShape(){
+    return   Container(
+        width: SizeConfig.screenWidth*(s120),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(15))
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical:5.0,horizontal: 2),
+          child: Row(
+            children: [
+              Text(translator.translate('region')),
+              SizedBox(width: 5,),
+              SvgPicture.asset(
+
+                "assets/images/region_search.svg",
+                width: SizeConfig.screenWidth*s15,
+              ),
+            ],
+          ),
+        ));
+  }
+
 }

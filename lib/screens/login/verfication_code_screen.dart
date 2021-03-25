@@ -29,7 +29,9 @@ class VerficationCodeScreen extends StatelessWidget {
                 child: Text(translator.translate('code_send')+_model.mobile  ,
                   style: TX_STYLE_black_15.copyWith(
                       color: lightGrey
-                  ),
+                   ,fontFamily: 'Schelyer'
+
+                ),
                 )),
           ),
           SizedBox(height: SizeConfig.screenWidth*s52,),

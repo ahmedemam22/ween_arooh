@@ -23,7 +23,8 @@ class PercentRateShape extends StatelessWidget {
             SizedBox(width: 10,),
 
             Text(number,style: TextStyle(
-              fontSize: 17
+              fontSize: SizeConfig.screenWidth*s17,
+                fontFamily: 'Schelyer'
             ),),
 
           ],

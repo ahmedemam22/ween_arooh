@@ -7,9 +7,25 @@ import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/marketDetailsProvider.dart';
-class LocationShape extends StatelessWidget {
-  Completer<GoogleMapController> _controller = Completer();
+class LocationShape extends StatefulWidget {
+  @override
+  _LocationShapeState createState() => _LocationShapeState();
+}
 
+class _LocationShapeState extends State<LocationShape> {
+  Completer<GoogleMapController> _controller = Completer();
+  Set<Marker> markers = Set();
+
+  @override
+  void didChangeDependencies() {
+  Marker marker = Marker(
+    markerId: MarkerId('technical_location'),
+    position:LatLng(Provider.of<MarketDetailsProvider>(context).marketDetails.latitude,Provider.of<MarketDetailsProvider>(context).marketDetails.longitude),
+    icon:BitmapDescriptor.defaultMarker,
+  );
+  markers.add(marker);
+    super.didChangeDependencies();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,6 +49,7 @@ class LocationShape extends StatelessWidget {
                 onMapCreated: (GoogleMapController controller) {
                   _controller.complete(controller);
                 },
+                markers: markers,
               ),)
         ],
       ),

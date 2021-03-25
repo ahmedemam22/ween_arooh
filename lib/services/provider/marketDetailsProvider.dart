@@ -3,6 +3,10 @@ import 'package:ween_arooh/network/constant.dart';
 import 'package:ween_arooh/network/api.dart';
 import 'package:ween_arooh/model/rateModel.dart';
 import 'package:ween_arooh/model/marketDetailsResponse.dart';
+import 'package:ween_arooh/utils/glopal_app.dart';
+import 'package:ween_arooh/utils/dialogs.dart';
+import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 class MarketDetailsProvider extends ChangeNotifier{
 
   RateModel _rateModel;
@@ -14,18 +18,20 @@ class MarketDetailsProvider extends ChangeNotifier{
   bool _waitRate=false;
   bool get waitRate=>_waitRate;
   int _selectId;
-  double rate;
+  String markeTitle;
+  double rate=3.0;
   bool _waitMarketDetails=false;
   bool get waitMarketDetails=>_waitMarketDetails;
   MarketDetailsResponse _marketDetails;
   MarketDetailsResponse get marketDetails=>_marketDetails;
   Future addRate(comment)async{
-    _waitMakeRate=true;
-    notifyListeners();
+
     try{
+      _waitMakeRate=true;
+      notifyListeners();
     await api.post(BASE_URL+RATE, {
     "market_id" : "1",
-    "user_id" : "2",
+    "user_id" : GlopalApp.user.id,
     "rate" : rate.toString(),
     "comment" : comment,
     "visits_count" : "0"
@@ -36,6 +42,7 @@ class MarketDetailsProvider extends ChangeNotifier{
     finally{
       _waitMakeRate=false;
       notifyListeners();
+
     }
 
   }
@@ -70,6 +77,7 @@ class MarketDetailsProvider extends ChangeNotifier{
     notifyListeners();
     var response= await api.get(BASE_URL+MARKET_DETAILS+"1");
   _marketDetails=MarketDetailsResponse.fromJson(response);
+  markeTitle=_marketDetails.title;
   }
   catch(e){
     print("error get market details ::$e");

@@ -28,9 +28,10 @@ class LoginScreen extends StatelessWidget {
 
               SizedBox(height: SizeConfig.screenWidth*s50,),
 
-              Form(
-                  key: _formKey,
-                  child: TextPhoneShape(controller: _mobileController,)),
+    Selector<RegisterProvider, bool>(
+    selector: (context, login) =>
+    login.validPhone,
+    builder: (context, value, child) { return TextPhoneShape(controller: _mobileController,validate: value,);}),
               SizedBox(height: SizeConfig.screenWidth*s80,),
 
     Selector<RegisterProvider, bool>(
@@ -39,11 +40,17 @@ class LoginScreen extends StatelessWidget {
     builder: (context, value, child) {
       return value?Center(child: CircularProgressIndicator(),):InkWell(
           onTap: () {
-            if (_formKey.currentState.validate()) {
+            if (_mobileController.text.length==9) {
+              Provider.of<RegisterProvider>(context, listen: false).changeValidPhone(false);
+
               Provider.of<RegisterProvider>(context, listen: false).login(
                   mobile: _mobileController.text, context: context);
             }
-          }
+            else{
+    Provider.of<RegisterProvider>(context, listen: false).changeValidPhone(true);
+    }
+            }
+
           ,
           child: ButtonShape(
               translator.translate('login_enter'), backgroundColor));

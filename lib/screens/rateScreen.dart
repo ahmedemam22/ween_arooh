@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ween_arooh/utils/dialogs.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/colors.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
 import 'package:ween_arooh/widgets/rate_shape/rateHeader.dart';
 import 'package:provider/provider.dart';
@@ -18,49 +20,78 @@ class RateScreen extends StatefulWidget {
 class _RateScreenState extends State<RateScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-@override
-  void didChangeDependencies() {
-  Provider.of<MarketDetailsProvider>(context,listen: false).getRates().then((value) => null);
-    super.didChangeDependencies();
-  }
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: backgroundColor,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: AppBar(
 
-        title: Center(child: Text(translator.translate('rate'))),
-      ),
-      key: _scaffoldKey,
-      drawer: AppDrawer(),
-      body: Consumer<MarketDetailsProvider>(
-    builder: (context, details, child) {
-      return details.waitRate
-          ? Center(child: CircularProgressIndicator())
-          : ListView(children: [
-        SizedBox(height: SizeConfig.screenWidth * s8),
-        RateHeader(),
-        PercentShape(),
-        Divider(thickness: 2,),
-        ReviewShape(),
+          actions: [
+            IconButton(icon: Icon(Icons.arrow_back_ios_outlined,color: Colors.white,),onPressed: (){
+              Navigator.pop(context);
+            },)
+          ],
+          backgroundColor: backgroundColor,
 
-        Expanded(
-          child: Container(
-            color: lightGray,
-            child: Center(
-              child: Container(
-                width: SizeConfig.screenWidth * s175,
-                height: SizeConfig.screenWidth * s70,
-                child: Center(child: ButtonShape("اكتب تعليق",
-                    backgroundColor)),),
-            ),
-          ),
+          title: Center(child: Text(translator.translate('rate'))),
         ),
+        key: _scaffoldKey,
+        drawer: AppDrawer(),
+        body:  FutureBuilder(
+    future:   Provider.of<MarketDetailsProvider>(context,listen: false).getRates(),
+    builder: (ctx, dataSnapshot) {
+    if (dataSnapshot.connectionState ==
+    ConnectionState.waiting) {
+    return Center(child:CircularProgressIndicator());
+    } else {
+    if (dataSnapshot.error != null) {
+    // ...
+    // Do error handling stuff
+    return Center(
+    child: Text(translator.translate('error')),
+    );
+    } else {
+    return Consumer<MarketDetailsProvider>(
+    builder: (context, details, child) {
+    return details.waitRate
+    ? Center(child: CircularProgressIndicator())
+        : ListView(children: [
+    SizedBox(height: SizeConfig.screenWidth * s8),
+    RateHeader(),
+    PercentShape(),
+    Divider(thickness: 2,),
+    ReviewShape(),
+    Align(
+    alignment: Alignment.bottomCenter,
+
+    child: InkWell(
+    onTap: ()async{
+   await Dialogs().rateDialog(context);
+   await Dialogs().awsomeDialog(context:context, title:translator.translate('success'), type:DialogType.SUCCES,desc:translator.translate('success_rate'),
+   );
 
 
-      ]);
-    }));
+    },
+    child: Container(
+    color: lightGray,
+    child: Center(
+
+    child: Container(
+    width: SizeConfig.screenWidth * s175,
+    height: SizeConfig.screenWidth * s70,
+    child: Center(child: ButtonShape(translator.translate('write_comment'),
+    backgroundColor)),),
+    ),
+    ),
+    ),
+    ),
+
+
+    ]);
+    });
+    }}})),
+    );
   }
 }

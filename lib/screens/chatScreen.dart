@@ -16,38 +16,42 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
    @override
-  void didChangeDependencies() {
+  void initState() {
      Provider.of<ChatProvider>(context,listen: false).getMessages().then((value) => null);
-    super.didChangeDependencies();
+    super.initState();
   }
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: backgroundColor,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: backgroundColor,
 
-          title: Center(child: Text(translator.translate('contact_us'))),
-        ),
-          key: _scaffoldKey,
-          drawer: AppDrawer(),
-      body: Column(children: [
-    SizedBox(height:SizeConfig.screenWidth*s8),
+            title: Center(child: Text(translator.translate('contact_us'))),
+          ),
+            key: _scaffoldKey,
+            drawer: AppDrawer(),
+        body: Column(children: [
+      SizedBox(height:SizeConfig.screenWidth*s8),
+          Expanded(
+            flex: 10,
+            child:  Consumer<ChatProvider>(
+      builder: (context, chat, child) {
+        return chat.waitMessage?Center(child: CircularProgressIndicator(),):
+        ListView.builder(
+              itemCount: chat.allMessages.length,
+              itemBuilder: (context, i) {
+                return ChatShape(chat.allMessages[i]);
+              });
+      }   )
+          ),
         Expanded(
-          flex: 10,
-          child:  Consumer<ChatProvider>(
-    builder: (context, chat, child) {
-      return chat.waitMessage?Center(child: CircularProgressIndicator(),):        ListView.builder(
-            itemCount: chat.allMessages.length,
-            itemBuilder: (context, i) {
-              return ChatShape(chat.allMessages[i]);
-            });
-    }   )
-        ),
-      Expanded(
-        child: ChatFooter(),
-      )
+          child: ChatFooter(),
+        )
 
-      ]));
+        ])),
+    );
   }
 }

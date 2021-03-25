@@ -45,6 +45,10 @@ class DescriptionShape extends StatelessWidget {
 
                   child: Center(
                     child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+
+                      ),
                       onChanged: (value){
                         Provider.of<AddActivityProvider>(context,listen: false).setData(keyy, value);
                       },

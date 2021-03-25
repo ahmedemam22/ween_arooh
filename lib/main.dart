@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:provider/provider.dart';
+import 'screens/addOffersScreen.dart';
+import 'services/provider/AddOffersProvider.dart';
 import 'package:ween_arooh/screens/settingScreen.dart';
 import 'package:ween_arooh/screens/aboutUsScreen.dart';
 import 'package:ween_arooh/screens/addActivityScreen.dart';
@@ -64,6 +66,7 @@ class _MyAppState extends State<MyApp> {
           ChangeNotifierProvider(create: (_) => OffersProvider()),
           ChangeNotifierProvider(create: (_) => MarketDetailsProvider()),
           ChangeNotifierProvider(create: (_) => AddActivityProvider()),
+          ChangeNotifierProvider(create: (_) => AddOffersProvider()),
 
 
         ],
@@ -101,6 +104,7 @@ class _MyAppState extends State<MyApp> {
             '/add_activity': (context) => AddActivityScreen(),
             '/market_details': (context) => MarketDetailsScreen(),
             '/display_image': (context) => DisplayImage(),
+            '/add_offers': (context) => AddOffersScreen(),
 
           },
           debugShowCheckedModeBanner: false,

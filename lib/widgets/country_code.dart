@@ -13,13 +13,15 @@ class CountryCode extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               CountryCodePicker(
+      showCountryOnly:true,
+
+
               //  onChanged: _onCountryChange,
                 dialogTextStyle: TX_STYLE_black_14.copyWith(fontFamily: 'NUMBER '),
                 // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
                 initialSelection: 'sa',
                 favorite: ['+966', 'SA'],
                 // optional. Shows only country name and flag
-                showCountryOnly: false,
                 // optional. Shows only country name and flag when popup is closed.
                 showOnlyCountryWhenClosed: false,
                 // optional. aligns the flag and the Text left

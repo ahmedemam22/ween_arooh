@@ -28,7 +28,7 @@ String fnValidName(String name) {
 
 String fnValidPhone(String phone) {
   if (phone == null||phone.length!=9 ) {
-    return   translator.currentLanguage == 'en' ? '"mobile number must be 9 digits" ' : "رقم الهاتف يجب ان يكون 9 ارقام";
+    return   translator.currentLanguage == 'en' ? 'mobile number must be 9 digits ' : "رقم الهاتف يجب ان يكون 9 ارقام";
 
 
   } else {

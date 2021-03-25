@@ -2,11 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:ween_arooh/network/constant.dart';
 import 'package:ween_arooh/network/api.dart';
 import 'package:ween_arooh/model/offersModel.dart';
+import 'package:localize_and_translate/localize_and_translate.dart';
 import 'dart:convert';
 class OffersProvider extends ChangeNotifier{
   OffersModel _offersModel;
   List<Result> _offersItems;
+  List<Result> _offersSearch=[];
   List<Result> get offersItems=>_offersItems;
+  List<Result> get offersSearch=>_offersSearch;
   bool _waitOffers=false;
   bool get waitOffers=>_waitOffers;
   Future getOffers()async{
@@ -14,8 +17,7 @@ try {
   _waitOffers=true;
   notifyListeners();
   var response = await api.post(BASE_URL + GET_OFFERS, {
-    "category_id": "1", // op.
-    "market_id": "1", // op.
+
   });
   print(json.decode(response.body));
   print("sssssssssssss");
@@ -31,6 +33,34 @@ finally{
 
 }
 
+  }
+  nameSearch(String title){
+    _offersSearch=[];
+    var _temp=_offersItems;
+    if(title.length>0) {
+      _offersSearch =
+          _temp.where((element) =>
+              element.marketName.contains(title)).toList();
+    }
+    else{
+      _offersSearch=[];
+    }print(_offersSearch.length);
+    print("filteeeeeeeeeeer");
+    notifyListeners();
+  }
+  locationSearch(String title){
+    _offersSearch=[];
+    var _temp=_offersItems;
+    if(title.length>0) {
+      _offersSearch =
+          _temp.where((element) =>
+              element.location.contains(title)).toList();
+    }
+    else{
+      _offersSearch=[];
+    }print(_offersSearch.length);
+    print("filteeeeeeeeeeer");
+    notifyListeners();
   }
 
 }

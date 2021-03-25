@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:ween_arooh/utils/flutterAlertDialog.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,12 @@ class DisplayOffersShape extends StatelessWidget {
 
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal:3.0),
-                      child: Image.network(_offers[i].path??"",width:SizeConfig.screenWidth*s47,height: SizeConfig.screenWidth*s51,fit: BoxFit.fill,),
+                      child: InkWell(
+                          onTap: (){
+                            CommonAlertRFlutter.alertWithWidgets(context, buttons: [], url:_offers[i].path??"");
+
+                          },
+                          child: Image.network(_offers[i].path??"",width:SizeConfig.screenWidth*s47,height: SizeConfig.screenWidth*s51,fit: BoxFit.fill,)),
                     );
                   }
 

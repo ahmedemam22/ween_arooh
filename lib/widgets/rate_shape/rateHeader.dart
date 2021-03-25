@@ -3,6 +3,7 @@ import 'package:ween_arooh/widgets/rate_shape/rateShape.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
+import 'package:ween_arooh/utils/text_style.dart';
 class RateHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,8 @@ class RateHeader extends StatelessWidget {
     alignment: Alignment.bottomRight,
             child: Row(
               children: [
-                Text("3.7"),
+                Text("3.7",style: TX_STYLE_black_14.copyWith(fontFamily: 'Schelyer',),
+    ),
                 SizedBox(width:  SizeConfig.screenWidth*s5,),
                 RateShape(),
 

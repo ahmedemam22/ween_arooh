@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:ween_arooh/utils/colors.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -31,8 +32,10 @@ class OptionShape extends StatelessWidget {
         ),
         Expanded(
           child: InkWell(
-              onTap: (){
-               Dialogs().rateDialog(context);
+              onTap: ()async{
+               await Dialogs().rateDialog(context);
+               await Dialogs().awsomeDialog(context:context, title:translator.translate('success'), type:DialogType.SUCCES,desc:translator.translate('success_rate'));
+
               },
               child: shape(translator.translate('add_rate'),"favorite")),
         ),

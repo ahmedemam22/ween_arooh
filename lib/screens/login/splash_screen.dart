@@ -18,9 +18,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<HomeProvider>(context,listen: false).getMainCategories();
     Future.delayed(Duration(seconds: 2), () {
       _check_savedUser();
+
     });
   }
   @override
@@ -56,10 +56,10 @@ class _SplashScreenState extends State<SplashScreen> {
       // String ids_check =pref.getString("email");
       try {
        if( pref.getString('user')==null){
-         Navigator.pushNamed(context, '/login');
+         Navigator.pushReplacementNamed(context, '/login');
        }
        else{
-         Provider.of<UserProvider>(context, listen: false).getUser().then((value) =>Navigator.pushNamed(context, '/main')
+         Provider.of<UserProvider>(context, listen: false).getUser().then((value) =>Navigator.pushReplacementNamed(context, '/main')
          );
        }
 

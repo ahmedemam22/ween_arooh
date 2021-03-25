@@ -1,14 +1,14 @@
 class ChatModel{
    String message;
    String level;
-   String type;
+   int type;
    String user_id;
    String msg_type;
    ChatModel({this.message,this.level,this.type,this.user_id,this.msg_type});
    factory ChatModel.fromJson(Map<String, dynamic> json) => ChatModel(
      message: json["message"],
      level: json["level"].toString(),
-     type: json["type"].toString(),
+     type: json["type"],
      user_id: json["user_id"].toString(),
      msg_type: json["msg_type"].toString()
 

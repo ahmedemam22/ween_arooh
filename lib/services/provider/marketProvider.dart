@@ -8,36 +8,45 @@ class MarketProvider extends ChangeNotifier{
   bool _waitMarket=false;
   bool get waitMarket=>_waitMarket;
   MarketModel _marketModel;
+  List<Result>get mainCategoryItemsSearch=>_mainCategoryItemsSearch;
+  List<Result> _mainCategoryItemsSearch=[];
   List<Result>_markets;
   List<Result>_temp;
   List<Result>get markets=>_markets;
 
-  List<Result>_marketsFilter=[];
-  List<Result>get marketsFilter=>_markets;
+  int count=0;
 Future getMarkets()async{
-  try{
-    _waitMarket=true;
-    notifyListeners();
-   var response=await api.post(BASE_URL+GET_MARKET, {});
-   _marketModel=MarketModel.fromJson(json.decode(response.body));
-   _markets=_marketModel.result;
-   _temp=_markets;
+  if(count==0) {
+    try {
+      count++;
 
-
+      _waitMarket = true;
+      notifyListeners();
+      var response = await api.post(BASE_URL + GET_MARKET, {
+      });
+      _marketModel = MarketModel.fromJson(json.decode(response.body));
+      _markets = _marketModel.result;
+      _temp=_markets;
+      print(_markets[0].title);
+      print(_markets[1].title);
+      print(_markets[2].title);
+      print('loooooooooooooooooc');
+    }
+    catch (e) {
+      print("get markets error::$e");
+    }
+    finally {
+      _waitMarket = false;
+      notifyListeners();
+    }
   }
-  catch(e){
-    print("get markets error::$e");
-
-  }
-  finally{
-    _waitMarket=false;
-    notifyListeners();
-  }
-
 
 }
 marketSearch(String title){
-  _marketsFilter=[];
+  var temp=markets;
+  _mainCategoryItemsSearch=temp.where((element) => translator.currentLanguage=='en'?element.titleEn.contains(title):element.titleAr.contains(title)).toList();
+  notifyListeners();
+  /*_marketsFilter=[];
 if(title.length>0) {
   _marketsFilter =
       _temp.where((element) => translator.currentLanguage == 'en' ? element
@@ -47,22 +56,25 @@ else{
   _marketsFilter=[];
 }print(_marketsFilter.length);
   print("filteeeeeeeeeeer");
-  notifyListeners();
+  notifyListeners();*/
 }
 filterByChars(){
   _temp.sort((a,b)=>a.titleEn.toLowerCase().compareTo(b.titleEn.toLowerCase()));
-  _marketsFilter=_temp;
+  _mainCategoryItemsSearch=_temp;
   notifyListeners();
 
 }
   filterByLocation(){
-    _temp.sort((a,b)=>double.parse(a.latitude??"0").compareTo(double.parse(b.latitude??"0")));
-    _marketsFilter=_temp;
+    _temp.sort((a,b)=>a.latitude.compareTo(b.latitude));
+    _mainCategoryItemsSearch=_temp;
     notifyListeners();
+
   }
   filterByRate(){
     _temp.sort((a,b)=>(a.rate).compareTo(b.rate));
-    _marketsFilter=_temp;
+
+    _mainCategoryItemsSearch=_temp;
+
     notifyListeners();
   }
 

@@ -13,4 +13,6 @@ const SHOW_RATE="recommendations/";
 const MARKET_DETAILS="markets/";
 const RESEND_CODE="resend_code";
 const SEND_CODE="markets/";
+const ADD_OFFERS="add_offers";
 const VERIFY="verify";
+const ABOUT="about";

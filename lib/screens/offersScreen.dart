@@ -21,51 +21,56 @@ class _OffersScreenState extends State<OffersScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
-    return Scaffold(
-      body: Column(
-        children: [
-          AppBarShape(title:translator.translate('offers'),openDrawer: widget.widgetKey,back: false,),
-          Expanded(
-            child:  Consumer<OffersProvider>(
-          builder: (context, offers, child) {
-            return offers.waitOffers?Center(child: CircularProgressIndicator(),):GridView.builder(
-              padding: EdgeInsets.fromLTRB(
-                  SizeConfig.screenWidth * s30, SizeConfig.screenWidth * s17,
-                  SizeConfig.screenWidth * s30
-                  , 0),
-              itemCount: offers.offersItems.length,
-              itemBuilder: (ctx, i) =>
-                  InkWell(
-                    onTap: (){
-                      Navigator.pushNamed(context, '/display_image',arguments: i);
-                    },
-                    child: Container(
-                      width: SizeConfig.screenWidth * s165,
-                      height: SizeConfig.screenHeight/3,
-                     child: FadeInImage.assetNetwork(
-                        placeholder:"assets/images/offers.jpg",
-                        fit: BoxFit.fill,
-                        image: offers.offersItems[i].panner??"",
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: Column(
+          children: [
+            AppBarShape(title:translator.translate('offers'),openDrawer: widget.widgetKey,back: false,onChange:Provider.of<OffersProvider>(context,listen: false).nameSearch,
+            onChangeOffer:Provider.of<OffersProvider>(context,listen: false).locationSearch ,),
+            Expanded(
+              child:  Consumer<OffersProvider>(
+            builder: (context, offers, child) {
+              return offers.waitOffers?Center(child: CircularProgressIndicator(),):GridView.builder(
+                padding: EdgeInsets.fromLTRB(
+                    SizeConfig.screenWidth * s30, SizeConfig.screenWidth * s17,
+                    SizeConfig.screenWidth * s30
+                    , 0),
+                itemCount:offers.offersSearch.length==0? offers.offersItems.length:offers.offersSearch.length,
+                itemBuilder: (ctx, i) {
+                var item=offers.offersSearch.length==0?offers.offersItems[i]:offers.offersSearch[i];
+                    return InkWell(
+                      onTap: (){
+                        Navigator.pushNamed(context, '/display_image',arguments: i);
+                      },
+                      child: Container(
+                        width: SizeConfig.screenWidth * s165,
+                        height: SizeConfig.screenHeight/3,
+                       child: FadeInImage.assetNetwork(
+                          placeholder:"assets/images/offers.jpg",
+                          fit: BoxFit.fill,
+                          image: item.path??"",
 
 
-                        width:  SizeConfig.screenWidth * s165,
-                        height: SizeConfig.screenHeight/3,),
+                          width:  SizeConfig.screenWidth * s165,
+                          height: SizeConfig.screenHeight/3,),
 
-                    ),
-                  ),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: SizeConfig.screenWidth / 30,
-                  crossAxisSpacing: SizeConfig.screenWidth * s18
+                      ),
+                );},
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: SizeConfig.screenWidth / 30,
+                    crossAxisSpacing: SizeConfig.screenWidth * s18,
+                  childAspectRatio: 0.6
 
 
-              ),
-            );
-          }),
-          ),
+                ),
+              );
+            }),
+            ),
 
-        ],
+          ],
+        ),
       ),
     );
   }

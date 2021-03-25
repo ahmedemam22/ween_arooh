@@ -27,7 +27,6 @@ class ChatFooter extends StatelessWidget {
             children: [
               InkWell(
                   onTap: (){
-                    Dialogs().discount(context);
                   },
                   child: Icon(Icons.attach_file,)),
               SizedBox(width: SizeConfig.screenWidth*s15,),

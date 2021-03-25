@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16.307" height="25" viewBox="0 0 16.307 25">
+  <g id="Group_3609" data-name="Group 3609" transform="translate(-296 -122)">
+    <g id="down-arrow" transform="translate(171.339 126.121)">
+      <g id="Group_3608" data-name="Group 3608" transform="translate(132)">
+        <path id="Path_2466" data-name="Path 2466" d="M140.455,13.037a.7.7,0,0,0-.988,0l-2.438,2.45V.7a.7.7,0,0,0-1.4,0V15.49l-2.438-2.45a.7.7,0,0,0-.99.985l3.632,3.649h0a.7.7,0,0,0,.989,0h0l3.632-3.649A.7.7,0,0,0,140.455,13.037Z" transform="translate(-132)" fill="#8f8f91" stroke="#fff" stroke-width="0.5"/>
+      </g>
+    </g>
+    <text id="A" transform="translate(296 132)" fill="#8f8f91" font-size="9" font-family="SegoeUI-Semibold, Segoe UI" font-weight="600"><tspan x="0" y="0">A</tspan></text>
+    <text id="z" transform="translate(296 144)" fill="#8f8f91" font-size="11" font-family="SegoeUI-Semibold, Segoe UI" font-weight="600"><tspan x="0" y="0">z</tspan></text>
+  </g>
+</svg>

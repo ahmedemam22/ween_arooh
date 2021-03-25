@@ -29,9 +29,11 @@ class _AppDrawerState extends State<AppDrawer> {
             child: ListView(children: [
               drawerShape(translator.translate('main'), 'ic_home','main'),
               drawerShape(translator.translate('record_service'), 'ic_record_service','add_activity'),
+              drawerShape(translator.translate('offers'), 'offers','offers'),
               drawerShape(translator.translate('call_us'), 'call','call'),
               drawerShape(translator.translate('language'), 'ic_lang','lang'),
               drawerShape(translator.translate('information'), 'ic_person','setting'),
+              drawerShape(translator.translate('about_us'), 'ic_about','about'),
               drawerShape(translator.translate('logout'), 'ic_logout','login'),
             ],),
           )
@@ -62,21 +64,7 @@ class _AppDrawerState extends State<AppDrawer> {
             )),
           ),
         ),
-        InkWell(
-          onTap: ()=>Navigator.pushNamed(context, '/login'),
-          child: Padding(
-            padding:  EdgeInsets.only(top: SizeConfig.screenWidth*s35,right:SizeConfig.screenWidth*s10,left: SizeConfig.screenWidth*s10 ),
-            child: Align(
-              alignment: Alignment.topRight,
-              child: Text("دخول",style: TextStyle(
-                fontSize: SizeConfig.screenWidth*s18,
-                fontWeight: FontWeight.bold,
 
-                decoration: TextDecoration.underline,
-              ),),
-            ),
-          ),
-        )
       ],
     );
   }
@@ -123,7 +111,12 @@ class _AppDrawerState extends State<AppDrawer> {
     } else if (name == "setting") {
       Navigator.pop(context);
       Navigator.pushNamed(_context, '/setting');
-    } else if (name == "login") {
+    }
+    else if (name == "offers") {
+      Navigator.pop(context);
+      Navigator.pushNamed(_context, '/add_offers');
+    }
+    else if (name == "login") {
       Provider.of<UserProvider>(context,listen: false).setUser();
       Navigator.pushReplacementNamed(_context, '/login');
 
@@ -132,7 +125,12 @@ class _AppDrawerState extends State<AppDrawer> {
       Navigator.pop(context);
       Navigator.pushNamed(_context, '/main');
 
-    }
+    }    else if (name == "about") {
+  Navigator.pop(context);
+  Navigator.pushNamed(_context, '/about_us');
+
+  }
+
     else if (name == "call") {
       Navigator.pop(context);
       Navigator.pushNamed(_context, '/chat');

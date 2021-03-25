@@ -9,11 +9,13 @@ import 'package:ween_arooh/utils/text_style.dart';
 class Dialogs{
   awsomeDialog({context,type,title,desc,onClick}){
     return AwesomeDialog(
+
       context: context,
       dialogType:type,
       animType: AnimType.BOTTOMSLIDE,
       title: title,
       desc: desc,
+
       btnOkOnPress: () {
         onClick;
 
@@ -139,8 +141,8 @@ class Dialogs{
         false;
   }
 
-  rateDialog(context){
-    showDialog(
+  Future rateDialog(context)async{
+    return await showDialog(
         context: context,
         builder: (_) => new Dialog(
           backgroundColor: Colors.transparent,
@@ -151,5 +153,25 @@ class Dialogs{
               child:  AddRateShape()
           ),
         ));
+  }
+  Future<bool> FN_showDetails_Dialog(BuildContext context, String title, String body) async {
+    return (await showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+        title: new Text(title),
+        content: new Text(body, style: TX_STYLE_black_14Point5.copyWith(fontFamily: 'Schelyer') ),
+        actions: <Widget>[
+          new FlatButton(
+            onPressed: () => Navigator.pop(context),
+            child: new Text(translator.translate('ok')),
+          ),
+//          new FlatButton(
+//            onPressed: () => Navigator.of(context).pop(true),
+//            child: new Text('Yes'),
+//          ),
+        ],
+      ),
+    )) ??
+        false;
   }
 }

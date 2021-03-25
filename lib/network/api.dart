@@ -1,18 +1,23 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:ween_arooh/utils/glopal_app.dart';
 
 
 
 
 class Api{
-  final String tokenn= 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvcmFpdG90ZWMub3JnXC93dGdcL2FwaVwvbG9naW4iLCJpYXQiOjE2MTYxNzE5OTcsIm5iZiI6MTYxNjE3MTk5NywianRpIjoicjU4azlUOEF5TzYzYlpUayIsInN1YiI6OCwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.jk467nFJ1OPuFO-FBD6Uclv8IPB3UKF5Zl0o8Ag7NAs'
-      ;
+   String tokenn= 'Bearer ${GlopalApp.token}';
 
-  Future<Map>get(url,[bool token=false])async {
+
+  Future<Map>get(url,[token])async {
+
+    if(token!=null)tokenn='Bearer ${token}';
+    print(tokenn);
+    print('sssss');
     http.Response response = await http.get(url,headers: {'Content-Type': "application/json; charset=utf-8",
     'Authorization': tokenn
     });
-    print(json.decode(response.body));
+
 
 
     return json.decode(response.body);

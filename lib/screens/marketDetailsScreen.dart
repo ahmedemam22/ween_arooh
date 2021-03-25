@@ -4,7 +4,7 @@ import 'package:ween_arooh/utils/colors.dart';
 
 import 'package:ween_arooh/widgets/ImageSliderMarket.dart';
 import 'package:ween_arooh/utils/size_config.dart';
-
+import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/marketDetailsProvider.dart';
 import 'package:ween_arooh/widgets/marketDetails/contactShape.dart';
@@ -30,43 +30,70 @@ class _MarketDetailsScreenState extends State<MarketDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Scaffold(
-      key: _scaffoldKey,
-      drawer: AppDrawer(),
-      appBar: AppBar(
-        backgroundColor: backgroundColor,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        key: _scaffoldKey,
+        drawer: AppDrawer(
 
-        title: Center(child: Text("اسواق العثيم")),
+        ),
+        appBar: AppBar(
+          actions: [
+        IconButton(icon: Icon(Icons.arrow_back_ios_outlined,color: Colors.white,),onPressed: (){
+          Navigator.pop(context);
+        },)
+          ],
 
-      ),
-      body:  Consumer<MarketDetailsProvider>(
+          backgroundColor: backgroundColor,
+
+          title: Consumer<MarketDetailsProvider>(
+      builder: (context, details, child)=>Center(child: Text(details.markeTitle??""))),
+
+        ),
+        body:  FutureBuilder(
+    future:   Provider.of<MarketDetailsProvider>(context,listen: false).getMarketDetails(),
+    builder: (ctx, dataSnapshot) {
+    if (dataSnapshot.connectionState ==
+    ConnectionState.waiting) {
+    return Center(child:CircularProgressIndicator());
+    } else {
+    if (dataSnapshot.error != null) {
+    // ...
+    // Do error handling stuff
+    return Center(
+    child: Text(translator.translate('error')),
+    );
+    } else {
+    return Consumer<MarketDetailsProvider>(
     builder: (context, details, child) {
-      return details.waitMarketDetails ? Center(
-          child: CircularProgressIndicator()) : Column(children: [
-        Expanded(
-            child: ListView(
-                children: [
-                  ImageSliderMarket(),
-                  SizedBox(height: 5,),
-                  OptionShape(),
-                  MarketInfo(),
-                  ContactShape(),
-                  Divider(thickness: 1,),
-                  SocialMediaShareShape(),
-                  Divider(thickness: 1,),
-                  DisplayOffersShape(),
-                  Divider(thickness: 1,),
-                  GetCopounShape(),
-                  Divider(thickness: 1,),
-                  LocationShape()
+    return details.waitMarketDetails ? Center(
+    child: CircularProgressIndicator()) : Column(children: [
+    Expanded(
+    child: ListView(
+    children: [
+    ImageSliderMarket(),
+    SizedBox(height: 5,),
+    OptionShape(),
+    MarketInfo(),
+    ContactShape(),
+    Divider(thickness: 1,),
+    SocialMediaShareShape(),
+    Divider(thickness: 1,),
+    DisplayOffersShape(),
+    Divider(thickness: 1,),
+    GetCopounShape(),
+    Divider(thickness: 1,),
+    LocationShape()
 
 
-                ])
+    ])
 
 
-        )
-      ]);
-    })  );
+    )
+    ]);
+    });
+    }}})  ),
+    );
 
 
   }

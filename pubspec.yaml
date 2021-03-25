@@ -32,6 +32,7 @@ dependencies:
   cupertino_icons: ^1.0.0
 
 dev_dependencies:
+
   flutter_test:
     sdk: flutter
   localize_and_translate: ^1.1.1+6
@@ -68,11 +69,21 @@ dev_dependencies:
   url_launcher: ^5.7.10
   #google map
   google_maps_flutter: ^1.2.0
+  flutter_launcher_icons: ^0.7.5
   #share by install apps
   share: 0.6.5+4
   #location
   geolocator: ^5.3.1
   location: ^3.0.2
+  #display image in dialog
+  rflutter_alert: ^1.1.0
+
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo.png"
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

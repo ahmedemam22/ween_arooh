@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:ween_arooh/network/api.dart';
 import 'package:ween_arooh/network/constant.dart';
 import 'package:ween_arooh/model/chatModel.dart';
+import 'package:ween_arooh/utils/glopal_app.dart';
 class ChatProvider extends ChangeNotifier{
   bool _waitMessage=false;
   bool get waitMessage=>_waitMessage;
@@ -11,7 +12,7 @@ class ChatProvider extends ChangeNotifier{
    try{
      _waitMessage=true;
      notifyListeners();
-     var response= await api.get(BASE_URL+GET_MESSAGE+"2");
+     var response= await api.get(BASE_URL+GET_MESSAGE+GlopalApp.user.id.toString());
      for(int i=0;i<response['result'].length;i++){
      _allMessages.add(ChatModel.fromJson(response['result'][i]));
    }}
@@ -25,9 +26,9 @@ class ChatProvider extends ChangeNotifier{
 
   }
   sendMessages(String msg)async{
-    _allMessages.add(ChatModel(message:msg, type: "",msg_type: "text",user_id: "2"));
+    _allMessages.add(ChatModel(message:msg, type: 1,msg_type: "text",user_id: "2"));
     notifyListeners();
-   try{ await api.post(BASE_URL+SEND_MESSAGE+"",ChatModel(message:msg, type: "",msg_type: "text",user_id: "2").toJson()
+   try{ await api.post(BASE_URL+SEND_MESSAGE+"",ChatModel(message:msg, type:1,msg_type: '1',user_id: "2").toJson()
     );
 
   }
