@@ -6,10 +6,15 @@ import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/AddOffersProvider.dart';
+import 'package:ween_arooh/services/provider/addActivityProvider.dart';
+import 'package:ween_arooh/services/provider/homeProvider.dart';
 import 'package:ween_arooh/widgets/addImageShape.dart';
 import 'package:ween_arooh/utils/dialogs.dart';
 import 'package:ween_arooh/widgets/button_shape.dart';
+import 'package:ween_arooh/utils/text_style.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:ween_arooh/widgets/dropDown.dart';
+import 'package:ween_arooh/services/provider/marketProvider.dart';
 class AddOffersScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -38,6 +43,44 @@ class AddOffersScreen extends StatelessWidget {
                             horizontal: SizeConfig.screenWidth * s20),
                         child: Column(
                           children: [
+                      /*      Container(
+                              color: lightGray,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Expanded(
+                                    flex: 0,
+                                    child: Text(
+                                      translator.translate('choose_activity'),
+                                      style: TX_STYLE_black_14,
+                                      maxLines: 1,
+                                    ),
+                                  ),
+                                  Expanded(flex:1,child: DropDown(items:Provider.of<MarketProvider>(context,listen: false).userMarketsList(),hint: translator.translate('choose_market'),
+                                    onChange:Provider.of<MarketProvider>(context,listen: false).getMarketId
+                                    ,))
+                                  // urgentServices_TextFieldOptions( translator.currentLanguage == "en" ? 'Services Type' : "نوع الخدمة", black),
+                                ],),
+                            ),*/
+                           /* Container(
+                              color: lightGray,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Expanded(
+                                    flex: 0,
+                                    child: Text(
+                                      translator.translate('choose_activity'),
+                                      style: TX_STYLE_black_14,
+                                      maxLines: 1,
+                                    ),
+                                  ),
+                                  Expanded(flex:1,child: DropDown(items:Provider.of<MarketProvider>(context,listen: false).userMarketsList() ,hint: translator.translate('choose_market'),
+                                    onChange:Provider.of<MarketProvider>(context,listen: false).getMarketId
+                                    ,))
+                                  // urgentServices_TextFieldOptions( translator.currentLanguage == "en" ? 'Services Type' : "نوع الخدمة", black),
+                                ],),
+                            ),*/
 
 
                             AddImageShape(title: translator.translate(

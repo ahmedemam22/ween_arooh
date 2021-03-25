@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:ween_arooh/utils/customDropDown.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/colors.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/widgets/searchTextField.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:ween_arooh/widgets/dropDown.dart';
+import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/addActivityProvider.dart';
 
 class AppBarShape extends StatelessWidget {
   final String title;
@@ -12,9 +16,12 @@ class AppBarShape extends StatelessWidget {
   final Function onChangeOffer;
   final bool back;
   final GlobalKey<ScaffoldState> openDrawer;
+  final GlobalKey dropdownKey = GlobalKey();
+
   AppBarShape({this.title, this.openDrawer, this.onChange,this.back=true, this.onChangeOffer});
   @override
   Widget build(BuildContext context) {
+
     return Container(
       height: SizeConfig.screenWidth*s125,
       color: backgroundColor,
@@ -50,15 +57,12 @@ SizedBox(width:SizeConfig.screenWidth*s10 ,),
                                       child:
 
                                   SearchTextField(onChange)),
-
-                                if(title==translator.translate('offers'))
-                                  SizedBox(width: SizeConfig.screenWidth*s10,),
-                                if(title==translator.translate('offers'))offersShape()
+                                if(title==translator.translate('offers'))SizedBox(width: 10,),
+                                if(title==translator.translate('offers'))offersShape(context)
 
 
-
-                              ],
-                            ),
+       
+  ]  ),
                           ),
                         ),
    ),
@@ -81,27 +85,40 @@ SizedBox(width:SizeConfig.screenWidth*s10 ,),
 
     );
   }
-  Widget offersShape(){
-    return   Container(
-        width: SizeConfig.screenWidth*(s120),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(15))
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical:5.0,horizontal: 2),
-          child: Row(
-            children: [
-              Text(translator.translate('region')),
-              SizedBox(width: 5,),
-              SvgPicture.asset(
+  Widget offersShape(context){
+    return   InkWell(
 
-                "assets/images/region_search.svg",
-                width: SizeConfig.screenWidth*s15,
-              ),
-            ],
+      child: Container(
+          width: SizeConfig.screenWidth*(s120),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(15))
           ),
-        ));
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical:5.0,horizontal: 2),
+            child: Row(
+              children: [
+              CustomDropdownButton<String>(
+              key: dropdownKey,
+              value: "ssss",
+              onChanged: (String val) => print('ssss'),
+              items: ['aaa','bbb','cc']
+                  .map((str) => DropdownMenuItem(
+                value: str,
+                child: Text(str),
+              ))
+                  .toList(),),
+                SizedBox(width: 5,),
+                SvgPicture.asset(
+
+                  "assets/images/region_search.svg",
+                  width: SizeConfig.screenWidth*s15,
+                ),
+              ],
+            ),
+          )),
+    );
   }
+
 
 }

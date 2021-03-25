@@ -7,6 +7,7 @@ import 'package:ween_arooh/screens/addActivityScreen.dart';
 import 'package:ween_arooh/screens/offersScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/homeProvider.dart';
+import 'package:ween_arooh/services/provider/marketProvider.dart';
 import 'package:ween_arooh/services/provider/userProvider.dart';
 class MainScreen extends StatefulWidget {
   @override
@@ -22,6 +23,9 @@ List<Widget>_widgets=[HomeScreen(_scaffoldKey),AddActivityScreen(),OffersScreen(
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     Provider.of<HomeProvider>(context,listen: true).getMainCategories().then((value) => null);
+    Provider.of<MarketProvider>(context,listen: true).getUserMarkets().then((value) => null);
+ //   Provider.of<HomeProvider>(context,listen: false).getCities().then((value) => null);
+
     Provider.of<UserProvider>(context,listen: false).aboutUs();
 
 }

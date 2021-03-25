@@ -14,7 +14,7 @@ class RateShape extends StatelessWidget {
         onRated: (v) {
         },
         starCount: 5,
-        rating: value??3,
+        rating: value??3.0,
         size:size?? SizeConfig.screenWidth*0.08,
         isReadOnly:true,
         color: backgroundColor,

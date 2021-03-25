@@ -3,11 +3,14 @@ import 'package:ween_arooh/network/api.dart';
 import 'package:ween_arooh/network/constant.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/model/mainCategoryResponse.dart';
+import 'package:ween_arooh/model/citiesResponse.dart';
 import 'package:ween_arooh/utils/glopal_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/userProvider.dart';
 class HomeProvider extends ChangeNotifier{
+  List<City>_citiesList;
+  List<City>get citiesList=>_citiesList;
   MainCategoryResponse _mainCategoryResponse;
   List<Result> _mainCategoryItems=[];
   List<Result> _mainCategoryItemsSearch=[];
@@ -35,8 +38,6 @@ class HomeProvider extends ChangeNotifier{
  finally{
    _waitMainCategory=false;
    notifyListeners();
-   print(_mainCategoryItems[0].nameAr);
-   print('nnnnnnnnnnnnnn');
  }}
   }
 makeSearch(String title){
@@ -59,5 +60,20 @@ notifyListeners();
       }
     });
 
+  }
+  Future getCities()async{
+    try {
+     var response= await api.get(BASE_URL + CITIES);
+     CitiesResponse _city=CitiesResponse.fromJson(response);
+     _citiesList=_city.result;
+     print(_citiesList[0].nameAr);
+     print('nnnnnnnnnnnnm');
+    }
+    catch(e){
+      print('error get cities$e');
+    }
+    finally{
+notifyListeners();
+    }
   }
 }

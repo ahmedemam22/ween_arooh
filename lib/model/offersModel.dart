@@ -50,8 +50,8 @@ class Result {
   int marketId;
   String code;
   String path;
-  String value;
-  DateTime endDate;
+  dynamic value;
+  dynamic endDate;
   String marketName;
   double latitude;
   double longitude;
@@ -61,25 +61,25 @@ class Result {
     id: json["id"],
     marketId: json["market_id"],
     code: json["code"],
-    path: json["path"] == null ? null : json["path"],
+    path: json["path"],
     value: json["value"],
-    endDate: DateTime.parse(json["end_date"]),
+    endDate: json["end_date"],
     marketName: json["market_name"],
-    latitude: json["latitude"] == null ? null : json["latitude"],
-    longitude: json["longitude"] == null ? null : json["longitude"],
-    location: json["location"] == null ? null : json["location"],
+    latitude: json["latitude"].toDouble(),
+    longitude: json["longitude"].toDouble(),
+    location: json["location"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "market_id": marketId,
     "code": code,
-    "path": path == null ? null : path,
+    "path": path,
     "value": value,
-    "end_date": "${endDate.year.toString().padLeft(4, '0')}-${endDate.month.toString().padLeft(2, '0')}-${endDate.day.toString().padLeft(2, '0')}",
+    "end_date": endDate,
     "market_name": marketName,
-    "latitude": latitude == null ? null : latitude,
-    "longitude": longitude == null ? null : longitude,
-    "location": location == null ? null : location,
+    "latitude": latitude,
+    "longitude": longitude,
+    "location": location,
   };
 }

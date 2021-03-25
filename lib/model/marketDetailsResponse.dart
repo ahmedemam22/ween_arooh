@@ -19,7 +19,6 @@ class MarketDetailsResponse {
     this.decEn,
     this.latitude,
     this.longitude,
-    this.location,
     this.siteLink,
     this.email,
     this.facebook,
@@ -40,6 +39,7 @@ class MarketDetailsResponse {
     this.panner,
     this.visitscount,
     this.rate,
+    this.location,
     this.category,
     this.images,
     this.offers,
@@ -54,9 +54,8 @@ class MarketDetailsResponse {
   dynamic minDecEn;
   dynamic decAr;
   dynamic decEn;
-  dynamic latitude;
-  dynamic longitude;
-  dynamic location;
+  double latitude;
+  double longitude;
   String siteLink;
   dynamic email;
   String facebook;
@@ -77,6 +76,7 @@ class MarketDetailsResponse {
   String panner;
   String visitscount;
   double rate;
+  String location;
   Category category;
   List<Image> images;
   List<Offer> offers;
@@ -91,9 +91,8 @@ class MarketDetailsResponse {
     minDecEn: json["min_dec_en"],
     decAr: json["dec_ar"],
     decEn: json["dec_en"],
-    latitude: json["latitude"],
-    longitude: json["longitude"],
-    location: json["location"],
+    latitude: json["latitude"].toDouble(),
+    longitude: json["longitude"].toDouble(),
     siteLink: json["site_link"],
     email: json["email"],
     facebook: json["facebook"],
@@ -114,6 +113,7 @@ class MarketDetailsResponse {
     panner: json["panner"],
     visitscount: json["visitscount"],
     rate: json["rate"].toDouble(),
+    location: json["location"],
     category: Category.fromJson(json["category"]),
     images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
     offers: List<Offer>.from(json["offers"].map((x) => Offer.fromJson(x))),
@@ -131,7 +131,6 @@ class MarketDetailsResponse {
     "dec_en": decEn,
     "latitude": latitude,
     "longitude": longitude,
-    "location": location,
     "site_link": siteLink,
     "email": email,
     "facebook": facebook,
@@ -152,6 +151,7 @@ class MarketDetailsResponse {
     "panner": panner,
     "visitscount": visitscount,
     "rate": rate,
+    "location": location,
     "category": category.toJson(),
     "images": List<dynamic>.from(images.map((x) => x.toJson())),
     "offers": List<dynamic>.from(offers.map((x) => x.toJson())),
@@ -298,10 +298,6 @@ class Offer {
     this.marketId,
     this.code,
     this.pic,
-    this.percentage,
-    this.value,
-    this.endDate,
-    this.management,
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
@@ -313,10 +309,6 @@ class Offer {
   int marketId;
   String code;
   String pic;
-  String percentage;
-  String value;
-  DateTime endDate;
-  int management;
   DateTime createdAt;
   DateTime updatedAt;
   dynamic deletedAt;
@@ -328,15 +320,11 @@ class Offer {
     marketId: json["market_id"],
     code: json["code"],
     pic: json["pic"],
-    percentage: json["percentage"],
-    value: json["value"],
-    endDate: DateTime.parse(json["end_date"]),
-    management: json["management"],
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
     deletedAt: json["deleted_at"],
     order: json["order"],
-    path: json["path"] == null ? null : json["path"],
+    path: json["path"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -344,15 +332,11 @@ class Offer {
     "market_id": marketId,
     "code": code,
     "pic": pic,
-    "percentage": percentage,
-    "value": value,
-    "end_date": "${endDate.year.toString().padLeft(4, '0')}-${endDate.month.toString().padLeft(2, '0')}-${endDate.day.toString().padLeft(2, '0')}",
-    "management": management,
     "created_at": createdAt.toIso8601String(),
     "updated_at": updatedAt.toIso8601String(),
     "deleted_at": deletedAt,
     "order": order,
-    "path": path == null ? null : path,
+    "path": path,
   };
 }
 
