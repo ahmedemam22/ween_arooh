@@ -17,6 +17,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
+
     super.initState();
     Future.delayed(Duration(seconds: 2), () {
       _check_savedUser();
@@ -59,6 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
          Navigator.pushReplacementNamed(context, '/login');
        }
        else{
+
          Provider.of<UserProvider>(context, listen: false).getUser().then((value) =>Navigator.pushReplacementNamed(context, '/main')
          );
        }

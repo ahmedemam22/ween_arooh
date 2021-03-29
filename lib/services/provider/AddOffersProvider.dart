@@ -79,17 +79,11 @@ desc: translator.translate('succes_add_offers'));
     notifyListeners();
   }
  Future<List<MultipartFile>>getData(List list)async{
-    print(list.length);
-    print('firsttttttttttt');
     List<MultipartFile>item=[];
 for(int i=0;i<list.length;i++){
   item.add(await MultipartFile.fromFile(list[i].path, filename:list[i].path.split('/').last));
 
     }
-
-    print(item.length);
-    print('lllllllllllllllllllll');
-
 
     return item;
   }

@@ -85,7 +85,7 @@ class AddRateShape extends StatelessWidget {
         ), color: backgroundColor,
           onPressed: () async{
            await Provider.of<MarketDetailsProvider>(context, listen: false).addRate(
-                _commentCon.text);
+                _commentCon.text,);
 
           /* await Dialogs().FN_showDetails_Dialog(context, translator.translate('success'), translator.translate('success_rate'),
            );*/

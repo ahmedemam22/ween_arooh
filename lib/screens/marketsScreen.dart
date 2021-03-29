@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/marketProvider.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
 import 'package:ween_arooh/widgets/filterShape.dart';
+import 'package:ween_arooh/services/provider/homeProvider.dart';
 class MarketsScreen extends StatefulWidget {
   static final   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -36,12 +37,26 @@ class _MarketsScreenState extends State<MarketsScreen> {
           FilterShape(),
           SizedBox(height:SizeConfig.screenWidth*s13),
           Expanded(
-            child:MarketList()
+            child :FutureBuilder(
+    future:   Provider.of<MarketProvider>(context,listen: false).getMarkets( Provider.of<HomeProvider>(context,listen: false).getCategoryId(_title)),
+    builder: (ctx, dataSnapshot) {
+    if (dataSnapshot.connectionState ==
+    ConnectionState.waiting) {
+    return Center(child:CircularProgressIndicator());
+    } else {
+    if (dataSnapshot.error != null) {
+    // ...
+    // Do error handling stuff
+    return Center(
+    child: Text(translator.translate('error')),
+    );
+    } else {
+    return Consumer<MarketProvider>(
+    builder: (context, details, child) {
+    return details.waitMarket ? Center(
+    child: CircularProgressIndicator()) : MarketList();});
 
 
-
-
-
-          )]));
+    }}}))]));
   }
 }

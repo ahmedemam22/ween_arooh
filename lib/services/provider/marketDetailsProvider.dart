@@ -8,16 +8,16 @@ import 'package:ween_arooh/utils/dialogs.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 class MarketDetailsProvider extends ChangeNotifier{
-
   RateModel _rateModel;
   RateModel get rateModel=>_rateModel;
-  List<ResultElement>_rates;
-  List<ResultElement>get rates=>_rates;
+  List<Recomendations>_rates;
+  List<Recomendations>get rates=>_rates;
   bool _waitMakeRate=false;
   bool get waitMakeRate=>_waitMakeRate;
   bool _waitRate=false;
   bool get waitRate=>_waitRate;
   int _selectId;
+  int get getId=>_selectId;
   String markeTitle;
   double rate=3.0;
   bool _waitMarketDetails=false;
@@ -30,7 +30,7 @@ class MarketDetailsProvider extends ChangeNotifier{
       _waitMakeRate=true;
       notifyListeners();
     await api.post(BASE_URL+RATE, {
-    "market_id" : "1",
+    "market_id" : _marketDetails.id,
     "user_id" : GlopalApp.user.id,
     "rate" : rate.toString(),
     "comment" : comment,
@@ -54,9 +54,9 @@ class MarketDetailsProvider extends ChangeNotifier{
    try{
      _waitRate=true;
      notifyListeners();
-     var response=await api.get(BASE_URL+SHOW_RATE+"1");
+     var response=await api.get(BASE_URL+SHOW_RATE+_marketDetails.id.toString());
    _rateModel=RateModel.fromJson(response);
-   _rates=_rateModel.result.result;
+   _rates=_rateModel.result.market[0].recomendations;
    }
    catch(e){
      print("get rates error ::$e");
@@ -71,11 +71,11 @@ class MarketDetailsProvider extends ChangeNotifier{
     _selectId=id;
     notifyListeners();
   }
-  Future getMarketDetails()async{
+  Future getMarketDetails(marketID)async{
   try{
     _waitMarketDetails=true;
     notifyListeners();
-    var response= await api.get(BASE_URL+MARKET_DETAILS+"1");
+    var response= await api.get(BASE_URL+MARKET_DETAILS+marketID.toString());
   _marketDetails=MarketDetailsResponse.fromJson(response);
   markeTitle=_marketDetails.title;
   }
@@ -90,7 +90,7 @@ class MarketDetailsProvider extends ChangeNotifier{
   }
   List<String> getImages(){
     List<String>_images=[];
-    _marketDetails.images.forEach((element) {_images.add(element.path);});
+   if(_marketDetails!=null) _marketDetails.images.forEach((element) {_images.add(element.path);});
     return _images;
   }
 

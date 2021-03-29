@@ -42,23 +42,33 @@ class Result {
     this.latitude,
     this.longitude,
     this.title,
+    this.email,
+    this.site_link,
     this.minDec,
     this.dec,
+    this.mobile,
+    this.telephone,
     this.logo,
     this.panner,
+    this.category_id,
     this.visitscount,
     this.rate,
     this.location,
   });
 
   int id;
+  int category_id;
   String titleAr;
   String titleEn;
   String minDecAr;
   String minDecEn;
+  String mobile;
+  String telephone;
   double latitude;
   double longitude;
   String title;
+  String email;
+  String site_link;
   String minDec;
   dynamic dec;
   String logo;
@@ -69,6 +79,7 @@ class Result {
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     id: json["id"],
+    category_id: json["category_id"],
     titleAr: json["title_ar"],
     titleEn: json["title_en"],
     minDecAr: json["min_dec_ar"] == null ? null : json["min_dec_ar"],
@@ -76,6 +87,10 @@ class Result {
     latitude: json["latitude"].toDouble(),
     longitude: json["longitude"].toDouble(),
     title: json["title"],
+    site_link: json["site_link"],
+    mobile: json["mobile"],
+    telephone: json["telephone"],
+    email: json["email"],
     minDec: json["min_dec"] == null ? null : json["min_dec"],
     dec: json["dec"],
     logo: json["logo"] == null ? null : json["logo"],
@@ -87,7 +102,13 @@ class Result {
 
   Map<String, dynamic> toJson() => {
     "id": id,
+    "category_id": category_id,
     "title_ar": titleAr,
+    "title_en": titleEn,
+    "email": email,
+    "site_link": site_link,
+    "mobile": mobile,
+    "telephone": telephone,
     "title_en": titleEn,
     "min_dec_ar": minDecAr == null ? null : minDecAr,
     "min_dec_en": minDecEn == null ? null : minDecEn,

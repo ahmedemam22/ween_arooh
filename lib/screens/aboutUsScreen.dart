@@ -9,7 +9,6 @@ import 'package:ween_arooh/services/provider/userProvider.dart';
 class AboutUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
 
     return WillPopScope(
       onWillPop: () async => false,

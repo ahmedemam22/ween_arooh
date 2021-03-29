@@ -7,7 +7,7 @@ import 'dart:convert';
 class OffersProvider extends ChangeNotifier{
   OffersModel _offersModel;
   List<Result> _offersItems;
-  List<Result> _offersSearch=[];
+  List<Result> _offersSearch;
   List<Result> get offersItems=>_offersItems;
   List<Result> get offersSearch=>_offersSearch;
   bool _waitOffers=false;
@@ -40,25 +40,23 @@ finally{
     if(title.length>0) {
       _offersSearch =
           _temp.where((element) =>
-              element.marketName.contains(title)).toList();
+              element.titleAr.contains(title)).toList();
     }
     else{
-      _offersSearch=[];
+      _offersSearch=null;
     }print(_offersSearch.length);
     print("filteeeeeeeeeeer");
     notifyListeners();
   }
-  locationSearch(String title){
+  locationSearch(int id){
     _offersSearch=[];
     var _temp=_offersItems;
-    if(title.length>0) {
+
       _offersSearch =
           _temp.where((element) =>
-              element.location.contains(title)).toList();
-    }
-    else{
-      _offersSearch=[];
-    }print(_offersSearch.length);
+              element.city_id==id).toList();
+
+ print(_offersSearch.length);
     print("filteeeeeeeeeeer");
     notifyListeners();
   }

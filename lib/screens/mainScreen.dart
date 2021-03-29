@@ -7,7 +7,7 @@ import 'package:ween_arooh/screens/addActivityScreen.dart';
 import 'package:ween_arooh/screens/offersScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/homeProvider.dart';
-import 'package:ween_arooh/services/provider/marketProvider.dart';
+import 'package:ween_arooh/services/provider/addActivityProvider.dart';
 import 'package:ween_arooh/services/provider/userProvider.dart';
 class MainScreen extends StatefulWidget {
   @override
@@ -18,15 +18,18 @@ class _MainScreenState extends State<MainScreen> {
   int _index=0;
   static final   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(); // ADD THIS LINE
 List<Widget>_widgets=[HomeScreen(_scaffoldKey),AddActivityScreen(),OffersScreen(_scaffoldKey)];
+int _count=0;
 @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-    Provider.of<HomeProvider>(context,listen: true).getMainCategories().then((value) => null);
-    Provider.of<MarketProvider>(context,listen: true).getUserMarkets().then((value) => null);
- //   Provider.of<HomeProvider>(context,listen: false).getCities().then((value) => null);
+  if(_count==0){  Provider.of<HomeProvider>(context,listen: true).getMainCategories().then((value) => null);
+    Provider.of<AddActivityProvider>(context,listen: true).getUserMarkets().then((value) => null);
+    Provider.of<HomeProvider>(context,listen: false).getCities();
 
     Provider.of<UserProvider>(context,listen: false).aboutUs();
+  _count++;
+  }
+    super.didChangeDependencies();
 
 }
   @override

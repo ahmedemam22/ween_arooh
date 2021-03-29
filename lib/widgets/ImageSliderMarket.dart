@@ -15,7 +15,7 @@ class _ImageSliderMarketState extends State<ImageSliderMarket> {
 List<String>_item;
   @override
   Widget build(BuildContext context) {
-     _item= Provider.of<MarketDetailsProvider>(context,listen: false).getImages()??[];
+     _item= Provider.of<MarketDetailsProvider>(context,listen: false)?.getImages()??[];
     return Stack(
       children: [
         CarouselSlider(

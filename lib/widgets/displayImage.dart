@@ -9,6 +9,7 @@ class DisplayImage extends StatefulWidget {
 
 class _DisplayImageState extends State<DisplayImage> {
 int _currentIndex=0;
+int _index=0;
 @override
   void didChangeDependencies() {
   _currentIndex=ModalRoute.of(context).settings.arguments;
@@ -23,11 +24,10 @@ int _currentIndex=0;
         child: InkWell(
             onTap: (){
               setState(() {
-                if(_currentIndex<_market.length-1){
+                if(_index<_market[_currentIndex].offers.length-1){
                   print('ssssssss');
                   print(_market.length);
-                _currentIndex=_currentIndex+1;
-                  print(_currentIndex);
+                _index++;
 
                 }
 
@@ -41,7 +41,7 @@ int _currentIndex=0;
             child: FadeInImage.assetNetwork(
               placeholder:"assets/images/offers.jpg",
               fit: BoxFit.fill,
-              image: _market[_currentIndex].path??"",
+              image: _market[_currentIndex].offers[_index].path??"",
 
 
               width: SizeConfig.screenWidth,

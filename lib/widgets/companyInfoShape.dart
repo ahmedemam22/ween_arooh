@@ -6,6 +6,7 @@ import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/utils/text_style.dart';
+import 'package:ween_arooh/widgets/defaultImageShape.dart';
 import 'package:ween_arooh/utils/colors.dart';
 import 'package:ween_arooh/utils/dialogs.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -27,7 +28,6 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
   TextEditingController _companyNameCon=TextEditingController();
   TextEditingController _addBranchCon=TextEditingController();
 
-  TextEditingController _responsibillityCon=TextEditingController();
   TextEditingController _countryCon=TextEditingController();
   TextEditingController _adminstrationCon=TextEditingController();
 
@@ -38,6 +38,8 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
   TextEditingController _emailCon=TextEditingController();
 
   TextEditingController _websiteCon=TextEditingController();
+  TextEditingController _minDescCon=TextEditingController();
+  TextEditingController _descCon=TextEditingController();
   bool addBranch=false;
   LatLng savedLocation;
   String savedAddress;
@@ -62,9 +64,8 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
                   child: Column(
                       children: [
                         shape( "company_name",_companyNameCon,"title_ar",true),
-                        shape( "responsibillity",_responsibillityCon,"admin_id",true),
-                        shape( "country",_countryCon,"location",true),
-                        shape( "administration_location",_adminstrationCon,"",true),
+                        shape( "country",_countryCon,"country",true),
+                        shape( "administration_location",_adminstrationCon,"location",true),
                         shape( "branches_location",_addBranchCon,"",true,true,add.branchesAddress.length>0?add.branchesAddress[0]:null),
                      Container(
                   height:add.branchesAddress.length>0?100:0 ,
@@ -121,8 +122,8 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
             child: Container(
               child:  Column(children: [
                 DescriptionShape(title:translator.translate('brief_description') ,maxLine: 1,keyy:
-                "min_dec_ar",),
-                DescriptionShape(title: translator.translate('detailed_description'),maxLine: 3,keyy:  "dec_ar",),
+                "min_dec_ar",controller: _minDescCon,),
+                DescriptionShape(title: translator.translate('detailed_description'),maxLine: 3,keyy:  "dec_ar",controller:_descCon ,),
               ]),
             ),
           ),
@@ -139,16 +140,34 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
                         child: Column(
                           children: [
 
-                            AddImageShape(title: translator.translate(
+                            add.oldMArket!=null? add.oldMArket['logo']!=null?DefaultImageShape(title: translator.translate(
+                  'company_logo'),
+                           logo: true,
+                  onSelectImage: add.addLogo,
+                 ):AddImageShape(title: translator.translate(
                                 'company_logo'),
                                 images: add.logoImage,
                                 onSelectImage: add.addLogo,
-                            onRemoveImage:  add.removeLogo,),
-                            AddImageShape(title: translator.translate(
+                            onRemoveImage:  add.removeLogo,):AddImageShape(title: translator.translate(
+                                'company_logo'),
+                              images: add.logoImage,
+                              onSelectImage: add.addLogo,
+                              onRemoveImage:  add.removeLogo,),
+
+                            add.oldMArket!=null? add.oldMArket['panner']!=null?DefaultImageShape(title: translator.translate(
+                                'main_banner'),
+                              logo: false,
+                              onSelectImage: add.addImageBanner,
+                            ): AddImageShape(title: translator.translate(
                                 'main_banner'),
                               images: add.bannerImage,
                               onSelectImage: add.addImageBanner,
                             onRemoveImage: add.removeImageBanner,
+                            ):AddImageShape(title: translator.translate(
+                                'main_banner'),
+                              images: add.bannerImage,
+                              onSelectImage: add.addImageBanner,
+                              onRemoveImage: add.removeImageBanner,
                             ),
 
 
@@ -166,9 +185,7 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
                                  else{ if(_formKey.currentState.validate()){
 
                                     await add.addActivity(context);}
-                                  else{
-                                    print("ssssssssssssss");
-                                  }}
+                                }
 
 
                                 },
@@ -232,8 +249,6 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
 
 
   saveLocation(LatLng Location, String address) {
-    print(address);
-    print("cccccccccccc");
     Provider.of<AddActivityProvider>(context,listen: false).addBranch(Location,address);
 
   }

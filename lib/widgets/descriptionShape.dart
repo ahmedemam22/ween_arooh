@@ -10,10 +10,19 @@ class DescriptionShape extends StatelessWidget {
   final int maxLine;
   final String title;
   final String keyy;
+  final  controller;
 
-  const DescriptionShape({Key key, this.maxLine, this.title, this.keyy}) : super(key: key);
+  const DescriptionShape({Key key, this.maxLine, this.title, this.keyy, this.controller}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    if(Provider.of<AddActivityProvider>(context,listen: false).oldMArket!=null){
+
+     controller.text=Provider.of<AddActivityProvider>(context,listen: false).oldMArket[keyy];
+    }
+    else{
+      //controller.text='';
+    }
+
     return     Padding(
       padding:  EdgeInsets.symmetric(vertical:SizeConfig.screenWidth*s14,horizontal: SizeConfig.screenWidth*s10),
       child: Row(
@@ -44,13 +53,15 @@ class DescriptionShape extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
 
                   child: Center(
-                    child: TextField(
+                    child: TextFormField(
+    controller: controller,
                       decoration: InputDecoration(
                         border: InputBorder.none,
 
                       ),
-                      onChanged: (value){
-                        Provider.of<AddActivityProvider>(context,listen: false).setData(keyy, value);
+                      validator: (value){
+                      if(value.length>0)  Provider.of<AddActivityProvider>(context,listen: false).setData(keyy, value);
+                        return null;
                       },
 
                       style: TX_STYLE_black_14,

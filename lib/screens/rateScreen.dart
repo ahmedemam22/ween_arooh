@@ -23,6 +23,8 @@ class _RateScreenState extends State<RateScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final marketId=  ModalRoute.of(context).settings.arguments;
+
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(

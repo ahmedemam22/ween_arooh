@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    Provider.of<MarketProvider>(context,listen: false).getMarkets().then((value) => null);
+   // Provider.of<MarketProvider>(context,listen: false).getMarkets().then((value) => null);
     super.initState();
   }
   @override

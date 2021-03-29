@@ -26,9 +26,9 @@ class ChatProvider extends ChangeNotifier{
 
   }
   sendMessages(String msg)async{
-    _allMessages.add(ChatModel(message:msg, type: 1,msg_type: "text",user_id: "2"));
+    _allMessages.add(ChatModel(message:msg, type: 1,msg_type: "text",user_id:GlopalApp.user.id.toString()));
     notifyListeners();
-   try{ await api.post(BASE_URL+SEND_MESSAGE+"",ChatModel(message:msg, type:1,msg_type: '1',user_id: "2").toJson()
+   try{ await api.post(BASE_URL+SEND_MESSAGE+"",ChatModel(message:msg, type:1,msg_type: '1',user_id: GlopalApp.user.id.toString()).toJson()
     );
 
   }

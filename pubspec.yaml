@@ -58,6 +58,7 @@ dev_dependencies:
   smooth_star_rating: 1.1.1
   #progress indicator
   percent_indicator: ^2.1.9+1
+
   #page view
   page_view_indicators: ^1.4.1
   #svg format picture
@@ -76,6 +77,7 @@ dev_dependencies:
   #location
   geolocator: ^5.3.1
   location: ^3.0.2
+  latlong: ^0.6.1
   #display image in dialog
   rflutter_alert: ^1.1.0
 

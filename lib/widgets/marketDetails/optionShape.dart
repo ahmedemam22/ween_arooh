@@ -19,7 +19,7 @@ class OptionShape extends StatelessWidget {
         Expanded(
           child: InkWell(
               onTap: (){
-                Navigator.pushNamed(context, "/rate");
+                Navigator.pushNamed(context, "/rate",arguments: Provider.of<MarketDetailsProvider>(context,listen: false).marketDetails.id);
               },
               child: shape(translator.translate('review'),"visitors_opinion")),
         ),

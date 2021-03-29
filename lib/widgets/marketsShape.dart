@@ -11,7 +11,7 @@ class MarketsShape extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.pushNamed(context, '/market_details');
+        Navigator.pushNamed(context, '/market_details',arguments: _market.id);
       },
       child:
     Column(

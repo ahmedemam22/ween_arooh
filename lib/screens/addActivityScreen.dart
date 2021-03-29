@@ -11,12 +11,10 @@ import 'package:ween_arooh/widgets/companyInfoShape.dart';
 import 'package:ween_arooh/utils/colors.dart';
 class AddActivityScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(); // ADD THIS LINE
-  final _formKey = GlobalKey<FormState>();
 
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
     return  Scaffold(
       backgroundColor: lightGray,
       key: _scaffoldKey,

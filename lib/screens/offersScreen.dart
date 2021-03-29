@@ -4,6 +4,7 @@ import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/offersProviders.dart';
+import 'package:ween_arooh/services/provider/homeProvider.dart';
 import 'package:ween_arooh/widgets/appBar/appBarShape.dart';
 class OffersScreen extends StatefulWidget {
   final widgetKey;
@@ -17,6 +18,7 @@ class _OffersScreenState extends State<OffersScreen> {
   @override
   void didChangeDependencies() {
     Provider.of<OffersProvider>(context,listen: false).getOffers().then((value) => null);
+
     super.didChangeDependencies();
   }
   @override
@@ -36,9 +38,9 @@ class _OffersScreenState extends State<OffersScreen> {
                     SizeConfig.screenWidth * s30, SizeConfig.screenWidth * s17,
                     SizeConfig.screenWidth * s30
                     , 0),
-                itemCount:offers.offersSearch.length==0? offers.offersItems.length:offers.offersSearch.length,
+                itemCount:offers.offersSearch?.length>=0? offers.offersSearch.length:offers.offersItems.length,
                 itemBuilder: (ctx, i) {
-                var item=offers.offersSearch.length==0?offers.offersItems[i]:offers.offersSearch[i];
+                var item=offers.offersSearch?.length>=0?offers.offersSearch[i]:offers.offersItems[i];
                     return InkWell(
                       onTap: (){
                         Navigator.pushNamed(context, '/display_image',arguments: i);
@@ -49,7 +51,7 @@ class _OffersScreenState extends State<OffersScreen> {
                        child: FadeInImage.assetNetwork(
                           placeholder:"assets/images/offers.jpg",
                           fit: BoxFit.fill,
-                          image: item.path??"",
+                          image: item.offers[0].path??"",
 
 
                           width:  SizeConfig.screenWidth * s165,

@@ -4,36 +4,38 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/text_style.dart';
+import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/marketDetailsProvider.dart';
 class RateHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isArabic=translator.currentLanguage=="ar";
+    final _rate=Provider.of<MarketDetailsProvider>(context,listen: false).rateModel;
 
     return Column(
       children: [
         Row(children: [
-       Container(
-            height:  SizeConfig.screenWidth*s85,
-            width:  SizeConfig.screenWidth*s100,
-            child: Card(
+        Padding(
+                    padding: const EdgeInsets.symmetric(vertical:2.0,horizontal: 4),
+                    child:
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child:
+                        Image.network(_rate.result.market[0].logo??'',width:  SizeConfig.screenWidth*s85,height:  SizeConfig.screenWidth*s66,fit: BoxFit.fill,),
 
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20))
-                ),
-                child:  Padding(
-                    padding: const EdgeInsets.symmetric(vertical:2.0),
-                    child: Image.asset('assets/images/othemImage.png',width:  SizeConfig.screenWidth*s85,height:  SizeConfig.screenWidth*s66,fit: BoxFit.fill,),
-                  ),
-                )),
+                      ),
+                    )
+
+                ,
          SizedBox(width: SizeConfig.screenWidth*s10,),
 
          Column(
            crossAxisAlignment: CrossAxisAlignment.start,
            children: [
-             Text("اسواق عبدالله العثيم",style: TextStyle(
+             Text(_rate.result.market[0].title,style: TextStyle(
                 fontSize:  SizeConfig.screenWidth*s20
               ),),
-    Text("البيع بالجملة والتجزئة",style: TextStyle(
+    Text(_rate.result.market[0].minDec??'',style: TextStyle(
     fontSize:  SizeConfig.screenWidth*s17,
       color: Colors.grey
     )) ,
@@ -48,10 +50,10 @@ class RateHeader extends StatelessWidget {
     alignment: Alignment.bottomRight,
             child: Row(
               children: [
-                Text("3.7",style: TX_STYLE_black_14.copyWith(fontFamily: 'Schelyer',),
+                Text(_rate.result.market[0].rate.toString().substring(0,3),style: TX_STYLE_black_14.copyWith(fontFamily: 'Schelyer',),
     ),
                 SizedBox(width:  SizeConfig.screenWidth*s5,),
-                RateShape(),
+                RateShape(value:_rate.result.market[0].rate ,),
 
 
               ],

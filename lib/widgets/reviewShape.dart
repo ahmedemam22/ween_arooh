@@ -5,10 +5,11 @@ import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/marketDetailsProvider.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/size_config.dart';
+import 'package:localize_and_translate/localize_and_translate.dart';
 class ReviewShape extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final List<ResultElement>_rates=Provider.of<MarketDetailsProvider>(context,listen: false).rates;
+    final List<Recomendations>_rates=Provider.of<MarketDetailsProvider>(context,listen: false).rates;
     return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
@@ -27,14 +28,17 @@ class ReviewShape extends StatelessWidget {
                       children: [
                         Image.asset("assets/images/reviewImage.png"),
                         SizedBox(width: 8,),
-                        Column(children: [
-                          Text(_rates[index].user.name, style: TextStyle(
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                          Text(_rates[index].user.fName+" "+_rates[index].user.lName, style: TextStyle(
                               fontSize: 15,
                             fontWeight: FontWeight.bold
 
                           ),
                             overflow: TextOverflow.ellipsis,),
-                          Text("3 review", style: TextStyle(
+                          Text(_rates[index].visitsCount.toString()+translator.translate('view') , style: TextStyle(
+                              fontFamily: 'Schelyer',
                               fontSize: 15,
                               color: Colors.grey
                           )),
@@ -50,7 +54,10 @@ class ReviewShape extends StatelessWidget {
                         Row(
                           children: [
                             RateShape(size: 20,value: _rates[index].rate.toDouble(),),
-                            Text("${DateTime.now().year-_rates[index].createdAt.year} years ago"),
+                            Text("${DateTime.now().year-_rates[index].createdAt.year} years ago",style: TextStyle(
+                              fontFamily: 'Schelyer',
+
+                            ),),
                           ],
                         ),
 

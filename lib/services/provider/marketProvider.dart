@@ -11,21 +11,21 @@ class MarketProvider extends ChangeNotifier{
   List<Result>get mainCategoryItemsSearch=>_mainCategoryItemsSearch;
   List<Result> _mainCategoryItemsSearch=[];
   List<Result>_markets;
-  List<Result>_userMarkets;
-  List<Result>get userMarkets=>_userMarkets;
+
   List<Result>_temp;
   List<Result>get markets=>_markets;
-  int marketId;
+  int marketIndex;
 
   int count=0;
-Future getMarkets()async{
-  if(count==0) {
+Future getMarkets(id)async{
+
     try {
       count++;
 
       _waitMarket = true;
       notifyListeners();
       var response = await api.post(BASE_URL + GET_MARKET, {
+        'market_id':id
       });
       _marketModel = MarketModel.fromJson(json.decode(response.body));
       _markets = _marketModel.result;
@@ -41,24 +41,8 @@ Future getMarkets()async{
     }
   }
 
-}
-Future getUserMarkets()async{
-try {
-  var response = await api.get(BASE_URL + USER_MARKETS + '?user_id=1');
 
-  _marketModel = MarketModel.fromJson(response);
-  _userMarkets = _marketModel.result;
-  print(_userMarkets.length);
-  print('lllllllllll');
-}
-catch(e){
-  print('error get user market $e');
-}
-finally{
 
-}
-
-}
 marketSearch(String title){
   var temp=markets;
   _mainCategoryItemsSearch=temp.where((element) => translator.currentLanguage=='en'?element.titleEn.contains(title):element.titleAr.contains(title)).toList();
@@ -102,13 +86,6 @@ filterByChars(){
     return _categoryNames;*/
 
   }
-  getMarketId(value){
-    _userMarkets.forEach((element) {
-      if(element.title==value){
-        marketId= element.id;
-      }
-    });
-  notifyListeners();
-  }
+
 
 }

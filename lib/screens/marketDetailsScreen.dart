@@ -25,12 +25,12 @@ class _MarketDetailsScreenState extends State<MarketDetailsScreen> {
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    Provider.of<MarketDetailsProvider>(context,listen: false).getMarketDetails().then((value) => null);
   }
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
-    return WillPopScope(
+  final marketId=  ModalRoute.of(context).settings.arguments;
+
+  return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
         key: _scaffoldKey,
@@ -51,7 +51,7 @@ class _MarketDetailsScreenState extends State<MarketDetailsScreen> {
 
         ),
         body:  FutureBuilder(
-    future:   Provider.of<MarketDetailsProvider>(context,listen: false).getMarketDetails(),
+    future:   Provider.of<MarketDetailsProvider>(context,listen: false).getMarketDetails(marketId),
     builder: (ctx, dataSnapshot) {
     if (dataSnapshot.connectionState ==
     ConnectionState.waiting) {

@@ -52,13 +52,16 @@ notifyListeners();
 
   }
   int getCategoryId(String title){
+    int id;
     print(title);
     print("vvvvvvvvvvv");
     _mainCategoryItems.forEach((element) {
       if(element.nameAr==title){
-        return element.id;
+        print('sssss7');
+        id=element.id;
       }
     });
+    return id;
 
   }
   Future getCities()async{
@@ -66,8 +69,6 @@ notifyListeners();
      var response= await api.get(BASE_URL + CITIES);
      CitiesResponse _city=CitiesResponse.fromJson(response);
      _citiesList=_city.result;
-     print(_citiesList[0].nameAr);
-     print('nnnnnnnnnnnnm');
     }
     catch(e){
       print('error get cities$e');
