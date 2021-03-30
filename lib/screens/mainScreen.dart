@@ -17,7 +17,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _index=0;
   static final   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(); // ADD THIS LINE
-List<Widget>_widgets=[HomeScreen(_scaffoldKey),AddActivityScreen(),OffersScreen(_scaffoldKey)];
+  static final   GlobalKey<ScaffoldState> _scaffoldKeyy = new GlobalKey<ScaffoldState>(); // ADD THIS LINE
+List<Widget>_widgets=[HomeScreen(),AddActivityScreen(),OffersScreen()];
 int _count=0;
 @override
   void didChangeDependencies() {
@@ -37,7 +38,6 @@ int _count=0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
         drawer: AppDrawer(),
         bottomNavigationBar: BottomNavigationBar(
       onTap: (index){

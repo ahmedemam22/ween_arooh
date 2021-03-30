@@ -69,7 +69,7 @@ class _TextFeldState extends State<TextFeld> {
           style: TX_STYLE_black_14.copyWith(fontFamily: 'Schelyer'),
 
 
-          keyboardType: widget.hintText=="mobile"?TextInputType.number:TextInputType.name,
+          keyboardType: widget.keyy=="mobile"||widget.keyy=="telephone"?TextInputType.number:TextInputType.name,
           onChanged: (value){
 
           if(widget.hintText=='branch'){

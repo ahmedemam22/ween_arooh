@@ -96,7 +96,7 @@ class Result {
   String logo;
   String panner;
   int visitscount;
-  int rate;
+  double rate;
   int city_id;
   String location;
   List<Offer> offers;
@@ -131,7 +131,7 @@ class Result {
     logo: json["logo"],
     panner: json["panner"],
     visitscount: json["visitscount"],
-    rate: json["rate"],
+    rate: json["rate"].toDouble(),
     location: json["location"],
     offers: List<Offer>.from(json["offers"].map((x) => Offer.fromJson(x))),
   );

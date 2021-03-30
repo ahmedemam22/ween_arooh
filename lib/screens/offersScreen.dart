@@ -6,9 +6,9 @@ import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/offersProviders.dart';
 import 'package:ween_arooh/services/provider/homeProvider.dart';
 import 'package:ween_arooh/widgets/appBar/appBarShape.dart';
+import 'package:ween_arooh/widgets/drawer.dart';
 class OffersScreen extends StatefulWidget {
-  final widgetKey;
-  OffersScreen(this.widgetKey);
+
 
   @override
   _OffersScreenState createState() => _OffersScreenState();
@@ -21,14 +21,19 @@ class _OffersScreenState extends State<OffersScreen> {
 
     super.didChangeDependencies();
   }
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(); // ADD THIS LINE
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        key: _scaffoldKey,
+        drawer: AppDrawer(),
+
         body: Column(
           children: [
-            AppBarShape(title:translator.translate('offers'),openDrawer: widget.widgetKey,back: false,onChange:Provider.of<OffersProvider>(context,listen: false).nameSearch,
+            AppBarShape(title:translator.translate('offers'),openDrawer: _scaffoldKey,back: false,onChange:Provider.of<OffersProvider>(context,listen: false).nameSearch,
             onChangeOffer:Provider.of<OffersProvider>(context,listen: false).locationSearch ,),
             Expanded(
               child:  Consumer<OffersProvider>(
