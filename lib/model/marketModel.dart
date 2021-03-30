@@ -74,7 +74,7 @@ class Result {
   String logo;
   String panner;
   dynamic visitscount;
-  dynamic rate;
+  double rate;
   String location;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
@@ -96,7 +96,7 @@ class Result {
     logo: json["logo"] == null ? null : json["logo"],
     panner: json["panner"],
     visitscount: json["visitscount"],
-    rate: json["rate"],
+    rate: json["rate"].toDouble(),
     location: json["location"],
   );
 

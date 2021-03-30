@@ -29,7 +29,7 @@ class MarketInfo extends StatelessWidget {
             Center(child: Container(
                 width: SizeConfig.screenWidth*s130,
                 child: Divider(thickness: 1,))),
-            Text("طريق صلاح الدين الايوبى / الرياض / الملز"),
+            Text(_item.location),
             Center(child: Divider(thickness: 1,)),
 
 

@@ -30,6 +30,7 @@ class _MarketDetailsScreenState extends State<MarketDetailsScreen> {
   Widget build(BuildContext context) {
   final marketId=  ModalRoute.of(context).settings.arguments;
 
+
   return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(

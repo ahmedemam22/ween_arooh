@@ -24,7 +24,7 @@ class Dialogs{
 
     )..show();
   }
-  Future<bool> dialogCopoun( context) async {
+  Future<bool> dialogCopoun( context,String code) async {
     return await showDialog(
       context: context,
       builder: (context) => Container(
@@ -66,7 +66,7 @@ class Dialogs{
                         child: new FlatButton(
                           onPressed: () => Navigator.of(context).pop(false),
                           child: new Text(
-                            "123ABCD",
+                            code??"123ABCD",
                             style: TX_STYLE_black_14Point5.copyWith(
                                 color: Colors.grey[700]
 

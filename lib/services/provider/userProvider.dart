@@ -123,7 +123,6 @@ Future getUser()async{
 aboutUs()async{
    try {
      _waitAbout=true;
-     notifyListeners();
      var response=await api.get(BASE_URL + ABOUT);
      about=response['result'][0]['text_ar'];
 

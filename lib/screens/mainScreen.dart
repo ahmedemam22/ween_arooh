@@ -22,6 +22,8 @@ int _count=0;
 @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
+  Provider.of<HomeProvider>(context,listen: false).getSliders();
+
   if(_count==0){  Provider.of<HomeProvider>(context,listen: true).getMainCategories().then((value) => null);
     Provider.of<AddActivityProvider>(context,listen: true).getUserMarkets().then((value) => null);
     Provider.of<HomeProvider>(context,listen: false).getCities();

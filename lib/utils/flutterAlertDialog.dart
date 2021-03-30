@@ -29,7 +29,7 @@ class CommonAlertRFlutter {
   static Widget  show_image(url){
     return Container(
       height: SizeConfig.screenWidth  /3,
-      width: SizeConfig.screenWidth / 1.5 ,
+      width: SizeConfig.screenWidth / 2 ,
       alignment: Alignment.center,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.0),
@@ -37,7 +37,7 @@ class CommonAlertRFlutter {
               image: NetworkImage(
                 url,
               ),
-              fit: BoxFit.contain)),
+              fit: BoxFit.fill)),
       child: Container(),
     );
 

@@ -19,10 +19,10 @@ List<String>_item;
     return Stack(
       children: [
         CarouselSlider(
-            items:List.generate(_item.length, (index) =>
+            items:List.generate(_item.length!=0?_item.length:1, (index) =>
                 FadeInImage.assetNetwork(
                   placeholder: 'assets/images/imageSlider1.png',
-                  image: _item[index],
+                  image: _item.length!=0?_item[index]??"":"",
                   height: SizeConfig.screenHeight,
                   width: SizeConfig.screenWidth,
                   fit: BoxFit.fill,

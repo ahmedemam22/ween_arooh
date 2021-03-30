@@ -73,11 +73,13 @@ class MarketDetailsProvider extends ChangeNotifier{
   }
   Future getMarketDetails(marketID)async{
   try{
+    markeTitle='';
     _waitMarketDetails=true;
     notifyListeners();
     var response= await api.get(BASE_URL+MARKET_DETAILS+marketID.toString());
   _marketDetails=MarketDetailsResponse.fromJson(response);
   markeTitle=_marketDetails.title;
+
   }
   catch(e){
     print("error get market details ::$e");

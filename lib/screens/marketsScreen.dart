@@ -27,36 +27,42 @@ class _MarketsScreenState extends State<MarketsScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
     return Scaffold(
         key: MarketsScreen._scaffoldKey,
         drawer: AppDrawer(),
-        body:    Column(children: [
-          AppBarShape(title:_title,openDrawer: MarketsScreen._scaffoldKey,onChange: Provider.of<MarketProvider>(context,listen: false).marketSearch,),
-          SizedBox(height:SizeConfig.screenWidth*s8),
-          FilterShape(),
-          SizedBox(height:SizeConfig.screenWidth*s13),
-          Expanded(
-            child :FutureBuilder(
-    future:   Provider.of<MarketProvider>(context,listen: false).getMarkets( Provider.of<HomeProvider>(context,listen: false).getCategoryId(_title)),
-    builder: (ctx, dataSnapshot) {
-    if (dataSnapshot.connectionState ==
-    ConnectionState.waiting) {
-    return Center(child:CircularProgressIndicator());
-    } else {
-    if (dataSnapshot.error != null) {
-    // ...
-    // Do error handling stuff
-    return Center(
-    child: Text(translator.translate('error')),
-    );
-    } else {
-    return Consumer<MarketProvider>(
-    builder: (context, details, child) {
-    return details.waitMarket ? Center(
-    child: CircularProgressIndicator()) : MarketList();});
+        body:    FutureBuilder(
+            future:   Provider.of<MarketProvider>(context,listen: false).getMarkets( Provider.of<HomeProvider>(context,listen: false).getCategoryId(_title)),
+            builder: (ctx, dataSnapshot) {
+              if (dataSnapshot.connectionState ==
+                  ConnectionState.waiting) {
+                return Center(child:CircularProgressIndicator());
+              } else {
+                if (dataSnapshot.error != null) {
+                  // ...
+                  // Do error handling stuff
+                  return Center(
+                    child: Text(translator.translate('error')),
+                  );
+                } else {
+        return Consumer<MarketProvider>(
+        builder: (context, details, child) {
+          return
+          Column(children: [
+            AppBarShape(title: _title,
+              openDrawer: MarketsScreen._scaffoldKey,
+              onChange: Provider
+                  .of<MarketProvider>(context, listen: false)
+                  .marketSearch,),
+            SizedBox(height: SizeConfig.screenWidth * s8),
+            FilterShape(),
+            SizedBox(height: SizeConfig.screenWidth * s13),
+            Expanded(
+                child:
+                MarketList()),
+          ]);
+        });
 
 
-    }}}))]));
+                      }}}));
   }
 }

@@ -26,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    Provider.of<MarketProvider>(context,listen: false).setCount();
     return Column(children: [
       AppBarShape(title:translator.translate('main'),openDrawer:   widget.widgetKey,onChange: Provider.of<HomeProvider>(context,listen: false).makeSearch,back:false),
       SizedBox(height:SizeConfig.screenWidth*s8),
@@ -34,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child:
         Consumer<HomeProvider>(builder: (context, category, child) {
     bool search=(category.mainCategoryItemsSearch!=null&&category.mainCategoryItemsSearch.length>0);
+
     return category.waitMainCategory?Center(child: CircularProgressIndicator(),): GridView.builder(
     padding: EdgeInsets.all(SizeConfig.screenWidth / 40),
     itemCount:search? category.mainCategoryItemsSearch.length:category.mainCategoryItems.length,

@@ -33,14 +33,20 @@ class _OffersScreenState extends State<OffersScreen> {
             Expanded(
               child:  Consumer<OffersProvider>(
             builder: (context, offers, child) {
-              return offers.waitOffers?Center(child: CircularProgressIndicator(),):GridView.builder(
+              int count=offers.offersSearch!=null? offers.offersSearch.length:offers.offersItems?.length;
+
+              return offers.waitOffers?Center(child: CircularProgressIndicator(),):count==0?Center(child:
+                Text(translator.translate('no_offers'),
+                style: TextStyle(
+                  fontSize: SizeConfig.screenWidth*s20
+                ),),):GridView.builder(
                 padding: EdgeInsets.fromLTRB(
                     SizeConfig.screenWidth * s30, SizeConfig.screenWidth * s17,
                     SizeConfig.screenWidth * s30
                     , 0),
-                itemCount:offers.offersSearch?.length>=0? offers.offersSearch.length:offers.offersItems.length,
+                itemCount:offers.offersSearch!=null? offers.offersSearch.length:offers.offersItems.length,
                 itemBuilder: (ctx, i) {
-                var item=offers.offersSearch?.length>=0?offers.offersSearch[i]:offers.offersItems[i];
+                var item=offers.offersSearch!=null?offers.offersSearch[i]:offers.offersItems[i];
                     return InkWell(
                       onTap: (){
                         Navigator.pushNamed(context, '/display_image',arguments: i);

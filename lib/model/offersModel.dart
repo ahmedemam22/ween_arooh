@@ -95,7 +95,7 @@ class Result {
   dynamic dec;
   String logo;
   String panner;
-  String visitscount;
+  int visitscount;
   int rate;
   int city_id;
   String location;

@@ -32,6 +32,10 @@ class MarketDetailsResponse {
     this.updatedAt,
     this.deletedAt,
     this.isManagement,
+    this.mobile,
+    this.location,
+    this.country,
+    this.cityId,
     this.title,
     this.minDec,
     this.dec,
@@ -39,11 +43,11 @@ class MarketDetailsResponse {
     this.panner,
     this.visitscount,
     this.rate,
-    this.location,
     this.category,
     this.images,
     this.offers,
     this.recomendations,
+    this.coupons,
     this.branches,
   });
 
@@ -69,18 +73,22 @@ class MarketDetailsResponse {
   DateTime updatedAt;
   dynamic deletedAt;
   int isManagement;
+  dynamic mobile;
+  String location;
+  dynamic country;
+  int cityId;
   String title;
   dynamic minDec;
   dynamic dec;
   String logo;
   String panner;
-  String visitscount;
+  int visitscount;
   double rate;
-  String location;
   Category category;
   List<Image> images;
   List<Offer> offers;
   List<Recomendation> recomendations;
+  List<Coupon> coupons;
   List<dynamic> branches;
 
   factory MarketDetailsResponse.fromJson(Map<String, dynamic> json) => MarketDetailsResponse(
@@ -106,6 +114,10 @@ class MarketDetailsResponse {
     updatedAt: DateTime.parse(json["updated_at"]),
     deletedAt: json["deleted_at"],
     isManagement: json["is_management"],
+    mobile: json["mobile"],
+    location: json["location"],
+    country: json["country"],
+    cityId: json["city_id"],
     title: json["title"],
     minDec: json["min_dec"],
     dec: json["dec"],
@@ -113,11 +125,11 @@ class MarketDetailsResponse {
     panner: json["panner"],
     visitscount: json["visitscount"],
     rate: json["rate"].toDouble(),
-    location: json["location"],
     category: Category.fromJson(json["category"]),
     images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
     offers: List<Offer>.from(json["offers"].map((x) => Offer.fromJson(x))),
     recomendations: List<Recomendation>.from(json["recomendations"].map((x) => Recomendation.fromJson(x))),
+    coupons: List<Coupon>.from(json["coupons"].map((x) => Coupon.fromJson(x))),
     branches: List<dynamic>.from(json["branches"].map((x) => x)),
   );
 
@@ -144,6 +156,10 @@ class MarketDetailsResponse {
     "updated_at": updatedAt.toIso8601String(),
     "deleted_at": deletedAt,
     "is_management": isManagement,
+    "mobile": mobile,
+    "location": location,
+    "country": country,
+    "city_id": cityId,
     "title": title,
     "min_dec": minDec,
     "dec": dec,
@@ -151,11 +167,11 @@ class MarketDetailsResponse {
     "panner": panner,
     "visitscount": visitscount,
     "rate": rate,
-    "location": location,
     "category": category.toJson(),
     "images": List<dynamic>.from(images.map((x) => x.toJson())),
     "offers": List<dynamic>.from(offers.map((x) => x.toJson())),
     "recomendations": List<dynamic>.from(recomendations.map((x) => x.toJson())),
+    "coupons": List<dynamic>.from(coupons.map((x) => x.toJson())),
     "branches": List<dynamic>.from(branches.map((x) => x)),
   };
 }
@@ -237,6 +253,54 @@ class Category {
     "name": name,
     "mindesc": mindesc,
     "desc": desc,
+  };
+}
+
+class Coupon {
+  Coupon({
+    this.id,
+    this.code,
+    this.image,
+    this.percentage,
+    this.expireDate,
+    this.marketId,
+    this.createdAt,
+    this.updatedAt,
+    this.path,
+  });
+
+  int id;
+  dynamic code;
+  String image;
+  String path;
+  dynamic percentage;
+  dynamic expireDate;
+  int marketId;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  factory Coupon.fromJson(Map<String, dynamic> json) => Coupon(
+    id: json["id"],
+    path: json["path"],
+    code: json["code"],
+    image: json["image"],
+    percentage: json["percentage"],
+    expireDate: json["expire_date"],
+    marketId: json["market_id"],
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: DateTime.parse(json["updated_at"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "path": path,
+    "code": code,
+    "image": image,
+    "percentage": percentage,
+    "expire_date": expireDate,
+    "market_id": marketId,
+    "created_at": createdAt.toIso8601String(),
+    "updated_at": updatedAt.toIso8601String(),
   };
 }
 

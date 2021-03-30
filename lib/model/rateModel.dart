@@ -114,7 +114,7 @@ class Market {
   dynamic dec;
   String logo;
   String panner;
-  String visitscount;
+  int visitscount;
   double rate;
   String location;
   List<Recomendations> recomendations;

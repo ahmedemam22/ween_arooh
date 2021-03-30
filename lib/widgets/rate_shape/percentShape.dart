@@ -23,7 +23,7 @@ class PercentShape extends StatelessWidget {
                 fontSize: SizeConfig.screenWidth*s40,
                   fontFamily: 'Schelyer'
               ),),
-              Text(_result.market[0].visitscount+translator.translate('view'),style: TextStyle(
+              Text(_result.market[0].visitscount.toString()+translator.translate('view'),style: TextStyle(
                   fontSize: SizeConfig.screenWidth*s15,
                   fontFamily: 'Schelyer'
               ),),

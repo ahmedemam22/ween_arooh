@@ -4,13 +4,14 @@ import 'package:ween_arooh/network/constant.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/model/mainCategoryResponse.dart';
 import 'package:ween_arooh/model/citiesResponse.dart';
-import 'package:ween_arooh/utils/glopal_app.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:provider/provider.dart';
-import 'package:ween_arooh/services/provider/userProvider.dart';
+import 'package:ween_arooh/model/sliderResponse.dart';
 class HomeProvider extends ChangeNotifier{
   List<City>_citiesList;
   List<City>get citiesList=>_citiesList;
+  SlidersResponse _slider;
+  SlidersResponse get slider=>_slider;
+  List<String>_images=[];
+  List<String> get images=>_images;
   MainCategoryResponse _mainCategoryResponse;
   List<Result> _mainCategoryItems=[];
   List<Result> _mainCategoryItemsSearch=[];
@@ -19,6 +20,7 @@ class HomeProvider extends ChangeNotifier{
   bool _waitMainCategory=false;
   bool get waitMainCategory=>_waitMainCategory;
   int count=0;
+  int _count=0;
   Future getMainCategories([token])async{
     if(count==0){
  try{
@@ -77,4 +79,18 @@ notifyListeners();
 notifyListeners();
     }
   }
-}
+  getSliders()async{
+  if(_count==0){  try{
+      _count++;
+    var response=  await api.get(BASE_URL+SLIDER);
+    _slider=SlidersResponse.fromJson(response);
+    _slider.result.forEach((element) {_images.add(element.path);});
+    }
+    catch(e){
+      print("erro get slider::$e");
+    }
+
+  finally{
+    notifyListeners();
+  }}
+}}

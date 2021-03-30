@@ -3,10 +3,16 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/dialogs.dart';
+import 'package:ween_arooh/utils/flutterAlertDialog.dart';
+import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/marketDetailsProvider.dart';
 class GetCopounShape extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final _coupon=Provider.of<MarketDetailsProvider>(context,listen: false).marketDetails.coupons;
+
     return Container(
+      height: SizeConfig.screenWidth*s100,
 
       child: Column(children: [
         Padding(
@@ -17,7 +23,7 @@ class GetCopounShape extends StatelessWidget {
               Text(translator.translate('get_coupon')),
               InkWell(
                 onTap: (){
-                  Dialogs().dialogCopoun(context);
+                  Dialogs().dialogCopoun(context,_coupon[0].code);
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -38,23 +44,32 @@ borderRadius: BorderRadius.all(Radius.circular(5))
         SizedBox(
           height: SizeConfig.screenWidth*s20,
         ),
-        Center(
-          child: InkWell(
-            onTap: (){
-             // CommonAlertRFlutter.alertWithWidgets(context, buttons: [], url:_offers[i].path??"");
+        Expanded(
+          child: Center(
 
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset("assets/images/discount.png",width: SizeConfig.screenWidth*s75,height: SizeConfig.screenWidth*s33 ,),
-                Image.asset("assets/images/discount.png",width: SizeConfig.screenWidth*s75,height: SizeConfig.screenWidth*s33 ,),
-                Image.asset("assets/images/discount.png",width: SizeConfig.screenWidth*s75,height: SizeConfig.screenWidth*s33 ,),
-              ],
-            ),
-          ),
+
+    child:ListView.builder(
+          itemCount: _coupon.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, i){
+
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal:3.0),
+              child: InkWell(
+                  onTap: (){
+                    CommonAlertRFlutter.alertWithWidgets(context, buttons: [], url:_coupon[i].path??"");
+
+                  },
+                  child: Image.network(_coupon[i].path??"",width:SizeConfig.screenWidth*s90,height: SizeConfig.screenWidth*s60,fit: BoxFit.fill,)),
+            );
+          }
+
+    ),
+    ),
         )
-      ],),
-    );
+        ]  ),
+        );
+
+
   }
 }

@@ -10,27 +10,24 @@ class MarketProvider extends ChangeNotifier{
   MarketModel _marketModel;
   List<Result>get mainCategoryItemsSearch=>_mainCategoryItemsSearch;
   List<Result> _mainCategoryItemsSearch=[];
-  List<Result>_markets;
+  List<Result>_markets=[];
 
   List<Result>_temp;
   List<Result>get markets=>_markets;
   int marketIndex;
+int count=0;
 
-  int count=0;
-Future getMarkets(id)async{
-
+Future getMarkets(id)async {
+  if (count == 0) {
     try {
-      count++;
-
+      _mainCategoryItemsSearch=[];
       _waitMarket = true;
-      notifyListeners();
       var response = await api.post(BASE_URL + GET_MARKET, {
-        'market_id':id
+        'category_id': id
       });
       _marketModel = MarketModel.fromJson(json.decode(response.body));
       _markets = _marketModel.result;
-      _temp=_markets;
-
+      _temp = _markets;
     }
     catch (e) {
       print("get markets error::$e");
@@ -40,8 +37,10 @@ Future getMarkets(id)async{
       notifyListeners();
     }
   }
-
-
+}
+setCount(){
+  count=0;
+}
 
 marketSearch(String title){
   var temp=markets;
@@ -60,7 +59,7 @@ else{
   notifyListeners();*/
 }
 filterByChars(){
-  _temp.sort((a,b)=>a.titleEn.toLowerCase().compareTo(b.titleEn.toLowerCase()));
+  _temp.sort((a,b)=>translator.currentLanguage=='en'?a.titleEn.toLowerCase().compareTo(b.titleEn.toLowerCase()):a.titleAr.toLowerCase().compareTo(b.titleAr.toLowerCase()));
   _mainCategoryItemsSearch=_temp;
   notifyListeners();
 
@@ -74,7 +73,8 @@ filterByChars(){
   filterByRate(){
     _temp.sort((a,b)=>(a.rate).compareTo(b.rate));
 
-    _mainCategoryItemsSearch=_temp;
+
+    _mainCategoryItemsSearch=_temp.reversed.toList();
 
     notifyListeners();
   }
