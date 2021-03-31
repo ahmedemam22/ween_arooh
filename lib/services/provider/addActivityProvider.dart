@@ -58,6 +58,9 @@ class AddActivityProvider extends ChangeNotifier{
 
   addLogo(File image){
   if(_logoImage.length==0)  _logoImage.add(image);
+  else{
+    _logoImage[0]=image;
+  }
     notifyListeners();
   }
 addBranch(latlng,String address){
@@ -85,10 +88,19 @@ addBranch(latlng,String address){
   Future addActivity(context)async{
 
     try {
+      Map<String,dynamic> _items={
+        'banners':await getData(_bannerImage),
+        'logos':await getData(_logoImage),
+      };
+      _data.addAll(_items);
    _waitAddActivity=true;
    notifyListeners();
+   var logo= await getData(logoImage);
+   var banner= await getData(bannerImage);
    _data.putIfAbsent("category_id", () =>Provider.of<HomeProvider>(context,listen: false).getCategoryId(category));
-   _data.putIfAbsent( "images", () => getData(bannerImage));
+   _data.putIfAbsent("category_id", () =>Provider.of<HomeProvider>(context,listen: false).getCategoryId(category));
+   //_data.putIfAbsent( "logos", () =>logo );
+   //_data.putIfAbsent( "banners", () => banner);
    _data.putIfAbsent("branches", () =>  getBranch());
    _data.putIfAbsent("admin_id", () =>  GlopalApp.user.id);
    _data.putIfAbsent("latitude", () =>  adminLocation.latitude);
@@ -120,7 +132,10 @@ addBranch(latlng,String address){
 print(_data);
 print('daaaaaaataaa');
 
-   var response=await   Dio().post(BASE_URL +ADD_ACTIVITY ,data:_data,
+      FormData formData = new FormData.fromMap(_data);
+
+
+   var response=await   Dio().post(BASE_URL +ADD_ACTIVITY ,data:formData,
      options: Options(headers:{
        HttpHeaders.authorizationHeader: 'Bearer ${GlopalApp.token}'
      } ),
@@ -150,30 +165,31 @@ print('daaaaaaataaa');
  }
 
   }
-  getData(List list){
-    List<Map<String,dynamic>>item=[];
+  Future<List<MultipartFile>>getData(List list)async{
+    List<MultipartFile>item=[];
+    for(int i=0;i<list.length;i++){
+      item.add(await MultipartFile.fromFile(list[i].path, filename:list[i].path.split('/').last));
 
-    list.forEach((element)async {
-      item.add({"image":await MultipartFile.fromFile(element.path, filename:element.path.split('/').last),
+    }
 
-      });
-
-    });
     return item;
   }
-  getBranch(){
+  List<Map<String,dynamic>> getBranch(){
     List<Map<String,dynamic>>item=[];
+for(int i=0;i<branches.length;i++){
+  item.add({
+    'latitude'      :branches[i].latitude.toString(), // required.
+    'longitude'      : branches[i].longitude.toString(), // required.
+    'location'      : branchesAddress ??'', // op.
 
-    branches.forEach((element) {
-      item.add({
-        'latitude'      :element.latitude.toString(), // required.
-        'longitude'      : element.longitude.toString(), // required.
-        'location'      : "", // op.
+
+  });
+}
 
 
-      });
-
-    });
+   // print(item[0]['latitude']);
+print(branches.length);
+    print('laaaaaaaaaat');
     return item;
   }
   addSocialMedia(String value,context){

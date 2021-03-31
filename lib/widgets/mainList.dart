@@ -12,7 +12,6 @@ class MarketList extends StatelessWidget {
         builder: (context, market, child) {
           bool search=(market.mainCategoryItemsSearch!=null&&market.mainCategoryItemsSearch?.length>0);
           int count=search?market.mainCategoryItemsSearch?.length:market.markets?.length;
-          print('rebuilddddddddddd');
 
           return
             market.waitMarket?Center(child: CircularProgressIndicator(),):count==0?
