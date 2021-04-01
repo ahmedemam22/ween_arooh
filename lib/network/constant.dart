@@ -17,5 +17,6 @@ const SEND_CODE="markets/";
 const ADD_OFFERS="add_offers";
 const USER_MARKETS="getmarkets";
 const CITIES="cities";
+const COUNTRY="regions";
 const VERIFY="verify";
 const ABOUT="about";

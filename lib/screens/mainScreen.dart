@@ -37,33 +37,36 @@ int _count=0;
 }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        drawer: AppDrawer(),
-        bottomNavigationBar: BottomNavigationBar(
-      onTap: (index){
-        setState(() {
-          _index=index;
-        });
-      },
-          currentIndex: _index, // this will be set when a new tab is tapped
-          items: [
-            BottomNavigationBarItem(
-              icon: setIcon('home'),
-              title: new Text(translator.translate('main')),
-            ),
-            BottomNavigationBarItem(
-              icon: setIcon('register'),
-              title: new Text(translator.translate('register')),
-            ),
-            BottomNavigationBarItem(
-                icon: setIcon('offers'),
-                title: Text(translator.translate('offers'))
-            )
-          ],
-        ),
-     body:_widgets[_index]
+    return WillPopScope(onWillPop: () async => false,
+
+      child: Scaffold(
+          drawer: AppDrawer(),
+          bottomNavigationBar: BottomNavigationBar(
+        onTap: (index){
+          setState(() {
+            _index=index;
+          });
+        },
+            currentIndex: _index, // this will be set when a new tab is tapped
+            items: [
+              BottomNavigationBarItem(
+                icon: setIcon('home'),
+                title: new Text(translator.translate('main')),
+              ),
+              BottomNavigationBarItem(
+                icon: setIcon('register'),
+                title: new Text(translator.translate('register')),
+              ),
+              BottomNavigationBarItem(
+                  icon: setIcon('offers'),
+                  title: Text(translator.translate('offers'))
+              )
+            ],
+          ),
+       body:_widgets[_index]
 
 
+      ),
     );
   }
   openDrawer(){

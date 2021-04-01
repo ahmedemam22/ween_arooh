@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/addActivityProvider.dart';
 import 'package:ween_arooh/utils/text_style.dart';
 import 'package:ween_arooh/screens/locationView.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:ween_arooh/utils/dialogs.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 class TextFeld extends StatefulWidget {
@@ -26,14 +28,19 @@ class _TextFeldState extends State<TextFeld> {
 
     super.didChangeDependencies();
   }
+  bool _change=false;
+  var prov;
   @override
   Widget build(BuildContext context) {
-    if(Provider.of<AddActivityProvider>(context,listen: false).oldMArket!=null){
-
-      widget.controller.text=Provider.of<AddActivityProvider>(context,listen: false).oldMArket[widget.keyy];
+   prov=Provider.of<AddActivityProvider>(context,listen: true);
+    if(prov.oldMArket!=null&&prov.checkOldMArket&&!_change){
+print('at8aaaaaaaayr');
+      widget.controller.text=prov.oldMArket[widget.keyy];
     }
-    else{
-      //widget.controller.text='';
+    else if(!_change&& !(widget.keyy==""|| widget.keyy=="location")){
+      print('mat8yr4');
+
+      widget.controller.text='';
     }
 
     _context=context;
@@ -43,12 +50,15 @@ class _TextFeldState extends State<TextFeld> {
         child: TextFormField(
           onTap:(){
 
-        if( widget.keyy==""|| widget.keyy=="location")    Navigator.push(
+        if( widget.keyy==""|| widget.keyy=="location") {
+        prov.setCity(null,_context);
+         Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) =>
                     LocationView(
                       savedLocation: saveLocation,
-                    )));
+                      initialPosition:LatLng(double.parse(prov.selectedCity.latitude),double.parse(prov.selectedCity.longitude)),
+                    )));}
           },
         controller: widget.controller,
             readOnly: widget.keyy==""|| widget.keyy=="location",
@@ -62,7 +72,7 @@ class _TextFeldState extends State<TextFeld> {
          }
 
           }
-          else if(v.length>0) Provider.of<AddActivityProvider>(context,listen: false).setData(widget.keyy, v);
+          else if(v.length>0) prov.setData(widget.keyy, v);
 
         }
           ,
@@ -71,10 +81,11 @@ class _TextFeldState extends State<TextFeld> {
 
           keyboardType: widget.keyy=="mobile"||widget.keyy=="telephone"?TextInputType.number:TextInputType.name,
           onChanged: (value){
+            _change=true;
 
           if(widget.hintText=='branch'){
             if(value.length==0){
-              Provider.of<AddActivityProvider>(context,listen: false).removeBranch(0);
+             prov.removeBranch(0);
             }
           }
 
@@ -93,8 +104,17 @@ class _TextFeldState extends State<TextFeld> {
   }
 
     saveLocation(LatLng Location, String address) {
-   Provider.of<AddActivityProvider>(_context,listen: false).setAdminLoication(Location);
-   widget.controller.text=address;
+    if (Location==null){
+
+      print('hhhhhhhhhhhhho');
+      Location=LatLng(double.parse(prov.selectedCity.latitude),double.parse(prov.selectedCity.longitude));
+    }
+   Provider.of<AddActivityProvider>(_context,listen: false).setAdminLoication(Location,address);
+   if(address!=null){
+     print('nnnnnnnnnnnnno');
+   widget.controller.text=address;}
+   print(address);
+   print('addressssss');
    setState(() {
 
    });

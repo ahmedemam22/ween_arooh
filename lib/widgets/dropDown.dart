@@ -38,7 +38,7 @@ class DropDownState extends State<DropDown> {
     for (String company in companies) {
       items.add(
         DropdownMenuItem(
-          value: company,
+          value: company??'',
           child: Column(children: [
             Center(child: Text(company)),
             SizedBox(height: SizeConfig.blockSizeVertical*1.3,),
@@ -53,6 +53,7 @@ class DropDownState extends State<DropDown> {
   onChangeDropdownItem( selectedCompany) {
     setState(() {
       _selectedCompany = selectedCompany;
+      print(_selectedCompany);
 widget.onChange(selectedCompany,context);
 
     });

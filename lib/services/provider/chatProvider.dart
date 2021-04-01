@@ -12,6 +12,7 @@ class ChatProvider extends ChangeNotifier{
    try{
      _waitMessage=true;
      notifyListeners();
+     _allMessages=[];
      var response= await api.get(BASE_URL+GET_MESSAGE+GlopalApp.user.id.toString());
      for(int i=0;i<response['result'].length;i++){
      _allMessages.add(ChatModel.fromJson(response['result'][i]));

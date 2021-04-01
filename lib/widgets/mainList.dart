@@ -5,7 +5,31 @@ import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/widgets/marketsShape.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-class MarketList extends StatelessWidget {
+import 'package:ween_arooh/services/provider/homeProvider.dart';
+class MarketList extends StatefulWidget {
+  @override
+  _MarketListState createState() => _MarketListState();
+}
+
+class _MarketListState extends State<MarketList> {
+  ScrollController _scrollController = ScrollController();
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        _getMoreData().then((value) => null);
+
+      }
+    });
+
+}
+  Future _getMoreData() async {
+    Provider.of<MarketProvider>(context,listen: false).getMarkets( Provider.of<HomeProvider>(context,listen: false).selectedId) ;
+}
+
   @override
   Widget build(BuildContext context) {
     return  Consumer<MarketProvider>(
@@ -18,21 +42,34 @@ class MarketList extends StatelessWidget {
             Center(child: Text(translator.translate('no_markets'),style: TextStyle(
               fontSize: SizeConfig.screenWidth*s20
             ),),):
-            GridView.builder(
-              padding: EdgeInsets.all(SizeConfig.screenWidth / 40),
-              itemCount:search?market.mainCategoryItemsSearch.length:market.markets?.length,
-              itemBuilder: (ctx, i) => MarketsShape(search?market.mainCategoryItemsSearch[i]:market.markets[i],i),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
+            Column(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: GridView.builder(
+                    controller: _scrollController,
+                    padding: EdgeInsets.all(SizeConfig.screenWidth / 40),
+                    itemCount:search?market.mainCategoryItemsSearch.length:market.markets?.length,
+                    itemBuilder: (ctx, i) => MarketsShape(search?market.mainCategoryItemsSearch[i]:market.markets[i],i),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
 
-                  mainAxisSpacing: SizeConfig.screenWidth / 35,
-                  crossAxisSpacing:  SizeConfig.screenWidth*s30,
-                  childAspectRatio: 0.55
+                        mainAxisSpacing: SizeConfig.screenWidth / 35,
+                        crossAxisSpacing:  SizeConfig.screenWidth*s30,
+                        childAspectRatio: 0.55
 
 
-              ),
+                    ),
 
+                  ),
+                ),
+
+                if(market.waitPagination) Expanded(
+                  flex: 1,
+                    child: Center(child: CircularProgressIndicator(),))
+              ],
             );
+
         });
   }
 }

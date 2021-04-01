@@ -83,7 +83,10 @@
   "choose_market": "اختر السوق",
   "add_data": "ادخل البيانات",
   "valid_phone": "رقم الهاتف يجب ان يكون 9 ارقام",
-  "success_rate": "تم اضافة تقييمك بنجاح"
+  "valid_images": "من فضلك ادخل الصور",
+  "success_rate": "تم اضافة تقييمك بنجاح",
+  "select_city_invalid": "من فضلك اختر الدولة اولا",
+  "add_offers_invalid": "قم بتسجيل نشاط اولا"
 
 
 

@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ween_arooh/utils/dialogs.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/network/api.dart';
 class UserProvider extends ChangeNotifier{
   User _user=User();
@@ -32,15 +33,22 @@ class UserProvider extends ChangeNotifier{
 
     }
     else{
-    userModel.imgProfile = _user.imgProfile;
-    _user = userModel;
+
+  if( _user.imgProfile!=null)  userModel.imgProfile = _user.imgProfile;
+
+
+    _user.fName = userModel.fName;
+    _user.lName = userModel.lName;
+    _user.mobile = userModel.mobile;
+    _user.name = userModel.fName+" "+userModel.lName;
+
     Dio dio = Dio();
 
     FormData formData = FormData.fromMap({
       "user_id": GlopalApp.user.id,
       "f_name": _user.fName,
       "l_name": _user.lName,
-      if(_user.mobile!= GlopalApp.user.mobile)"mobile": _user.mobile,
+  if(_user.mobile!=GlopalApp.user.mobile)  "mobile": _user.mobile,
      if(userModel.imgProfile!=null) "profile_pic": await MultipartFile.fromFile(
           _user.imgProfile.path, filename: "${_user.imgProfile.path
           .split('/')
@@ -70,10 +78,15 @@ class UserProvider extends ChangeNotifier{
 
     }
     finally {
+      await setUser(_user);
       _waitSetting=false;
       notifyListeners();
       Map valueMap = jsonDecode(response.toString());
       if (valueMap['code'] == 200 && valueMap['message'] == 'success') {
+        GlopalApp.user.fName=_user.fName;
+        GlopalApp.user.lName=_user.lName;
+        GlopalApp.user.name=_user.fName+" "+_user.lName;
+        GlopalApp.user.mobile=_user.mobile;
         Dialogs().awsomeDialog(context: context,
             type: DialogType.SUCCES,
             desc: translator.translate('update_profile'),
@@ -90,7 +103,7 @@ class UserProvider extends ChangeNotifier{
     }}
   }
 Future setUser([User user])async{
-    _user=user;
+   _user=user;
     GlopalApp.user=_user;
     notifyListeners();
 
@@ -112,6 +125,8 @@ Future getUser()async{
       final User user = User.fromJson(userMap);
       _user=user;
       GlopalApp.user=_user;
+      print(_user.id);
+      print('idddddddddddddddd');
       GlopalApp.token=prefs.getString('token');
       print('glopaaaaaaaaaaaaal');
       print(GlopalApp.token);
@@ -120,11 +135,11 @@ Future getUser()async{
   }
   notifyListeners();
 }
-aboutUs()async{
+Future aboutUs()async{
    try {
      _waitAbout=true;
      var response=await api.get(BASE_URL + ABOUT);
-     about=response['result'][0]['text_ar'];
+     about=translator.currentLanguage=='ar'?response['result'][0]['text_ar']:response['result'][0]['text_en'];
 
 }
 catch(e){

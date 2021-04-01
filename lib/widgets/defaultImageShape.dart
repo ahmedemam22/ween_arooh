@@ -54,7 +54,7 @@ class DefaultImageShape extends StatelessWidget {
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                           fit: BoxFit.fill,
-                                          image: NetworkImage(logo?image.oldMArket['logo']:image.oldMArket['panner'],))))),
+                                          image: NetworkImage(logo?image.oldMArket['logo']:image.oldMArket['panner'],),)))),
                              )
 
 

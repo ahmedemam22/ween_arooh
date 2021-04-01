@@ -6,7 +6,12 @@ import 'package:ween_arooh/utils/colors.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/userProvider.dart';
-class AboutUsScreen extends StatelessWidget {
+class AboutUsScreen extends StatefulWidget {
+  @override
+  _AboutUsScreenState createState() => _AboutUsScreenState();
+}
+
+class _AboutUsScreenState extends State<AboutUsScreen> {
   @override
   Widget build(BuildContext context) {
 
@@ -19,22 +24,25 @@ class AboutUsScreen extends StatelessWidget {
 
         ),
         drawer: AppDrawer(),
-        body: Column(
-          children: [
-          Expanded(
-              child: Padding(
-                padding:  EdgeInsets.only(top:SizeConfig.screenWidth*s120,left:SizeConfig.screenWidth*s20,
-                right: SizeConfig.screenWidth*s20),
-                child: Consumer<UserProvider>(builder: (context, user, child) {
-                  return Text(
-                    user.about ?? '', style: TextStyle(
-                      fontSize: SizeConfig.screenWidth * s17,
-                      color: categoryColor
-                  ),);
-                }),
-              ),
-            )
-          ],
+        body: RefreshIndicator(
+          onRefresh:     Provider.of<UserProvider>(context,listen: false).aboutUs
+          ,
+          child: ListView(
+            children: [
+            Padding(
+                  padding:  EdgeInsets.only(top:SizeConfig.screenWidth*s120,left:SizeConfig.screenWidth*s20,
+                  right: SizeConfig.screenWidth*s20),
+                  child: Consumer<UserProvider>(builder: (context, user, child) {
+                    return Text(
+                      user.about ?? '', style: TextStyle(
+                        fontSize: SizeConfig.screenWidth * s17,
+                        color: categoryColor
+                    ),);
+                  }),
+                ),
+
+            ],
+          ),
         ),
       ),
     );

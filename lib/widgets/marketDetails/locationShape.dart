@@ -44,7 +44,7 @@ class _LocationShapeState extends State<LocationShape> {
                 mapType: MapType.normal,
                 initialCameraPosition: CameraPosition(
                   target: LatLng( Provider.of<MarketDetailsProvider>(context).marketDetails.latitude??30,  Provider.of<MarketDetailsProvider>(context).marketDetails.longitude??31),
-                  zoom: 14.4746,
+                  zoom: 8,
                 ),
                 onMapCreated: (GoogleMapController controller) {
                   _controller.complete(controller);

@@ -20,6 +20,7 @@ class HomeProvider extends ChangeNotifier{
   bool _waitMainCategory=false;
   bool get waitMainCategory=>_waitMainCategory;
   int count=0;
+  int selectedId;
   int _count=0;
   Future getMainCategories([token])async{
     if(count==0){
@@ -54,16 +55,15 @@ notifyListeners();
 
   }
   int getCategoryId(String title){
-    int id;
     print(title);
     print("vvvvvvvvvvv");
     _mainCategoryItems.forEach((element) {
       if(element.nameAr==title){
         print('sssss7');
-        id=element.id;
+        selectedId=element.id;
       }
     });
-    return id;
+    return selectedId;
 
   }
   Future getCities()async{
@@ -93,4 +93,13 @@ notifyListeners();
   finally{
     notifyListeners();
   }}
-}}
+}
+List<String> cityItemsDropDown(){
+    List<String>_items=[];
+    _citiesList.forEach((element) {_items.add(element.nameAr);
+
+    });
+    return _items;
+}
+
+}

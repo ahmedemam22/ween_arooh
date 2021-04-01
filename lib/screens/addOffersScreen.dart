@@ -43,25 +43,17 @@ class AddOffersScreen extends StatelessWidget {
                             horizontal: SizeConfig.screenWidth * s20),
                         child: Column(
                           children: [
-                      /*      Container(
+
+
+                           Container(
                               color: lightGray,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Expanded(
-                                    flex: 0,
-                                    child: Text(
-                                      translator.translate('choose_activity'),
-                                      style: TX_STYLE_black_14,
-                                      maxLines: 1,
-                                    ),
-                                  ),
-                                  Expanded(flex:1,child: DropDown(items:Provider.of<MarketProvider>(context,listen: false).userMarketsList(),hint: translator.translate('choose_market'),
-                                    onChange:Provider.of<MarketProvider>(context,listen: false).getMarketId
+                             width: SizeConfig.screenWidth,
+                             child:  DropDown(items:Provider.of<AddActivityProvider>(context,listen: false).getUserMArketItems(),hint: translator.translate('choose_market'),
+                               onChange:Provider.of<AddActivityProvider>(context,listen: false).setSelectedMarket
                                     ,))
                                   // urgentServices_TextFieldOptions( translator.currentLanguage == "en" ? 'Services Type' : "نوع الخدمة", black),
-                                ],),
-                            ),*/
+
+                           ,
                            /* Container(
                               color: lightGray,
                               child: Row(
@@ -81,6 +73,7 @@ class AddOffersScreen extends StatelessWidget {
                                   // urgentServices_TextFieldOptions( translator.currentLanguage == "en" ? 'Services Type' : "نوع الخدمة", black),
                                 ],),
                             ),*/
+                            SizedBox(height: 10,),
 
 
                             AddImageShape(title: translator.translate(

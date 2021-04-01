@@ -10,14 +10,14 @@ import 'package:ween_arooh/model/citiesResponse.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:ween_arooh/network/constant.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:ween_arooh/model/marketModel.dart';
+import 'package:ween_arooh/model/userMarketModel.dart';
 import 'package:ween_arooh/network/api.dart';
 import 'package:ween_arooh/utils/distance.dart';
 import 'package:ween_arooh/network/constant.dart';
 
 class AddActivityProvider extends ChangeNotifier{
   List<LatLng>_branches=[];
-  MarketModel _marketModel;
+  UserMarketModel _marketModel;
   List<LatLng>get branches=>_branches;
   List<String>_branchesAddress=[];
   List<String>get branchesAddress=>_branchesAddress;
@@ -28,8 +28,15 @@ class AddActivityProvider extends ChangeNotifier{
   List<File>get logoImage=>_logoImage;
   List<File>get bannerImage=>_bannerImage;
   LatLng adminLocation;
+  String location;
   Map<String,dynamic> _oldMarket;
   Map<String,dynamic> get oldMArket=>_oldMarket;
+  bool _checkOldMArket=false;
+  bool get checkOldMArket=>_checkOldMArket;
+  City _selectedCity;
+  City get selectedCity=>_selectedCity;
+  String _selectedMarket;
+  String get selectedMarket=>_selectedMarket;
 
   Map<String,dynamic>_data={};
   Map<String,dynamic>get data=>_data;
@@ -38,6 +45,7 @@ class AddActivityProvider extends ChangeNotifier{
   bool get waitAddActivity=>_waitAddActivity;
   String social='facebook';
   String category;
+
   setData(String key,value){
     if(_data.containsKey(key)){
 
@@ -86,28 +94,28 @@ addBranch(latlng,String address){
     notifyListeners();
   }
   Future addActivity(context)async{
-
+    Response  response;
     try {
       Map<String,dynamic> _items={
         'banners':await getData(_bannerImage),
         'logos':await getData(_logoImage),
+        'region_id':1,
       };
       _data.addAll(_items);
+      print(location);
    _waitAddActivity=true;
    notifyListeners();
    var logo= await getData(logoImage);
    var banner= await getData(bannerImage);
    _data.putIfAbsent("category_id", () =>Provider.of<HomeProvider>(context,listen: false).getCategoryId(category));
-   _data.putIfAbsent("category_id", () =>Provider.of<HomeProvider>(context,listen: false).getCategoryId(category));
    //_data.putIfAbsent( "logos", () =>logo );
    //_data.putIfAbsent( "banners", () => banner);
-   _data.putIfAbsent("branches", () =>  getBranch());
+   _data.putIfAbsent("branches", () =>  branches.length>0?getBranch():null);
    _data.putIfAbsent("admin_id", () =>  GlopalApp.user.id);
+   _data.putIfAbsent("location", () =>  location);
    _data.putIfAbsent("latitude", () =>  adminLocation.latitude);
    _data.putIfAbsent("longitude", () => adminLocation.longitude);
-   print(setCityId(context, adminLocation.latitude, adminLocation.longitude));
-   print('idddddddddddddddddd');
-   _data.putIfAbsent("city_id", () => setCityId(context, adminLocation.latitude, adminLocation.longitude));
+   _data.putIfAbsent("city_id", () =>selectedCity.id);
 
 /*{
      "title_ar":"asd",
@@ -135,22 +143,29 @@ print('daaaaaaataaa');
       FormData formData = new FormData.fromMap(_data);
 
 
-   var response=await   Dio().post(BASE_URL +ADD_ACTIVITY ,data:formData,
+    response=await   Dio().post(BASE_URL +ADD_ACTIVITY ,data:formData,
      options: Options(headers:{
        HttpHeaders.authorizationHeader: 'Bearer ${GlopalApp.token}'
      } ),
      onSendProgress: (int sent, int total) {
        print('send $sent::$total');
      },);
-   _waitAddActivity=false;
+
+      _waitAddActivity=false;
    notifyListeners();
    await Dialogs().awsomeDialog(context: context,desc: "تم اضافة نشاطك بنجاح",type:DialogType.SUCCES,title:"اضف نشاطك",);
    print(jsonDecode(response.toString()));
    Map valueMap = jsonDecode(response.toString());
 
    if (valueMap['code'] == 200 && valueMap['message'] == 'success') {
+     _logoImage=[];
+     _bannerImage=[];
+     category='';
+     getUserMarkets();
    }
    else if(valueMap['code'] == 400 && valueMap['message'] == 'success'){
+     print(valueMap['result']);
+     print('rssssssssssssssss');
    }
     }
  catch(e){
@@ -203,16 +218,48 @@ print(branches.length);
    notifyListeners();
 
   }
-  setAdminLoication(LatLng latng){
+  setSelectedMarket(value,context){
+    _selectedMarket=value;
+    notifyListeners();
+
+
+ //  return getSelectedMarketId();
+
+  }
+ int getSelectedMarketId(){
+    int id;
+    _userMarkets.forEach((element) {
+      if(element.title==_selectedMarket){
+        id=element.id;
+
+      }
+    });
+    return id;
+
+  }
+  setCity([value,context]){
+    if(value==null)_selectedCity=Provider.of<HomeProvider>(context,listen: false).citiesList[0];
+   else{ List<City>_city=Provider.of<HomeProvider>(context,listen: false).citiesList;
+    _city.forEach((element) {
+      if(element.nameAr==value){
+        _selectedCity=element;
+      }
+    });}
+
+    notifyListeners();
+
+  }
+  setAdminLoication(LatLng latng,String location){
     adminLocation=latng;
+    location=location;
     notifyListeners();
 
   }
   Future getUserMarkets()async{
     try {
-      var response = await api.get(BASE_URL + USER_MARKETS + '?user_id=1');
+      var response = await api.get(BASE_URL + USER_MARKETS + '?user_id=${GlopalApp.user.id}');
 
-      _marketModel = MarketModel.fromJson(response);
+      _marketModel = UserMarketModel.fromJson(response);
       _userMarkets = _marketModel.result;
 
     }
@@ -226,12 +273,14 @@ print(branches.length);
   }
   getMarketId(value,context){
     _oldMarket=null;
+    _checkOldMArket=false;
     for(int i=0;i<_userMarkets.length;i++) {
       print(Provider.of<HomeProvider>(context,listen: false).getCategoryId(category));
-      print(_userMarkets[i].category_id);
-      if( _userMarkets[i].category_id==Provider.of<HomeProvider>(context,listen: false).getCategoryId(category)) {
+      if( _userMarkets[i].categoryId==Provider.of<HomeProvider>(context,listen: false).getCategoryId(category)) {
         print('7ssssssssl');
         _oldMarket = _userMarkets[i].toJson();
+        _checkOldMArket=true;
+
       }
       if(_oldMarket!=null)  print(_oldMarket.length);
     }
@@ -258,5 +307,12 @@ print(branches.length);
     });
 return city_id;
 
+  }
+  List<String> getUserMArketItems(){
+    Set<String>_items={};
+    _userMarkets.forEach((element) {
+      _items.add(element.title);
+    });
+    return _items.toList();
   }
 }

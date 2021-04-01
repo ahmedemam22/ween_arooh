@@ -7,6 +7,8 @@ import 'package:dio/dio.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'dart:convert';
 import 'package:ween_arooh/utils/glopal_app.dart';
+import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/addActivityProvider.dart';
 
 class AddOffersProvider extends ChangeNotifier{
   bool _waitAddOffer=false;
@@ -16,10 +18,12 @@ class AddOffersProvider extends ChangeNotifier{
   List<File>_couponImage=[];
   List<File>get copounImage=>_couponImage;
   addOffer(context)async{
+    print(Provider.of<AddActivityProvider>(context,listen: false).getSelectedMarketId());
+    print('hoooooooooooooob');
     FormData formData = new FormData.fromMap({
       "coupons":await getData(_couponImage),
    "offers": await getData(_offerImage),
-      "market_id":1
+      "market_id":Provider.of<AddActivityProvider>(context,listen: false).getSelectedMarketId()
     });
 
   try {

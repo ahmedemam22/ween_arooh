@@ -14,10 +14,11 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 class LocationView extends StatefulWidget {
   Function savedLocation;
   LatLng finallocation;
+  LatLng initialPosition;
   String productLocation;
 
   Function backButton;
-  LocationView({this.savedLocation, this.productLocation, this.backButton});
+  LocationView({this.savedLocation, this.productLocation, this.backButton,this.initialPosition});
   @override
   State<LocationView> createState() => LocationViewState();
 }
@@ -30,13 +31,14 @@ class LocationViewState extends State<LocationView> {
 
   String address;
   TextEditingController _address_controller = new TextEditingController();
-  CameraPosition _CairoLocation = CameraPosition(
-    target: LatLng(30.04119653718865, 31.257430873811245),
-    zoom: 14.4746,
-  );
+  CameraPosition _CairoLocation ;
 
   @override
   void initState() {
+    _CairoLocation=CameraPosition(
+      target: widget.initialPosition,
+      zoom: 8,
+    );
     if (widget.savedLocation != null) //add or update location of my product
         {
       if (widget.productLocation == null) //add location to new product
@@ -46,7 +48,7 @@ class LocationViewState extends State<LocationView> {
           print('response initstate :${widget.finallocation.latitude.toString()}');
           _CairoLocation = CameraPosition(
             target: response,
-            zoom: 14.4746,
+            zoom: 8,
           );
           final Marker marker = Marker(
             markerId: MarkerId('Cairo'),
@@ -62,7 +64,7 @@ class LocationViewState extends State<LocationView> {
         print('0x11 lat is :${lat} and long is : $lng');
         _CairoLocation = CameraPosition(
           target: LatLng(double.parse(lat), double.parse(lng)),
-          zoom: 14.4746,
+          zoom: 8,
         );
         final Marker marker = Marker(
           markerId: MarkerId('Cairo'),
@@ -78,7 +80,7 @@ class LocationViewState extends State<LocationView> {
       print('0x11 lat is :${lat} and long is : $lng');
       _CairoLocation = CameraPosition(
         target: LatLng(double.parse(lat), double.parse(lng)),
-        zoom: 14.4746,
+        zoom: 8,
       );
       final Marker marker = Marker(
         markerId: MarkerId('Cairo'),
@@ -305,7 +307,7 @@ class LocationViewState extends State<LocationView> {
 
   Future<LatLng> _userLocation() async {
     try {
-      currentLocation = await location.getLocation();
+      currentLocation = widget.initialPosition;
       print('current location ${currentLocation.latitude} , the long is ${currentLocation.longitude}');
       LatLng current = LatLng(currentLocation.latitude, currentLocation.longitude);
       setMarker(current);
@@ -325,7 +327,7 @@ class LocationViewState extends State<LocationView> {
 
     final GoogleMapController controller = await _controller.future;
     controller
-        .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(bearing: 360.0, target: location, tilt: 59.440717697143555, zoom: 14.4746)));
+        .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(bearing: 360.0, target: location, tilt: 59.440717697143555, zoom: 10)));
     markers.clear();
     _nameOfLOcation(location);
     final Marker marker = Marker(

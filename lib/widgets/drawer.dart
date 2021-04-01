@@ -8,6 +8,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ween_arooh/utils/glopal_app.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/userProvider.dart';
+import 'package:ween_arooh/services/provider/addActivityProvider.dart';
+import 'package:ween_arooh/utils/dialogs.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 class AppDrawer extends StatefulWidget {
 
   @override
@@ -113,8 +116,13 @@ class _AppDrawerState extends State<AppDrawer> {
       Navigator.pushNamed(_context, '/setting');
     }
     else if (name == "offers") {
-      Navigator.pop(context);
-      Navigator.pushNamed(_context, '/add_offers');
+
+      if(Provider.of<AddActivityProvider>(_context,listen: false).userMarkets.length==0){
+        Dialogs().awsomeDialog(context: _context,type: DialogType.ERROR,title: translator.translate('sorry'),
+       desc: translator.translate('add_offers_invalid'),onClick: Navigator.pushNamed(_context, '/add_activity') );
+      }
+
+     else{ Navigator.pushNamed(_context, '/add_offers');}
     }
     else if (name == "login") {
       Provider.of<UserProvider>(context,listen: false).setUser();

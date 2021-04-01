@@ -3,43 +3,68 @@ import 'package:ween_arooh/network/api.dart';
 import 'package:ween_arooh/network/constant.dart';
 import 'package:ween_arooh/model/marketModel.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:geolocator/geolocator.dart';
 import 'dart:convert';
 class MarketProvider extends ChangeNotifier{
   bool _waitMarket=false;
+  bool _waitPagination=false;
   bool get waitMarket=>_waitMarket;
+  bool get waitPagination=>_waitPagination;
   MarketModel _marketModel;
-  List<Result>get mainCategoryItemsSearch=>_mainCategoryItemsSearch;
-  List<Result> _mainCategoryItemsSearch=[];
-  List<Result>_markets=[];
+  List<Market>get mainCategoryItemsSearch=>_mainCategoryItemsSearch;
+  List<Market> _mainCategoryItemsSearch=[];
+  List<Market>_markets=[];
 
-  List<Result>_temp;
-  List<Result>get markets=>_markets;
+  List<Market>_temp;
+  List<Market>get markets=>_markets;
   int marketIndex;
-int count=0;
+int count=1;
+bool checkMarketPagination(){
+  if(_markets.length==0)return true;
+ else if(count<_marketModel.result.lastPage)return true;
+ else return false;
+
+}
 
 Future getMarkets(id)async {
-  if (count == 0) {
-    try {
+  print(id);
+  print(id);
+   if(checkMarketPagination()){try {
+      Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+
       _mainCategoryItemsSearch=[];
-      _waitMarket = true;
+      print(count);
+      print('cccoount');
+     if(count==1) _waitMarket = true;
+     else{
+       print('paginaaaaaa');
+       _waitPagination = true;}
+     notifyListeners();
       var response = await api.post(BASE_URL + GET_MARKET, {
-        'category_id': id
+        'category_id': id,
+        "current_latitude":position.latitude,
+        "current_longitude":position.longitude,
+        "page":count
       });
       _marketModel = MarketModel.fromJson(json.decode(response.body));
-      _markets = _marketModel.result;
+      _markets .addAll( _marketModel.result.data);
       _temp = _markets;
+      count++;
     }
     catch (e) {
       print("get markets error::$e");
     }
     finally {
       _waitMarket = false;
+      _waitPagination = false;
       notifyListeners();
-    }
-  }
+
+  }}
 }
 setCount(){
-  count=0;
+  count=1;
+  _markets=[];
+  notifyListeners();
 }
 
 marketSearch(String title){
@@ -65,7 +90,7 @@ filterByChars(){
 
 }
   filterByLocation(){
-    _temp.sort((a,b)=>a.latitude.compareTo(b.latitude));
+    _temp.sort((a,b)=>a.distance.compareTo(b.distance));
     _mainCategoryItemsSearch=_temp;
     notifyListeners();
 
@@ -77,14 +102,6 @@ filterByChars(){
     _mainCategoryItemsSearch=_temp.reversed.toList();
 
     notifyListeners();
-  }
-  List<String> userMarketsList(){
-  return['test MA 4-3','mmmmmmmmmmm','mmmmmmmmmmm'];
-   /* List<String>_categoryNames=[];
-    _userMarkets.forEach((element) {
-      _categoryNames.add(element.title.substring(0,2));});
-    return _categoryNames;*/
-
   }
 
 

@@ -7,6 +7,8 @@ import 'package:ween_arooh/utils/size_config.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/utils/text_style.dart';
 import 'package:ween_arooh/widgets/defaultImageShape.dart';
+import 'package:ween_arooh/services/provider/homeProvider.dart';
+import 'package:ween_arooh/widgets/dropDown.dart';
 import 'package:ween_arooh/utils/colors.dart';
 import 'package:ween_arooh/utils/dialogs.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -47,6 +49,7 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
 
 
 
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -64,7 +67,7 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
                   child: Column(
                       children: [
                         shape( "company_name",_companyNameCon,"title_ar",true),
-                        shape( "country",_countryCon,"country",true),
+                        shapeDropDown( "country",true),
                         shape( "administration_location",_adminstrationCon,"location",true),
                         shape( "branches_location",_addBranchCon,"",true,true,add.branchesAddress.length>0?add.branchesAddress[0]:null),
                      Container(
@@ -182,6 +185,11 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
                                   if(add.category==null){
                                     Dialogs().awsomeDialog(context: context,title: translator.translate('sorry'),desc:translator.translate('valid_activity'),type: DialogType.ERROR);
                                   }
+                                  else if(add.logoImage.length==0||add.bannerImage.length==0){
+                                    Dialogs().awsomeDialog(context: context,title: translator.translate('sorry'),desc:translator.translate('valid_images'),type: DialogType.ERROR);
+
+
+                                  }
                                  else{ if(_formKey.currentState.validate()){
 
                                     await add.addActivity(context);}
@@ -241,6 +249,37 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
               "assets/images/add_branch.svg",
             ),
           ),
+        ],
+      ),
+    );
+
+  }
+  shapeDropDown(title,[add=false]){
+    return Padding(
+      padding:  EdgeInsets.only(top:SizeConfig.screenWidth*s10),
+      child: Row(
+
+        children: [
+          Text("*",
+            style: TX_STYLE_black_15.copyWith(color: red),
+
+          ),
+
+          SizedBox(width: 8,),
+
+          Expanded(
+            child: Text(translator.translate(title),
+              style: TX_STYLE_black_15,
+
+            ),
+          ),
+          SizedBox(width: 30,),
+
+          DropDown(items: Provider.of<HomeProvider>(context,listen: false).cityItemsDropDown(),size: SizeConfig.screenWidth*0.6,onChange:
+        Provider.of<AddActivityProvider>(context,listen: false).setCity
+      ,),
+
+
         ],
       ),
     );
