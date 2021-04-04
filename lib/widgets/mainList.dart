@@ -27,7 +27,7 @@ class _MarketListState extends State<MarketList> {
 
 }
   Future _getMoreData() async {
-    Provider.of<MarketProvider>(context,listen: false).getMarkets( Provider.of<HomeProvider>(context,listen: false).selectedId) ;
+    Provider.of<MarketProvider>(context,listen: false).getMarkets( Provider.of<HomeProvider>(context,listen: false).selectedId,true) ;
 }
 
   @override

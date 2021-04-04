@@ -54,7 +54,7 @@ finally{
 
       _offersSearch =
           _temp.where((element) =>
-              element.city_id==id).toList();
+              element.cityId==id).toList();
 
  print(_offersSearch.length);
     print("filteeeeeeeeeeer");

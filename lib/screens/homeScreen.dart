@@ -28,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<MarketProvider>(context,listen: false).setCount();
     return Scaffold(
       key: _scaffoldKey,
       drawer: AppDrawer(),

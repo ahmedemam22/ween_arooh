@@ -69,7 +69,7 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
                         shape( "company_name",_companyNameCon,"title_ar",true),
                         shapeDropDown( "country",true),
                         shape( "administration_location",_adminstrationCon,"location",true),
-                        shape( "branches_location",_addBranchCon,"",true,true,add.branchesAddress.length>0?add.branchesAddress[0]:null),
+                       // shape( "branches_location",_addBranchCon,"",true,true,add.branchesAddress.length>0?add.branchesAddress[0]:null),
                      Container(
                   height:add.branchesAddress.length>0?100:0 ,
 

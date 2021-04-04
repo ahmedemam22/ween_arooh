@@ -15,10 +15,10 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _index=0;
+  int _index=1;
   static final   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(); // ADD THIS LINE
   static final   GlobalKey<ScaffoldState> _scaffoldKeyy = new GlobalKey<ScaffoldState>(); // ADD THIS LINE
-List<Widget>_widgets=[HomeScreen(),AddActivityScreen(),OffersScreen()];
+List<Widget>_widgets=[AddActivityScreen(),HomeScreen(),OffersScreen()];
 int _count=0;
 @override
   void didChangeDependencies() {
@@ -49,13 +49,14 @@ int _count=0;
         },
             currentIndex: _index, // this will be set when a new tab is tapped
             items: [
-              BottomNavigationBarItem(
-                icon: setIcon('home'),
-                title: new Text(translator.translate('main')),
-              ),
+
               BottomNavigationBarItem(
                 icon: setIcon('register'),
                 title: new Text(translator.translate('register')),
+              ),
+              BottomNavigationBarItem(
+                icon: setIcon('home'),
+                title: new Text(translator.translate('main')),
               ),
               BottomNavigationBarItem(
                   icon: setIcon('offers'),
