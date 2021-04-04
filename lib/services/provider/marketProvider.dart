@@ -14,7 +14,6 @@ class MarketProvider extends ChangeNotifier{
   List<Market>get mainCategoryItemsSearch=>_mainCategoryItemsSearch;
   List<Market> _mainCategoryItemsSearch=[];
   List<Market>_markets=[];
-
   List<Market>_temp;
   List<Market>get markets=>_markets;
   int marketIndex;
@@ -37,8 +36,8 @@ Future getMarkets(id)async {
       print('cccoount');
      if(count==1) _waitMarket = true;
      else{
-       print('paginaaaaaa');
-       _waitPagination = true;}
+       _waitPagination = true;
+     }
      notifyListeners();
       var response = await api.post(BASE_URL + GET_MARKET, {
         'category_id': id,

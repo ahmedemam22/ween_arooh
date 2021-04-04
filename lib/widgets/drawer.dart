@@ -77,7 +77,7 @@ class _AppDrawerState extends State<AppDrawer> {
         onTap: () => _route(route),
 
       child: Padding(
-        padding:  EdgeInsets.only(bottom:SizeConfig.screenWidth*s30),
+        padding:  EdgeInsets.only(bottom:SizeConfig.screenWidth*s20),
         child: ListTile(
           title: Text(title,style: TextStyle(
             fontSize: SizeConfig.screenWidth*s17
