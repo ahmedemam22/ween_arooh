@@ -56,6 +56,10 @@ class Result {
     this.updatedAt,
     this.deletedAt,
     this.isManagement,
+    this.mobile,
+    this.location,
+    this.cityId,
+    this.regionId,
     this.title,
     this.minDec,
     this.dec,
@@ -63,48 +67,47 @@ class Result {
     this.panner,
     this.visitscount,
     this.rate,
-    this.location,
     this.offers,
-    this.city_id
   });
 
   int id;
   String titleAr;
-  String titleEn;
-  dynamic minDecAr;
+  dynamic titleEn;
+  String minDecAr;
   dynamic minDecEn;
-  dynamic decAr;
+  String decAr;
   dynamic decEn;
   double latitude;
   double longitude;
   String siteLink;
-  dynamic email;
-  String facebook;
-  String youtube;
-  String twitter;
-  String linkedin;
-  dynamic parentId;
+  String email;
+  dynamic facebook;
+  dynamic youtube;
+  dynamic twitter;
+  dynamic linkedin;
+  int parentId;
   int categoryId;
-  dynamic adminId;
+  int adminId;
   DateTime createdAt;
   DateTime updatedAt;
   dynamic deletedAt;
   int isManagement;
+  String mobile;
+  String location;
+  int cityId;
+  int regionId;
   String title;
-  dynamic minDec;
-  dynamic dec;
+  String minDec;
+  String dec;
   String logo;
   String panner;
   int visitscount;
-  double rate;
-  int city_id;
-  String location;
+  int rate;
   List<Offer> offers;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     id: json["id"],
     titleAr: json["title_ar"],
-    city_id: json["city_id"],
     titleEn: json["title_en"],
     minDecAr: json["min_dec_ar"],
     minDecEn: json["min_dec_en"],
@@ -125,14 +128,17 @@ class Result {
     updatedAt: DateTime.parse(json["updated_at"]),
     deletedAt: json["deleted_at"],
     isManagement: json["is_management"],
+    mobile: json["mobile"],
+    location: json["location"],
+    cityId: json["city_id"],
+    regionId: json["region_id"],
     title: json["title"],
     minDec: json["min_dec"],
     dec: json["dec"],
     logo: json["logo"],
     panner: json["panner"],
     visitscount: json["visitscount"],
-    rate: json["rate"].toDouble(),
-    location: json["location"],
+    rate: json["rate"],
     offers: List<Offer>.from(json["offers"].map((x) => Offer.fromJson(x))),
   );
 
@@ -142,7 +148,6 @@ class Result {
     "title_en": titleEn,
     "min_dec_ar": minDecAr,
     "min_dec_en": minDecEn,
-    "city_id": city_id,
     "dec_ar": decAr,
     "dec_en": decEn,
     "latitude": latitude,
@@ -160,6 +165,10 @@ class Result {
     "updated_at": updatedAt.toIso8601String(),
     "deleted_at": deletedAt,
     "is_management": isManagement,
+    "mobile": mobile,
+    "location": location,
+    "city_id": cityId,
+    "region_id": regionId,
     "title": title,
     "min_dec": minDec,
     "dec": dec,
@@ -167,7 +176,6 @@ class Result {
     "panner": panner,
     "visitscount": visitscount,
     "rate": rate,
-    "location": location,
     "offers": List<dynamic>.from(offers.map((x) => x.toJson())),
   };
 }
@@ -189,8 +197,8 @@ class Offer {
   int marketId;
   String code;
   String pic;
-  DateTime createdAt;
-  DateTime updatedAt;
+  dynamic createdAt;
+  dynamic updatedAt;
   dynamic deletedAt;
   int order;
   String path;
@@ -200,8 +208,8 @@ class Offer {
     marketId: json["market_id"],
     code: json["code"],
     pic: json["pic"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
+    createdAt: json["created_at"],
+    updatedAt: json["updated_at"],
     deletedAt: json["deleted_at"],
     order: json["order"],
     path: json["path"],
@@ -212,8 +220,8 @@ class Offer {
     "market_id": marketId,
     "code": code,
     "pic": pic,
-    "created_at": createdAt.toIso8601String(),
-    "updated_at": updatedAt.toIso8601String(),
+    "created_at": createdAt,
+    "updated_at": updatedAt,
     "deleted_at": deletedAt,
     "order": order,
     "path": path,

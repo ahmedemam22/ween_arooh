@@ -6,6 +6,7 @@ import 'package:ween_arooh/utils/colors.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ween_arooh/utils/glopal_app.dart';
+import 'package:ween_arooh/services/provider/homeProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/userProvider.dart';
 import 'package:ween_arooh/services/provider/addActivityProvider.dart';
@@ -110,7 +111,8 @@ class _AppDrawerState extends State<AppDrawer> {
       _changeLanguage();
     } else if (name == "add_activity") {
       Navigator.pop(context);
-      Navigator.pushNamed(_context, '/add_activity');
+      Provider.of<HomeProvider>(context,listen: false).changeIndex(0);
+      Navigator.pushNamed(_context, '/main');
     } else if (name == "setting") {
       Navigator.pop(context);
       Navigator.pushNamed(_context, '/setting');

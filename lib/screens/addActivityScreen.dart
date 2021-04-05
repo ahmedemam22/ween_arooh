@@ -16,6 +16,7 @@ class AddActivityScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+
       backgroundColor: lightGray,
       key: _scaffoldKey,
       appBar: AppBar(

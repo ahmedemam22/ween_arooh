@@ -12,6 +12,7 @@ import 'package:ween_arooh/widgets/rate_shape/percentShape.dart';
 import 'package:ween_arooh/widgets/reviewShape.dart';
 import 'package:ween_arooh/widgets/button_shape.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:ween_arooh/widgets/bottomNavigationBar.dart';
 class RateScreen extends StatefulWidget {
   @override
   _RateScreenState createState() => _RateScreenState();

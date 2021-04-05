@@ -8,6 +8,7 @@ import 'package:ween_arooh/widgets/userImageShape.dart';
 import 'package:ween_arooh/widgets/settingTextField.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
 import 'package:ween_arooh/model/userModel.dart';
+import 'package:ween_arooh/widgets/bottomNavigationBar.dart';
 import 'package:ween_arooh/widgets/button_shape.dart';
 import 'package:ween_arooh/services/provider/userProvider.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +39,9 @@ class _SettingScreenState extends State<SettingScreen> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        bottomNavigationBar:  BottomnavigationBar(),
         appBar: AppBar(
+
           backgroundColor: backgroundColor,
           title: Center(child: Text(translator.translate('information'))),
 

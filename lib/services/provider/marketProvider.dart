@@ -25,9 +25,13 @@ bool checkMarketPagination(){
 
 }
 
-Future getMarkets(id)async {
+Future getMarkets(id,[bool pagi=false])async {
   print(id);
-  print(id);
+  print(count);
+  print('ccccccccc');
+  if(!pagi)setCount();
+
+
    if(checkMarketPagination()){try {
       Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
 
@@ -61,6 +65,7 @@ Future getMarkets(id)async {
   }}
 }
 setCount(){
+  print('seeeeeeeeeet');
   count=1;
   _markets=[];
   notifyListeners();

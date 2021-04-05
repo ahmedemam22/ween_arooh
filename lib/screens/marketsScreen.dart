@@ -7,6 +7,7 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:ween_arooh/widgets/mainList.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/marketProvider.dart';
+import 'package:ween_arooh/widgets/bottomNavigationBar.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
 import 'package:ween_arooh/widgets/filterShape.dart';
 import 'package:ween_arooh/services/provider/homeProvider.dart';
@@ -28,6 +29,7 @@ class _MarketsScreenState extends State<MarketsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomnavigationBar(),
         key: MarketsScreen._scaffoldKey,
         drawer: AppDrawer(),
         body:    FutureBuilder(

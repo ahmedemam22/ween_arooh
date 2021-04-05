@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
 import 'package:ween_arooh/utils/colors.dart';
+import 'package:ween_arooh/widgets/bottomNavigationBar.dart';
 
 import 'package:ween_arooh/widgets/ImageSliderMarket.dart';
 import 'package:ween_arooh/utils/size_config.dart';
@@ -35,6 +36,7 @@ class _MarketDetailsScreenState extends State<MarketDetailsScreen> {
       onWillPop: () async => false,
       child: Scaffold(
         key: _scaffoldKey,
+        bottomNavigationBar:  BottomnavigationBar(),
         drawer: AppDrawer(
 
         ),

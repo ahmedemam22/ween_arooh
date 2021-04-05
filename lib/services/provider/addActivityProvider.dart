@@ -110,7 +110,7 @@ addBranch(latlng,String address){
    _data.putIfAbsent("category_id", () =>Provider.of<HomeProvider>(context,listen: false).getCategoryId(category));
    //_data.putIfAbsent( "logos", () =>logo );
    //_data.putIfAbsent( "banners", () => banner);
-   _data.putIfAbsent("branches", () =>  branches.length>0?getBranch():null);
+  // _data.putIfAbsent("branches", () =>  branches.length>0?getBranch():null);
    _data.putIfAbsent("admin_id", () =>  GlopalApp.user.id);
    _data.putIfAbsent("location", () =>  location);
    _data.putIfAbsent("latitude", () =>  adminLocation.latitude);
@@ -258,6 +258,7 @@ print(branches.length);
   Future getUserMarkets()async{
     try {
       var response = await api.get(BASE_URL + USER_MARKETS + '?user_id=${GlopalApp.user.id}');
+      print(response);
 
       _marketModel = UserMarketModel.fromJson(response);
       _userMarkets = _marketModel.result;
