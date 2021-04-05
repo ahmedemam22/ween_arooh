@@ -6,6 +6,8 @@ import 'package:ween_arooh/model/mainCategoryResponse.dart';
 import 'package:ween_arooh/model/citiesResponse.dart';
 import 'package:ween_arooh/model/sliderResponse.dart';
 class HomeProvider extends ChangeNotifier{
+  int _index=1;
+  get index=>_index;
   List<City>_citiesList;
   List<City>get citiesList=>_citiesList;
   SlidersResponse _slider;
@@ -22,6 +24,10 @@ class HomeProvider extends ChangeNotifier{
   int count=0;
   int selectedId;
   int _count=0;
+  changeIndex(int index){
+    _index=index;
+    notifyListeners();
+  }
   Future getMainCategories([token])async{
     if(count==0){
  try{

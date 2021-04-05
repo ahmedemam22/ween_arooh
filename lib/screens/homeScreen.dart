@@ -10,6 +10,8 @@ import 'package:ween_arooh/services/provider/marketProvider.dart';
 import 'package:ween_arooh/services/provider/homeProvider.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
 class HomeScreen extends StatefulWidget {
+  final key;
+  HomeScreen(this.key);
 
 
   @override
@@ -29,11 +31,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
+      key: widget.key,
       drawer: AppDrawer(),
 
       body: Column(children: [
-        AppBarShape(title:translator.translate('main'),openDrawer:   _scaffoldKey,onChange: Provider.of<HomeProvider>(context,listen: false).makeSearch,back:false),
+        AppBarShape(title:translator.translate('main'),openDrawer:  widget.key,onChange: Provider.of<HomeProvider>(context,listen: false).makeSearch,back:false),
         SizedBox(height:SizeConfig.screenWidth*s8),
         ImageSlider(),
         Expanded(

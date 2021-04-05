@@ -7,6 +7,7 @@ import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/colors.dart';
 import 'package:provider/provider.dart';
+import 'package:ween_arooh/widgets/bottomNavigationBar.dart';
 import 'package:ween_arooh/services/provider/chatProvider.dart';
 class ChatScreen extends StatefulWidget {
   @override
@@ -25,6 +26,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        bottomNavigationBar:  BottomnavigationBar(),
           appBar: AppBar(
             backgroundColor: backgroundColor,
 

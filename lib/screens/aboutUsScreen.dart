@@ -6,6 +6,7 @@ import 'package:ween_arooh/utils/colors.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/userProvider.dart';
+import 'package:ween_arooh/widgets/bottomNavigationBar.dart';
 class AboutUsScreen extends StatefulWidget {
   @override
   _AboutUsScreenState createState() => _AboutUsScreenState();
@@ -18,6 +19,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        bottomNavigationBar:  BottomnavigationBar(),
        appBar: AppBar(
          backgroundColor: backgroundColor,
           title: Center(child: Text(translator.translate('about_us'))),

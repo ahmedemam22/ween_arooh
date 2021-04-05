@@ -11,6 +11,7 @@ import 'package:ween_arooh/services/provider/homeProvider.dart';
 import 'package:ween_arooh/widgets/addImageShape.dart';
 import 'package:ween_arooh/utils/dialogs.dart';
 import 'package:ween_arooh/widgets/button_shape.dart';
+import 'package:ween_arooh/widgets/bottomNavigationBar.dart';
 import 'package:ween_arooh/utils/text_style.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:ween_arooh/widgets/dropDown.dart';
@@ -23,6 +24,7 @@ class AddOffersScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        bottomNavigationBar:  BottomnavigationBar(),
         appBar: AppBar(
           backgroundColor: backgroundColor,
 

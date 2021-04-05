@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/homeProvider.dart';
 import 'package:ween_arooh/services/provider/addActivityProvider.dart';
 import 'package:ween_arooh/services/provider/userProvider.dart';
+import 'package:ween_arooh/widgets/bottomNavigationBar.dart';
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -18,11 +19,12 @@ class _MainScreenState extends State<MainScreen> {
   int _index=1;
   static final   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(); // ADD THIS LINE
   static final   GlobalKey<ScaffoldState> _scaffoldKeyy = new GlobalKey<ScaffoldState>(); // ADD THIS LINE
-List<Widget>_widgets=[AddActivityScreen(),HomeScreen(),OffersScreen()];
+List<Widget>_widgets=[AddActivityScreen(),HomeScreen(_scaffoldKey),OffersScreen()];
 int _count=0;
 @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
+ _index= ModalRoute.of(context).settings.arguments??1;
   Provider.of<HomeProvider>(context,listen: false).getSliders();
 
   if(_count==0){  Provider.of<HomeProvider>(context,listen: true).getMainCategories().then((value) => null);
@@ -41,30 +43,13 @@ int _count=0;
 
       child: Scaffold(
           drawer: AppDrawer(),
-          bottomNavigationBar: BottomNavigationBar(
-        onTap: (index){
-          setState(() {
-            _index=index;
-          });
-        },
-            currentIndex: _index, // this will be set when a new tab is tapped
-            items: [
+          bottomNavigationBar:BottomnavigationBar(),
+       body: Consumer<HomeProvider>(
+    builder: (context, add, child) {
+_index=add.index;
+      return
 
-              BottomNavigationBarItem(
-                icon: setIcon('register'),
-                title: new Text(translator.translate('register')),
-              ),
-              BottomNavigationBarItem(
-                icon: setIcon('home'),
-                title: new Text(translator.translate('main')),
-              ),
-              BottomNavigationBarItem(
-                  icon: setIcon('offers'),
-                  title: Text(translator.translate('offers'))
-              )
-            ],
-          ),
-       body:_widgets[_index]
+        _widgets[add.index];})
 
 
       ),
@@ -73,11 +58,5 @@ int _count=0;
   openDrawer(){
     _scaffoldKey.currentState.openDrawer();
   }
- Widget setIcon(String iconName){
-    return SvgPicture.asset(
 
-      "assets/images/$iconName.svg",
-
-    );
-  }
 }
