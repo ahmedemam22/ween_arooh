@@ -57,14 +57,14 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences.getInstance().then((pref) {
       // String ids_check =pref.getString("email");
       try {
-        if( pref.getString('user')==null){
-          Navigator.pushReplacementNamed(context, '/login');
-        }
-        else{
+       if( pref.getString('user')==null){
+         Navigator.pushReplacementNamed(context, '/main');
+       }
+       else{
 
-          Provider.of<UserProvider>(context, listen: false).getUser().then((value) =>Navigator.pushReplacementNamed(context, '/main')
-          );
-        }
+         Provider.of<UserProvider>(context, listen: false).getUser().then((value) =>Navigator.pushReplacementNamed(context, '/main')
+         );
+       }
 
         /* else {
           navigateAndClearStack(context, Log_In());

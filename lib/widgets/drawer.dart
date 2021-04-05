@@ -61,7 +61,7 @@ class _AppDrawerState extends State<AppDrawer> {
               children: [
                 UserImageShape(path:'assets/images/userDrawer.png'),
                 SizedBox(height: SizeConfig.screenWidth*s10,),
-                Text(GlopalApp.user.name??"",style: TextStyle(
+                Text(GlopalApp.user?.name??translator.translate('unknown_user'),style: TextStyle(
                   fontSize: SizeConfig.screenWidth*s17
                 ),)
               ],
@@ -110,14 +110,23 @@ class _AppDrawerState extends State<AppDrawer> {
     if (name == 'lang') {
       _changeLanguage();
     } else if (name == "add_activity") {
+      if(GlopalApp.user==null){
+        Dialogs().awsomeDialogWithCancel(context: _context,type: DialogType.ERROR,title: translator.translate('sorry'),
+            desc: translator.translate('valid_login'),onClick:()=> Navigator.pushNamed(_context, '/login') );
+      }
+else{
       Navigator.pop(context);
       Provider.of<HomeProvider>(context,listen: false).changeIndex(0);
-      Navigator.pushNamed(_context, '/main');
+      Navigator.pushNamed(_context, '/main');}
     } else if (name == "setting") {
       Navigator.pop(context);
       Navigator.pushNamed(_context, '/setting');
     }
     else if (name == "offers") {
+      if(GlopalApp.user==null){
+        Dialogs().awsomeDialogWithCancel(context: _context,type: DialogType.ERROR,title: translator.translate('sorry'),
+            desc: translator.translate('valid_login'),onClick:()=> Navigator.pushNamed(_context, '/login') );
+      }
 
       if(Provider.of<AddActivityProvider>(_context,listen: false).userMarkets.length==0){
         Dialogs().awsomeDialog(context: _context,type: DialogType.ERROR,title: translator.translate('sorry'),
@@ -142,8 +151,13 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
     else if (name == "call") {
+      if(GlopalApp.user==null){
+        Dialogs().awsomeDialogWithCancel(context: _context,type: DialogType.ERROR,title: translator.translate('sorry'),
+            desc: translator.translate('valid_login'),onClick: ()=>Navigator.pushNamed(_context, '/login') );
+      }
+      else{
       Navigator.pop(context);
-      Navigator.pushNamed(_context, '/chat');
+      Navigator.pushNamed(_context, '/chat');}
 
     }else {
       Navigator.pop(context);
