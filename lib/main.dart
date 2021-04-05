@@ -50,6 +50,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+  void initState() {
+    super.initState();
+    Provider.of<UserProvider>(context,listen: false).getUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
