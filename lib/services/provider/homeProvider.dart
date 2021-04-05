@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:ween_arooh/network/api.dart';
 import 'package:ween_arooh/network/constant.dart';
@@ -30,29 +31,29 @@ class HomeProvider extends ChangeNotifier{
   }
   Future getMainCategories([token])async{
     if(count==0){
- try{
-   print(++count);
-   _mainCategoryItems=[];
-   _waitMainCategory=true;
+      try{
+        print(++count);
+        _mainCategoryItems=[];
+        _waitMainCategory=true;
 
-   var  response=await api.get(BASE_URL+MAIN_CATEGORY,token);
+        var  response=await api.get(BASE_URL+MAIN_CATEGORY,token);
 
- _mainCategoryResponse=MainCategoryResponse.fromJson(response);
- _mainCategoryItems=_mainCategoryResponse.result;
+        _mainCategoryResponse=MainCategoryResponse.fromJson(response);
+        _mainCategoryItems=_mainCategoryResponse.result;
 
- }
- catch(e){
-   print("error main category ::$e");
- }
- finally{
-   _waitMainCategory=false;
-   notifyListeners();
- }}
+      }
+      catch(e){
+        print("error main category ::$e");
+      }
+      finally{
+        _waitMainCategory=false;
+        notifyListeners();
+      }}
   }
-makeSearch(String title){
+  makeSearch(String title){
     var temp=_mainCategoryItems;
     _mainCategoryItemsSearch=temp.where((element) => translator.currentLanguage=='en'?element.nameEn.contains(title):element.nameAr.contains(title)).toList();
-notifyListeners();
+    notifyListeners();
   }
   List<String> categoriesList(){
     List<String>_categoryNames=[];
@@ -74,38 +75,38 @@ notifyListeners();
   }
   Future getCities()async{
     try {
-     var response= await api.get(BASE_URL + CITIES);
-     CitiesResponse _city=CitiesResponse.fromJson(response);
-     _citiesList=_city.result;
+      var response= await api.get(BASE_URL + CITIES);
+      CitiesResponse _city=CitiesResponse.fromJson(response);
+      _citiesList=_city.result;
     }
     catch(e){
       print('error get cities$e');
     }
     finally{
-notifyListeners();
+      notifyListeners();
     }
   }
   getSliders()async{
-  if(_count==0){  try{
+    if(_count==0){  try{
       _count++;
-    var response=  await api.get(BASE_URL+SLIDER);
-    _slider=SlidersResponse.fromJson(response);
-    _slider.result.forEach((element) {_images.add(element.path);});
+      var response=  await api.get(BASE_URL+SLIDER);
+      _slider=SlidersResponse.fromJson(response);
+      _slider.result.forEach((element) {_images.add(element.path);});
     }
     catch(e){
       print("erro get slider::$e");
     }
 
-  finally{
-    notifyListeners();
-  }}
-}
-List<String> cityItemsDropDown(){
+    finally{
+      notifyListeners();
+    }}
+  }
+  List<String> cityItemsDropDown(){
     List<String>_items=[];
     _citiesList.forEach((element) {_items.add(element.nameAr);
 
     });
     return _items;
-}
+  }
 
 }

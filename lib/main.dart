@@ -13,6 +13,22 @@ import 'services/provider/addActivityProvider.dart';
 import 'package:ween_arooh/services/provider/marketDetailsProvider.dart';
 import 'screens/marketDetailsScreen.dart';
 import 'screens/login/login_screen.dart';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:provider/provider.dart';
+import 'screens/addOffersScreen.dart';
+import 'services/provider/AddOffersProvider.dart';
+import 'package:ween_arooh/screens/settingScreen.dart';
+import 'package:ween_arooh/screens/aboutUsScreen.dart';
+import 'package:ween_arooh/screens/addActivityScreen.dart';
+import 'services/provider/addActivityProvider.dart';
+import 'package:ween_arooh/services/provider/marketDetailsProvider.dart';
+import 'screens/marketDetailsScreen.dart';
+import 'screens/login/login_screen.dart';
 import 'screens/mainScreen.dart';
 import 'screens/marketsScreen.dart';
 import 'screens/login/registration_screen.dart';
@@ -50,12 +66,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
-  void initState() {
-    super.initState();
-    Provider.of<UserProvider>(context,listen: false).getUser();
-  }
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -76,7 +86,7 @@ class _MyAppState extends State<MyApp> {
 
 
         ],
-         child: MaterialApp(
+        child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
             fontFamily: "GESS",
@@ -102,7 +112,7 @@ class _MyAppState extends State<MyApp> {
             '/register': (context) => RegistrationScreen(),
             '/main': (context) => MainScreen(),
             '/markets': (context) => MarketsScreen(),
-           // '/offers': (context) => OffersScreen(),
+            // '/offers': (context) => OffersScreen(),
             '/setting': (context) => SettingScreen(),
             '/about_us': (context) => AboutUsScreen(),
             '/chat': (context) => ChatScreen(),
@@ -116,10 +126,7 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
 
 
-    ),
-       );
+        ),
+      );
   }
 }
-
-
-

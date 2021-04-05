@@ -18,8 +18,7 @@ class _BottomnavigationBarState extends State<BottomnavigationBar> {
             onTap: (index) {
               setState(() {
                 _index = index;
-                Provider.of<HomeProvider>(context, listen: false).changeIndex(
-                    index);
+                Provider.of<HomeProvider>(context, listen: false).changeIndex(index);
                 Navigator.pushReplacementNamed(context, '/main',arguments: _index);
               });
             },
