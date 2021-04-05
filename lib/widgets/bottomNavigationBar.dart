@@ -3,7 +3,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/homeProvider.dart';
+
 class BottomnavigationBar extends StatefulWidget {
+  final bool main_Screen;
+  BottomnavigationBar({
+    this.main_Screen
+  });
   @override
   _BottomnavigationBarState createState() => _BottomnavigationBarState();
 }
@@ -14,7 +19,9 @@ class _BottomnavigationBarState extends State<BottomnavigationBar> {
   Widget build(BuildContext context) {
     return Consumer<HomeProvider>(
         builder: (context, add, child) {
-          return BottomNavigationBar(
+          return  new Theme(
+              data: widget.main_Screen? Theme.of(context).copyWith( primaryColor: Colors.blue,):Theme.of(context).copyWith( primaryColor: Colors.grey,), // sets the inactive color of the `BottomNavigationBar`
+          child: BottomNavigationBar(
             onTap: (index) {
               setState(() {
                 _index = index;
@@ -38,7 +45,7 @@ class _BottomnavigationBarState extends State<BottomnavigationBar> {
                   title: Text(translator.translate('offers'))
               )
             ],
-          );
+          ));
         });
   }
   Widget setIcon(String iconName){

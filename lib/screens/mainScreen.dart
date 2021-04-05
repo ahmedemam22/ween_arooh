@@ -43,7 +43,7 @@ int _count=0;
 
       child: Scaffold(
           drawer: AppDrawer(),
-          bottomNavigationBar:BottomnavigationBar(),
+          bottomNavigationBar:BottomnavigationBar(main_Screen: true),
        body: Consumer<HomeProvider>(
     builder: (context, add, child) {
 _index=add.index;

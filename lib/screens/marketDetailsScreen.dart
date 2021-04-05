@@ -36,7 +36,7 @@ class _MarketDetailsScreenState extends State<MarketDetailsScreen> {
       onWillPop: () async => false,
       child: Scaffold(
         key: _scaffoldKey,
-        bottomNavigationBar:  BottomnavigationBar(),
+        bottomNavigationBar:  BottomnavigationBar(main_Screen: false),
         drawer: AppDrawer(
 
         ),
