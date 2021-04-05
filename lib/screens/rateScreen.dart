@@ -4,6 +4,7 @@ import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/colors.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:ween_arooh/utils/glopal_app.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
 import 'package:ween_arooh/widgets/rate_shape/rateHeader.dart';
 import 'package:provider/provider.dart';
@@ -66,11 +67,12 @@ class _RateScreenState extends State<RateScreen> {
     PercentShape(),
     Divider(thickness: 2,),
     ReviewShape(),
-    Align(
+ if(GlopalApp.user!=null)   Align(
     alignment: Alignment.bottomCenter,
 
     child: InkWell(
     onTap: ()async{
+
    await Dialogs().rateDialog(context);
    await Dialogs().awsomeDialog(context:context, title:translator.translate('success'), type:DialogType.SUCCES,desc:translator.translate('success_rate'),
    onClick: Provider.of<MarketDetailsProvider>(context,listen: false).getRates()

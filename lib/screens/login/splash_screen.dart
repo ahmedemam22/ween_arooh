@@ -58,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
       // String ids_check =pref.getString("email");
       try {
        if( pref.getString('user')==null){
-         Navigator.pushReplacementNamed(context, '/login');
+         Navigator.pushReplacementNamed(context, '/main');
        }
        else{
 

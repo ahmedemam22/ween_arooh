@@ -256,7 +256,7 @@ print(branches.length);
 
   }
   Future getUserMarkets()async{
-    try {
+  if(GlopalApp.user!=null){  try {
       var response = await api.get(BASE_URL + USER_MARKETS + '?user_id=${GlopalApp.user.id}');
       print(response);
 
@@ -271,7 +271,7 @@ print(branches.length);
 
     }
 
-  }
+  }}
   getMarketId(value,context){
     _oldMarket=null;
     _checkOldMArket=false;

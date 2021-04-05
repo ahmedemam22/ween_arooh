@@ -7,6 +7,7 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:share/share.dart';
 import 'package:provider/provider.dart';
+import 'package:ween_arooh/utils/glopal_app.dart';
 import 'package:ween_arooh/services/provider/marketDetailsProvider.dart';
 import 'package:ween_arooh/utils/dialogs.dart';
 class OptionShape extends StatelessWidget {
@@ -33,9 +34,17 @@ class OptionShape extends StatelessWidget {
         Expanded(
           child: InkWell(
               onTap: ()async{
-               await Dialogs().rateDialog(context);
-               await Dialogs().awsomeDialog(context:context, title:translator.translate('success'), type:DialogType.SUCCES,desc:translator.translate('success_rate'));
-
+                if(GlopalApp.user==null){
+                  Dialogs().awsomeDialogWithCancel(context: context,type: DialogType.ERROR,title: translator.translate('sorry'),
+                      desc: translator.translate('valid_login'),onClick: ()=>Navigator.pushNamed(context, '/login') );
+                }
+                else {
+                  await Dialogs().rateDialog(context);
+                  await Dialogs().awsomeDialog(context: context,
+                      title: translator.translate('success'),
+                      type: DialogType.SUCCES,
+                      desc: translator.translate('success_rate'));
+                }
               },
               child: shape(translator.translate('add_rate'),"favorite")),
         ),

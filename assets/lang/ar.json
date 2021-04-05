@@ -29,6 +29,7 @@
   "enter_rate": "ادخل التقييم",
   "send": "ارسال",
   "valid_offers": "قم باختيار العروض او الخصومات",
+  "cancel": "الغاء",
 
 
   "about_us": "من نحن",
@@ -86,12 +87,7 @@
   "valid_images": "من فضلك ادخل الصور",
   "success_rate": "تم اضافة تقييمك بنجاح",
   "select_city_invalid": "من فضلك اختر الدولة اولا",
-  "add_offers_invalid": "قم بتسجيل نشاط اولا"
-
-
-
-
-
-
-
+  "add_offers_invalid": "قم بتسجيل نشاط اولا",
+  "unknown_user": "غير معروف",
+  "valid_login": "من فضلك سجل اولا"
 }

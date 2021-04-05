@@ -15,12 +15,37 @@ class Dialogs{
       animType: AnimType.BOTTOMSLIDE,
       title: title,
       desc: desc,
+      btnOkText: translator.translate('ok'),
+
 
       btnOkOnPress: () {
         onClick;
 
       },
+
       btnOkColor: backgroundColor,
+
+    )..show();
+  }
+  awsomeDialogWithCancel({context,type,title,desc,Function onClick}){
+    return AwesomeDialog(
+
+      context: context,
+      dialogType:type,
+      animType: AnimType.BOTTOMSLIDE,
+      title: title,
+      desc: desc,
+      btnOkText: translator.translate('ok'),
+      btnCancelText: translator.translate('cancel'),
+
+      btnOkOnPress:
+        onClick,
+
+
+      btnOkColor: backgroundColor,
+      btnCancelOnPress: (){
+
+      }
 
     )..show();
   }
