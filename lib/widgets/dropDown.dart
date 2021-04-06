@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:flutter/services.dart';
+
 import 'package:ween_arooh/utils/customDropDown.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/addActivityProvider.dart';
@@ -28,10 +30,13 @@ class DropDownState extends State<DropDown> {
 
   @override
   void initState() {
+    Provider.of<AddActivityProvider>(context,listen: false).changeUnFocus(true);
+
     _dropdownMenuItems = buildDropdownMenuItems(widget.items);
     _selectedCompany = _dropdownMenuItems[0].value;
     super.initState();
   }
+
 
   List<DropdownMenuItem<String>> buildDropdownMenuItems(List companies) {
     List<DropdownMenuItem<String>> items = List();
@@ -51,6 +56,7 @@ class DropDownState extends State<DropDown> {
   }
 
   onChangeDropdownItem( selectedCompany) {
+
     setState(() {
       _selectedCompany = selectedCompany;
       print(_selectedCompany);
@@ -59,6 +65,10 @@ widget.onChange(selectedCompany,context);
     });
     // Provider.of<UrgentProvider>(context,listen: false).changeService_type( selectedCompany);
 
+  }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
   }
 
   @override
@@ -71,20 +81,26 @@ widget.onChange(selectedCompany,context);
               left: SizeConfig.safeAreaVertical * 0.5,
               right: SizeConfig.safeAreaVertical * 0.5
           ),
+          child:
+        InkWell(
+          onTap: (){
+          },
           child: Container(
-            width: widget.size??SizeConfig.screenWidth * 0.7,
+                width: widget.size??SizeConfig.screenWidth * 0.7,
 
-            decoration: BoxDecoration(
-              // borderRadius: BorderRadius.all(Radius.circular(10)),
+                decoration: BoxDecoration(
+                  // borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                child: CustomDropdownButton(
+                  value: _selectedCompany,
+
+                  items: _dropdownMenuItems,
+                  hint: Center(child: Text(widget.hint??"")),
+                  onChanged: onChangeDropdownItem,
+
+
+              ),
             ),
-            child: CustomDropdownButton(
-              value: _selectedCompany,
-
-              items: _dropdownMenuItems,
-              hint: Center(child: Text(widget.hint??"")),
-              onChanged: onChangeDropdownItem,
-
-            ),
-          ));
+        ));
   }
 }

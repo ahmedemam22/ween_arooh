@@ -120,7 +120,12 @@ else{
       Navigator.pushNamed(_context, '/main');}
     } else if (name == "setting") {
       Navigator.pop(context);
-      Navigator.pushNamed(_context, '/setting');
+      if(GlopalApp.user==null){
+        Dialogs().awsomeDialogWithCancel(context: _context,type: DialogType.ERROR,title: translator.translate('sorry'),
+            desc: translator.translate('valid_login'),onClick: ()=>Navigator.pushNamed(_context, '/login') );
+      }
+      else{
+      Navigator.pushNamed(_context, '/setting');}
     }
     else if (name == "offers") {
       if(GlopalApp.user==null){
@@ -142,6 +147,8 @@ else{
 
     } else if (name == "main") {
       Navigator.pop(context);
+      Provider.of<HomeProvider>(context,listen: false).changeIndex(1);
+
       Navigator.pushNamed(_context, '/main');
 
     }    else if (name == "about") {

@@ -44,63 +44,82 @@ print('at8aaaaaaaayr');
     }
 
     _context=context;
-    return Container(
-      width: SizeConfig.screenWidth*0.58,
-
-        child: TextFormField(
-          onTap:(){
-
-        if( widget.keyy==""|| widget.keyy=="location") {
-        prov.setCity(null,_context);
-         Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>
-                    LocationView(
-                      savedLocation: saveLocation,
-                      initialPosition:LatLng(double.parse(prov.selectedCity.latitude),double.parse(prov.selectedCity.longitude)),
-                    )));}
-          },
-        controller: widget.controller,
-            readOnly: widget.keyy==""|| widget.keyy=="location",
-          validator:(v){
-          if(widget.validate!=null){
-         if( widget.validate(v)==null){
-           Provider.of<AddActivityProvider>(context,listen: false).setData(widget.keyy, v);
-         }
-         else {
-           return translator.translate('add_data');
-         }
-
-          }
-          else if(v.length>0) prov.setData(widget.keyy, v);
-
-        }
-          ,
-          style: TX_STYLE_black_14.copyWith(fontFamily: 'Schelyer'),
-
-
-          keyboardType: widget.keyy=="mobile"||widget.keyy=="telephone"?TextInputType.number:TextInputType.name,
-          onChanged: (value){
-            _change=true;
-
-          if(widget.hintText=='branch'){
-            if(value.length==0){
-             prov.removeBranch(0);
-            }
+    return Consumer<AddActivityProvider>(
+        builder: (context, add, child) {
+          if (add.unFocus) {
+            print('fooooooooooooooocus');
+            FocusScope.of(context).unfocus();
           }
 
-          },
+          return Container(
+            width: SizeConfig.screenWidth * 0.58,
 
-          // style: mobileResult == null ? TX_STYLE_black_14Point5.copyWith(color: gray,fontFamily: 'Schelyer') : TX_STYLE_black_14Point5.copyWith(color: red,fontFamily: 'Schelyer'),
-          decoration: InputDecoration(
-              hintStyle: TX_STYLE_black_14.copyWith(fontFamily: 'Schelyer',fontWeight: FontWeight.normal),
+            child: TextFormField(
+              onTap: () {
+               add.changeUnFocus(false);
 
-          //  hintStyle: mobileResult == null ? TX_STYLE_black_14Point5.copyWith(color: gray) : TX_STYLE_black_14Point5.copyWith(color: red),
-            hintText: widget.hintText!=null&&widget.hintText!='branch'?widget.hintText=='mobile'?translator.translate(widget.hintText)+' :5xxxxxxxx':translator.translate(widget.hintText):"",
-          ),
-        ),
 
-    );
+                if (widget.keyy == "" || widget.keyy == "location") {
+                  prov.setCity(null, _context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>
+                          LocationView(
+                            savedLocation: saveLocation,
+                            initialPosition: LatLng(double.parse(prov
+                                .selectedCity.latitude), double.parse(prov
+                                .selectedCity.longitude)),
+                          )));
+                }
+              },
+              controller: widget.controller,
+              readOnly: widget.keyy == "" || widget.keyy == "location",
+              validator: (v) {
+                if (widget.validate != null) {
+                  if (widget.validate(v) == null) {
+                    Provider.of<AddActivityProvider>(context, listen: false)
+                        .setData(widget.keyy, v);
+                  }
+                  else {
+                    return translator.translate('add_data');
+                  }
+                }
+                else if (v.length > 0) prov.setData(widget.keyy, v);
+              }
+              ,
+              style: TX_STYLE_black_14.copyWith(fontFamily: 'Schelyer'),
+
+
+              keyboardType: widget.keyy == "mobile" ||
+                  widget.keyy == "telephone"
+                  ? TextInputType.number
+                  : TextInputType.name,
+              onChanged: (value) {
+                _change = true;
+
+                if (widget.hintText == 'branch') {
+                  if (value.length == 0) {
+                    prov.removeBranch(0);
+                  }
+                }
+              },
+
+              // style: mobileResult == null ? TX_STYLE_black_14Point5.copyWith(color: gray,fontFamily: 'Schelyer') : TX_STYLE_black_14Point5.copyWith(color: red,fontFamily: 'Schelyer'),
+              decoration: InputDecoration(
+                hintStyle: TX_STYLE_black_14.copyWith(
+                    fontFamily: 'Schelyer', fontWeight: FontWeight.normal),
+
+                //  hintStyle: mobileResult == null ? TX_STYLE_black_14Point5.copyWith(color: gray) : TX_STYLE_black_14Point5.copyWith(color: red),
+                hintText: widget.hintText != null && widget.hintText != 'branch'
+                    ? widget.hintText == 'mobile' ? translator.translate(
+                    widget.hintText) + ' :5xxxxxxxx' : translator.translate(
+                    widget.hintText)
+                    : "",
+              ),
+            ),
+
+          );
+        });
   }
 
     saveLocation(LatLng Location, String address) {

@@ -12,9 +12,12 @@ class OffersProvider extends ChangeNotifier{
   List<Result> get offersSearch=>_offersSearch;
   bool _waitOffers=false;
   bool get waitOffers=>_waitOffers;
-  Future getOffers()async{
+int count=0;
+Future getOffers()async{
 try {
+
   _waitOffers=true;
+  count++;
   notifyListeners();
   var response = await api.post(BASE_URL + GET_OFFERS, {
 
@@ -59,6 +62,10 @@ finally{
  print(_offersSearch.length);
     print("filteeeeeeeeeeer");
     notifyListeners();
+  }
+  setCount(){
+  count=0;
+  notifyListeners();
   }
 
 }

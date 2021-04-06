@@ -16,11 +16,13 @@ import 'package:ween_arooh/utils/text_style.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:ween_arooh/widgets/dropDown.dart';
 import 'package:ween_arooh/services/provider/marketProvider.dart';
+import 'package:ween_arooh/services/provider/offersProviders.dart';
 class AddOffersScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<OffersProvider>(context,listen: false).setCount();
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(

@@ -16,6 +16,8 @@ import 'package:ween_arooh/utils/distance.dart';
 import 'package:ween_arooh/network/constant.dart';
 
 class AddActivityProvider extends ChangeNotifier{
+  bool _unFocus=false;
+  bool get unFocus=>_unFocus;
   List<LatLng>_branches=[];
   UserMarketModel _marketModel;
   List<LatLng>get branches=>_branches;
@@ -315,5 +317,10 @@ return city_id;
       _items.add(element.title);
     });
     return _items.toList();
+  }
+  changeUnFocus(bool value){
+    _unFocus=value;
+    notifyListeners();
+
   }
 }

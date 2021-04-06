@@ -82,10 +82,20 @@ class _MarketDetailsScreenState extends State<MarketDetailsScreen> {
     Divider(thickness: 1,),
     SocialMediaShareShape(),
     Divider(thickness: 1,),
-    DisplayOffersShape(),
-    Divider(thickness: 1,),
-    GetCopounShape(),
-    Divider(thickness: 1,),
+      if(details.marketDetails.offers.length>0)Column(
+        children: [
+          DisplayOffersShape(),
+          Divider(thickness: 1,),
+
+        ],
+      ),
+      if(details.marketDetails.coupons.length>0)Column(
+        children: [
+          GetCopounShape(),
+          Divider(thickness: 1,),
+
+        ],
+      ),
     LocationShape()
 
 

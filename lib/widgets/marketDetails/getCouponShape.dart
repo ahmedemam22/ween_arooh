@@ -21,7 +21,7 @@ class GetCopounShape extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(translator.translate('get_coupon')),
-              InkWell(
+           InkWell(
                 onTap: (){
                   Dialogs().dialogCopoun(context,_coupon[0].code);
                 },

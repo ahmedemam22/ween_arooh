@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:ween_arooh/utils/glopal_app.dart';
 import 'package:ween_arooh/services/provider/marketDetailsProvider.dart';
 import 'package:ween_arooh/utils/dialogs.dart';
+import 'package:ween_arooh/utils/launcher.dart';
 class OptionShape extends StatelessWidget {
 
   @override
@@ -24,11 +25,15 @@ class OptionShape extends StatelessWidget {
               },
               child: shape(translator.translate('review'),"visitors_opinion")),
         ),
-       shape(translator.translate('add_num'),"contact"),
+       InkWell(
+           onTap: (){
+             makePhoneCall('tel:${Provider.of<MarketDetailsProvider>(context,listen: false).marketDetails.mobile}');
+           },
+           child: shape(translator.translate('add_num'),"contact")),
         Expanded(
           child: InkWell(
               onTap: (){
-                Share.share(Provider.of<MarketDetailsProvider>(context,listen: false).marketDetails.siteLink);
+                Share.share(Provider.of<MarketDetailsProvider>(context,listen: false).marketDetails.siteLink??"aaa");
               },child: shape(translator.translate('share'),"share")),
         ),
         Expanded(

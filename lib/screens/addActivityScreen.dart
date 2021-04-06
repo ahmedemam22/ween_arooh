@@ -9,12 +9,15 @@ import 'package:ween_arooh/services/provider/homeProvider.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
 import 'package:ween_arooh/widgets/companyInfoShape.dart';
 import 'package:ween_arooh/utils/colors.dart';
+import 'package:ween_arooh/services/provider/offersProviders.dart';
 class AddActivityScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(); // ADD THIS LINE
 
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<OffersProvider>(context,listen: false).setCount();
+
     return  Scaffold(
 
       backgroundColor: lightGray,
@@ -27,45 +30,55 @@ class AddActivityScreen extends StatelessWidget {
       drawer: AppDrawer(),
 
       body:
-   Container(
-          height: SizeConfig.screenHeight,
-          child: Column(children: [
-            Expanded(
-              child: ListView(
+      new GestureDetector(
+        behavior: HitTestBehavior.translucent,
 
-                children: [
-                  Container(
-                    color: lightGray,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Expanded(
-                          flex: 0,
-                          child: Text(
-                            translator.translate('choose_activity'),
-                            style: TX_STYLE_black_14,
-                            maxLines: 1,
+        onTap: () {
+
+          FocusScope.of(context).requestFocus(new FocusNode());
+        },
+     child: Container(
+            height: SizeConfig.screenHeight,
+            child: Column(children: [
+              Expanded(
+                child: ListView(
+                  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+
+
+                  children: [
+                    Container(
+                      color: lightGray,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Expanded(
+                            flex: 0,
+                            child: Text(
+                              translator.translate('choose_activity'),
+                              style: TX_STYLE_black_14,
+                              maxLines: 1,
+                            ),
                           ),
-                        ),
-                        Expanded(flex:1,child: DropDown(items:Provider.of<HomeProvider>(context,listen: false).categoriesList(),hint: translator.translate('choose_activity'),
-                        onChange:Provider.of<AddActivityProvider>(context,listen: false).setCategory
-                          ,))
-                        // urgentServices_TextFieldOptions( translator.currentLanguage == "en" ? 'Services Type' : "نوع الخدمة", black),
-                      ],),
-                  ),
-                          CompanyInfoShape(),
+                          Expanded(flex:1,child: DropDown(items:Provider.of<HomeProvider>(context,listen: false).categoriesList(),hint: translator.translate('choose_activity'),
+                          onChange:Provider.of<AddActivityProvider>(context,listen: false).setCategory
+                            ,))
+                          // urgentServices_TextFieldOptions( translator.currentLanguage == "en" ? 'Services Type' : "نوع الخدمة", black),
+                        ],),
+                    ),
+                            CompanyInfoShape(),
 
 
 
 
-                ],
+                  ],
+                ),
               ),
-            ),
 
 
 
-          ]),
-        ),
+            ]),
+          ),
+   ),
 
     );
   }
