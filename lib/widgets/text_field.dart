@@ -56,7 +56,6 @@ print('at8aaaaaaaayr');
 
             child: TextFormField(
               onTap: () {
-               add.changeUnFocus(false);
 
 
                 if (widget.keyy == "" || widget.keyy == "location") {

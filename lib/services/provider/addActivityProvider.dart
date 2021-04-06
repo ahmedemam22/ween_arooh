@@ -117,7 +117,7 @@ addBranch(latlng,String address){
    _data.putIfAbsent("location", () =>  location);
    _data.putIfAbsent("latitude", () =>  adminLocation.latitude);
    _data.putIfAbsent("longitude", () => adminLocation.longitude);
-   _data.putIfAbsent("city_id", () =>selectedCity.id);
+   _data.putIfAbsent("city_id", () =>selectedCity==null?1:selectedCity.id);
 
 /*{
      "title_ar":"asd",
@@ -282,6 +282,7 @@ print(branches.length);
       if( _userMarkets[i].categoryId==Provider.of<HomeProvider>(context,listen: false).getCategoryId(category)) {
         print('7ssssssssl');
         _oldMarket = _userMarkets[i].toJson();
+        adminLocation=LatLng(_oldMarket['latitude'],_oldMarket['longitude']);
         _checkOldMArket=true;
 
       }

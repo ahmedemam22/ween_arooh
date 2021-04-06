@@ -13,7 +13,8 @@ class DropDown extends StatefulWidget {
   final double size;
   final String hint;
   final  onChange;
-  DropDown({this.items, this.size, this.hint, this.onChange}) : super();
+  final BuildContext contextt;
+  DropDown({this.items, this.size, this.hint, this.onChange, this.contextt}) : super();
 
   final String title = "DropDown Demo";
 
@@ -30,7 +31,7 @@ class DropDownState extends State<DropDown> {
 
   @override
   void initState() {
-    Provider.of<AddActivityProvider>(context,listen: false).changeUnFocus(true);
+  //  FocusScope.of(widget.contextt).unfocus();
 
     _dropdownMenuItems = buildDropdownMenuItems(widget.items);
     _selectedCompany = _dropdownMenuItems[0].value;
@@ -56,6 +57,7 @@ class DropDownState extends State<DropDown> {
   }
 
   onChangeDropdownItem( selectedCompany) {
+    print('chaaaaaaaaaaaaaaange');
 
     setState(() {
       _selectedCompany = selectedCompany;
@@ -68,39 +70,58 @@ widget.onChange(selectedCompany,context);
   }
   @override
   void didChangeDependencies() {
+    print('diddddddddddddddd');
+
     super.didChangeDependencies();
   }
+@override
+  void didUpdateWidget(covariant DropDown oldWidget) {
+print('updtaaaaaaaaaaaa');
+
+if(oldWidget!=widget){
+  //FocusScope.of(widget.contextt).unfocus();
+
+}
+
+super.didUpdateWidget(oldWidget);
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return
-      Padding(
-          padding: EdgeInsets.only(
-              bottom: SizeConfig.safeAreaVertical * 0.5,
-              top: SizeConfig.safeAreaVertical * 0.5,
-              left: SizeConfig.safeAreaVertical * 0.5,
-              right: SizeConfig.safeAreaVertical * 0.5
-          ),
-          child:
-        InkWell(
-          onTap: (){
-          },
-          child: Container(
-                width: widget.size??SizeConfig.screenWidth * 0.7,
-
-                decoration: BoxDecoration(
-                  // borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                child: CustomDropdownButton(
-                  value: _selectedCompany,
-
-                  items: _dropdownMenuItems,
-                  hint: Center(child: Text(widget.hint??"")),
-                  onChanged: onChangeDropdownItem,
-
-
-              ),
+      GestureDetector(
+        onForcePressUpdate: (v){
+          print('ccccccccccccccc');
+        },
+        child: Padding(
+            padding: EdgeInsets.only(
+                bottom: SizeConfig.safeAreaVertical * 0.5,
+                top: SizeConfig.safeAreaVertical * 0.5,
+                left: SizeConfig.safeAreaVertical * 0.5,
+                right: SizeConfig.safeAreaVertical * 0.5
             ),
-        ));
+
+            child: Container(
+                  width: widget.size??SizeConfig.screenWidth * 0.7,
+
+                  decoration: BoxDecoration(
+                    // borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+
+                    child: CustomDropdownButton(
+
+                      value: _selectedCompany,
+
+                      items: _dropdownMenuItems,
+                      hint: Center(child: Text(widget.hint??"")),
+                      onChanged: onChangeDropdownItem,
+
+
+                ),
+                  ),
+              ),
+
+      );
   }
 }

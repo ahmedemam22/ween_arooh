@@ -22,7 +22,8 @@ class AddSocialMedia extends StatelessWidget {
             Row(
               children: [
                 DropDown(items:["facebook","twitter","youtube","linkedin"],size:SizeConfig.screenWidth*s120,hint: 'facebook',
-                onChange:Provider.of<AddActivityProvider>(context).addSocialMedia)
+                onChange:Provider.of<AddActivityProvider>(context).addSocialMedia,
+                contextt: context,)
                   ,
     Consumer<AddActivityProvider>(
     builder: (context, add, child){return TextFeld(controller: _socialCon,keyy: add.social,);}),

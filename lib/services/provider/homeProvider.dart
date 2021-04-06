@@ -62,10 +62,8 @@ notifyListeners();
   }
   int getCategoryId(String title){
     print(title);
-    print("vvvvvvvvvvv");
     _mainCategoryItems.forEach((element) {
       if(element.nameAr==title){
-        print('sssss7');
         selectedId=element.id;
       }
     });

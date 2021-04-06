@@ -30,41 +30,38 @@ class AddActivityScreen extends StatelessWidget {
       drawer: AppDrawer(),
 
       body:
-      new GestureDetector(
-        behavior: HitTestBehavior.translucent,
-
-        onTap: () {
-
-          FocusScope.of(context).requestFocus(new FocusNode());
-        },
-     child: Container(
+      Container(
             height: SizeConfig.screenHeight,
             child: Column(children: [
               Expanded(
                 child: ListView(
-                  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
 
 
                   children: [
-                    Container(
-                      color: lightGray,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Expanded(
-                            flex: 0,
-                            child: Text(
-                              translator.translate('choose_activity'),
-                              style: TX_STYLE_black_14,
-                              maxLines: 1,
+
+                      Container(
+                        color: lightGray,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Expanded(
+                              flex: 0,
+                              child: Text(
+                                translator.translate('choose_activity'),
+                                style: TX_STYLE_black_14,
+                                maxLines: 1,
+                              ),
                             ),
-                          ),
-                          Expanded(flex:1,child: DropDown(items:Provider.of<HomeProvider>(context,listen: false).categoriesList(),hint: translator.translate('choose_activity'),
-                          onChange:Provider.of<AddActivityProvider>(context,listen: false).setCategory
-                            ,))
-                          // urgentServices_TextFieldOptions( translator.currentLanguage == "en" ? 'Services Type' : "نوع الخدمة", black),
-                        ],),
-                    ),
+                            Expanded(flex:1,
+                              child: DropDown(items:Provider.of<HomeProvider>(context,listen: false).categoriesList(),hint: translator.translate('choose_activity'),
+                              onChange:Provider.of<AddActivityProvider>(context,listen: false).setCategory,
+                                contextt: context
+                                ,),
+                            )
+                            // urgentServices_TextFieldOptions( translator.currentLanguage == "en" ? 'Services Type' : "نوع الخدمة", black),
+                          ],),
+                      ),
+
                             CompanyInfoShape(),
 
 
@@ -78,7 +75,7 @@ class AddActivityScreen extends StatelessWidget {
 
             ]),
           ),
-   ),
+
 
     );
   }
