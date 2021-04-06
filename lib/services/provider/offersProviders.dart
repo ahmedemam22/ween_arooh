@@ -14,7 +14,10 @@ class OffersProvider extends ChangeNotifier{
   bool get waitOffers=>_waitOffers;
 int count=0;
 Future getOffers()async{
-try {
+  if(count==0){
+
+    try {
+
 
   _waitOffers=true;
   count++;
@@ -27,16 +30,15 @@ try {
   _offersModel=OffersModel.fromJson(json.decode(response.body));
   _offersItems=_offersModel.result;
 }
-catch(e){
+catch(e) {
   print("error get offers::$e");
 }
-finally{
-  _waitOffers=false;
+finally {
+  _waitOffers = false;
   notifyListeners();
-
 }
 
-  }
+  }}
   nameSearch(String title){
     _offersSearch=[];
     var _temp=_offersItems;
