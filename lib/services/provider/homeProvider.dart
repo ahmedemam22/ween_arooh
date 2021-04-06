@@ -55,9 +55,9 @@ makeSearch(String title){
 notifyListeners();
   }
   List<String> categoriesList(){
-    List<String>_categoryNames=[];
+    Set<String>_categoryNames= {};
     _mainCategoryItems.forEach((element) {_categoryNames.add(element.name);});
-    return _categoryNames;
+    return _categoryNames.toList();
 
   }
   int getCategoryId(String title){

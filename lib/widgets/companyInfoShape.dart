@@ -277,7 +277,8 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
 
           DropDown(items: Provider.of<HomeProvider>(context,listen: false).cityItemsDropDown(),size: SizeConfig.screenWidth*0.6,onChange:
         Provider.of<AddActivityProvider>(context,listen: false).setCity,
-      contextt: context
+
+            contextt: context
       ,),
 
 

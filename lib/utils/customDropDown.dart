@@ -1,5 +1,7 @@
 import 'dart:math' as math;
-
+import 'package:provider/provider.dart';
+import 'package:ween_arooh/services/provider/addActivityProvider.dart';
+import 'package:ween_arooh/services/provider/homeProvider.dart';
 import 'package:flutter/material.dart';
 
 const Duration _kDropdownMenuDuration = Duration(milliseconds: 300);
@@ -393,7 +395,9 @@ class CustomDropdownButton<T> extends StatefulWidget {
   /// The [elevation] and [iconSize] arguments must not be null (they both have
   /// defaults, so do not need to be specified).
   CustomDropdownButton({
+
     Key key,
+    this.contexxt,
     @required this.items,
     this.value,
     this.hint,
@@ -420,6 +424,7 @@ class CustomDropdownButton<T> extends StatefulWidget {
 
   /// Displayed if [value] is null.
   final Widget hint;
+  final  contexxt;
 
   /// Called when the user selects an item.
   final ValueChanged<T> onChanged;
@@ -464,7 +469,9 @@ class _DropdownButtonState<T> extends State<CustomDropdownButton<T>>
   @override
   void initState() {
     super.initState();
-//    _updateSelectedIndex();
+  // _updateSelectedIndex();
+    getIndex();
+
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -489,11 +496,14 @@ class _DropdownButtonState<T> extends State<CustomDropdownButton<T>>
 
   @override
   void didUpdateWidget(CustomDropdownButton<T> oldWidget) {
+
     super.didUpdateWidget(oldWidget);
+
     _updateSelectedIndex();
   }
 
   void _updateSelectedIndex() {
+
     assert(widget.value == null ||
         widget.items
             .where((DropdownMenuItem<T> item) => item.value == widget.value)
@@ -503,6 +513,7 @@ class _DropdownButtonState<T> extends State<CustomDropdownButton<T>>
     for (int itemIndex = 0; itemIndex < widget.items.length; itemIndex++) {
       if (widget.items[itemIndex].value == widget.value) {
         _selectedIndex = itemIndex;
+
         return;
       }
     }
@@ -512,7 +523,9 @@ class _DropdownButtonState<T> extends State<CustomDropdownButton<T>>
       widget.style ?? Theme.of(context).textTheme.subhead;
 
   void _handleTap() {
-    final RenderBox itemBox = context.findRenderObject();
+
+
+  final RenderBox itemBox = context.findRenderObject();
     final Rect itemRect = itemBox.localToGlobal(Offset.zero) & itemBox.size;
     final TextDirection textDirection = Directionality.of(context);
     final EdgeInsetsGeometry menuMargin =
@@ -525,6 +538,7 @@ class _DropdownButtonState<T> extends State<CustomDropdownButton<T>>
       buttonRect: menuMargin.resolve(textDirection).inflateRect(itemRect),
       padding: _kMenuItemPadding.resolve(textDirection),
       selectedIndex: -1,
+
       elevation: widget.elevation,
       theme: Theme.of(context, shadowThemeOnly: true),
       style: _textStyle,
@@ -533,6 +547,9 @@ class _DropdownButtonState<T> extends State<CustomDropdownButton<T>>
 
     Navigator.push(context, _dropdownRoute)
         .then<void>((_DropdownRouteResult<T> newValue) {
+
+
+
       _dropdownRoute = null;
       if (!mounted || newValue == null) return;
       if (widget.onChanged != null) widget.onChanged(newValue.result);
@@ -622,7 +639,19 @@ class _DropdownButtonState<T> extends State<CustomDropdownButton<T>>
     return new Semantics(
       button: true,
       child: new GestureDetector(
-          onTap: _handleTap, behavior: HitTestBehavior.opaque, child: result),
+          onTap:(){
+            _handleTap();
+            FocusScope.of(widget.contexxt).unfocus();
+          }, behavior: HitTestBehavior.opaque, child: result),
     );
   }
+  getIndex(){
+    if(Provider.of<AddActivityProvider>(context,listen: false).category!=null){
+    for(int i=0;i<widget.items.length;i++){
+
+ if( Provider.of<AddActivityProvider>(context,listen: false).category==widget.items[i].value) {
+   _selectedIndex = i;
+ }
+ }
+ }  }
 }

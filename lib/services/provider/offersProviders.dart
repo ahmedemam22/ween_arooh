@@ -10,6 +10,7 @@ class OffersProvider extends ChangeNotifier{
   List<Result> _offersSearch;
   List<Result> get offersItems=>_offersItems;
   List<Result> get offersSearch=>_offersSearch;
+  int cityId;
   bool _waitOffers=false;
   bool get waitOffers=>_waitOffers;
 int count=0;
@@ -54,6 +55,7 @@ finally {
     notifyListeners();
   }
   locationSearch(int id){
+  cityId=id;
     _offersSearch=[];
     var _temp=_offersItems;
 

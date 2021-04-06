@@ -57,7 +57,6 @@ class DropDownState extends State<DropDown> {
   }
 
   onChangeDropdownItem( selectedCompany) {
-    print('chaaaaaaaaaaaaaaange');
 
     setState(() {
       _selectedCompany = selectedCompany;
@@ -68,33 +67,12 @@ widget.onChange(selectedCompany,context);
     // Provider.of<UrgentProvider>(context,listen: false).changeService_type( selectedCompany);
 
   }
-  @override
-  void didChangeDependencies() {
-    print('diddddddddddddddd');
-
-    super.didChangeDependencies();
-  }
-@override
-  void didUpdateWidget(covariant DropDown oldWidget) {
-print('updtaaaaaaaaaaaa');
-
-if(oldWidget!=widget){
-  //FocusScope.of(widget.contextt).unfocus();
-
-}
-
-super.didUpdateWidget(oldWidget);
-  }
 
 
   @override
   Widget build(BuildContext context) {
     return
-      GestureDetector(
-        onForcePressUpdate: (v){
-          print('ccccccccccccccc');
-        },
-        child: Padding(
+       Padding(
             padding: EdgeInsets.only(
                 bottom: SizeConfig.safeAreaVertical * 0.5,
                 top: SizeConfig.safeAreaVertical * 0.5,
@@ -110,7 +88,7 @@ super.didUpdateWidget(oldWidget);
                   ),
 
                     child: CustomDropdownButton(
-
+contexxt: widget.contextt,
                       value: _selectedCompany,
 
                       items: _dropdownMenuItems,
@@ -120,7 +98,7 @@ super.didUpdateWidget(oldWidget);
 
                 ),
                   ),
-              ),
+
 
       );
   }

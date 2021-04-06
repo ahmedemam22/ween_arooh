@@ -34,24 +34,14 @@ class _TextFeldState extends State<TextFeld> {
   Widget build(BuildContext context) {
    prov=Provider.of<AddActivityProvider>(context,listen: true);
     if(prov.oldMArket!=null&&prov.checkOldMArket&&!_change){
-print('at8aaaaaaaayr');
-      widget.controller.text=prov.oldMArket[widget.keyy];
+     if( prov.oldMArket[widget.keyy]!=null) widget.controller.text=prov.oldMArket[widget.keyy];
     }
     else if(!_change&& !(widget.keyy==""|| widget.keyy=="location")){
-      print('mat8yr4');
-
       widget.controller.text='';
     }
 
     _context=context;
-    return Consumer<AddActivityProvider>(
-        builder: (context, add, child) {
-          if (add.unFocus) {
-            print('fooooooooooooooocus');
-            FocusScope.of(context).unfocus();
-          }
-
-          return Container(
+    return Container(
             width: SizeConfig.screenWidth * 0.58,
 
             child: TextFormField(
@@ -82,6 +72,7 @@ print('at8aaaaaaaayr');
                   else {
                     return translator.translate('add_data');
                   }
+
                 }
                 else if (v.length > 0) prov.setData(widget.keyy, v);
               }
@@ -95,6 +86,7 @@ print('at8aaaaaaaayr');
                   : TextInputType.name,
               onChanged: (value) {
                 _change = true;
+                print('chaaange');
 
                 if (widget.hintText == 'branch') {
                   if (value.length == 0) {
@@ -118,21 +110,24 @@ print('at8aaaaaaaayr');
             ),
 
           );
-        });
+
   }
 
     saveLocation(LatLng Location, String address) {
-    if (Location==null){
+      widget.controller.text='';
+      print(address);
+      print('ccccccccccccc');
 
-      print('hhhhhhhhhhhhho');
+      if (Location==null){
+
       Location=LatLng(double.parse(prov.selectedCity.latitude),double.parse(prov.selectedCity.longitude));
     }
    Provider.of<AddActivityProvider>(_context,listen: false).setAdminLoication(Location,address);
    if(address!=null){
-     print('nnnnnnnnnnnnno');
+     print(address);
+     widget.controller.text='';
    widget.controller.text=address;}
-   print(address);
-   print('addressssss');
+   if( prov.oldMArket!=null)   prov.oldMArket['location']=null;
    setState(() {
 
    });

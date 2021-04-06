@@ -16,8 +16,6 @@ import 'package:ween_arooh/utils/distance.dart';
 import 'package:ween_arooh/network/constant.dart';
 
 class AddActivityProvider extends ChangeNotifier{
-  bool _unFocus=false;
-  bool get unFocus=>_unFocus;
   List<LatLng>_branches=[];
   UserMarketModel _marketModel;
   List<LatLng>get branches=>_branches;
@@ -50,7 +48,7 @@ class AddActivityProvider extends ChangeNotifier{
 
   setData(String key,value){
     if(_data.containsKey(key)){
-
+print('aywaaaaaaaa');
       _data.update(key, (value) => value);
     }
     else{
@@ -160,6 +158,7 @@ print('daaaaaaataaa');
    Map valueMap = jsonDecode(response.toString());
 
    if (valueMap['code'] == 200 && valueMap['message'] == 'success') {
+     _data={};
      _logoImage=[];
      _bannerImage=[];
      category='';
@@ -261,6 +260,7 @@ print(branches.length);
   if(GlopalApp.user!=null){  try {
       var response = await api.get(BASE_URL + USER_MARKETS + '?user_id=${GlopalApp.user.id}');
       print(response);
+      print('useeeeeeeeeeeeeeer');
 
       _marketModel = UserMarketModel.fromJson(response);
       _userMarkets = _marketModel.result;
@@ -319,9 +319,5 @@ return city_id;
     });
     return _items.toList();
   }
-  changeUnFocus(bool value){
-    _unFocus=value;
-    notifyListeners();
 
-  }
 }
