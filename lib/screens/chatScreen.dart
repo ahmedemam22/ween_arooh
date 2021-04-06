@@ -26,7 +26,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        bottomNavigationBar:  BottomnavigationBar(),
+        bottomNavigationBar:  BottomnavigationBar(main_Screen: false),
           appBar: AppBar(
             backgroundColor: backgroundColor,
 

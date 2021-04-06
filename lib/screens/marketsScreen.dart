@@ -29,7 +29,7 @@ class _MarketsScreenState extends State<MarketsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomnavigationBar(),
+      bottomNavigationBar: BottomnavigationBar(main_Screen: false),
         key: MarketsScreen._scaffoldKey,
         drawer: AppDrawer(),
         body:    FutureBuilder(

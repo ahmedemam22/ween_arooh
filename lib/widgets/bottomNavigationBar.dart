@@ -3,10 +3,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/services/provider/homeProvider.dart';
-import 'package:ween_arooh/utils/glopal_app.dart';
-import 'package:ween_arooh/utils/dialogs.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
+
 class BottomnavigationBar extends StatefulWidget {
+  final bool main_Screen;
+  BottomnavigationBar({
+    this.main_Screen
+  });
   @override
   _BottomnavigationBarState createState() => _BottomnavigationBarState();
 }
@@ -17,16 +19,14 @@ class _BottomnavigationBarState extends State<BottomnavigationBar> {
   Widget build(BuildContext context) {
     return Consumer<HomeProvider>(
         builder: (context, add, child) {
-          return BottomNavigationBar(
+          return  new Theme(
+              data: widget.main_Screen? Theme.of(context).copyWith( primaryColor: Colors.blue,):Theme.of(context).copyWith( primaryColor: Colors.grey,), // sets the inactive color of the `BottomNavigationBar`
+          child: BottomNavigationBar(
             onTap: (index) {
               setState(() {
-                if(index==0&&GlopalApp.user==null)
-                  Dialogs().awsomeDialogWithCancel(context: context,type: DialogType.ERROR,title: translator.translate('sorry'),
-                      desc: translator.translate('valid_login'),onClick: ()=>Navigator.pushNamed(context, '/login') );
-            else{    _index = index;
-                Provider.of<HomeProvider>(context, listen: false).changeIndex(
-                    index);
-                Navigator.pushReplacementNamed(context, '/main',arguments: _index);}
+                _index = index;
+                Provider.of<HomeProvider>(context, listen: false).changeIndex(index);
+                Navigator.pushReplacementNamed(context, '/main',arguments: _index);
               });
             },
             currentIndex: add.index, // this will be set when a new tab is tapped
@@ -45,7 +45,7 @@ class _BottomnavigationBarState extends State<BottomnavigationBar> {
                   title: Text(translator.translate('offers'))
               )
             ],
-          );
+          ));
         });
   }
   Widget setIcon(String iconName){

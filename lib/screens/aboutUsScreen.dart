@@ -19,7 +19,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        bottomNavigationBar:  BottomnavigationBar(),
+        bottomNavigationBar:  BottomnavigationBar(main_Screen: false),
        appBar: AppBar(
          backgroundColor: backgroundColor,
           title: Center(child: Text(translator.translate('about_us'))),
