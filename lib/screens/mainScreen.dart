@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:ween_arooh/screens/NewAddActivity.dart';
 import 'package:ween_arooh/widgets/bottomNavigationBar.dart';
 import 'package:ween_arooh/widgets/drawer.dart';
 import 'package:ween_arooh/screens/homeScreen.dart';
@@ -19,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
   int _index=1;
   static final   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(); // ADD THIS LINE
   static final   GlobalKey<ScaffoldState> _scaffoldKeyy = new GlobalKey<ScaffoldState>(); // ADD THIS LINE
-List<Widget>_widgets=[AddActivityScreen(),HomeScreen(_scaffoldKey),OffersScreen()];
+List<Widget>_widgets=[NewAddActivity(),HomeScreen(_scaffoldKey),OffersScreen()];
 int _count=0;
 @override
   void didChangeDependencies() {

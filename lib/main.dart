@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:provider/provider.dart';
+import 'package:ween_arooh/screens/NewAddActivity.dart';
 import 'screens/addOffersScreen.dart';
 import 'services/provider/AddOffersProvider.dart';
 import 'package:ween_arooh/screens/settingScreen.dart';
@@ -117,7 +118,7 @@ class _MyAppState extends State<MyApp> {
             '/about_us': (context) => AboutUsScreen(),
             '/chat': (context) => ChatScreen(),
             '/rate': (context) => RateScreen(),
-            '/add_activity': (context) => AddActivityScreen(),
+            '/add_activity': (context) => NewAddActivity(),
             '/market_details': (context) => MarketDetailsScreen(),
             '/display_image': (context) => DisplayImage(),
             '/add_offers': (context) => AddOffersScreen(),
