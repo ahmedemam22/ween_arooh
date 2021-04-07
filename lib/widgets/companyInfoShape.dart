@@ -143,34 +143,17 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
                         child: Column(
                           children: [
 
-                            add.oldMArket!=null? add.oldMArket['logo']!=null?DefaultImageShape(title: translator.translate(
-                  'company_logo'),
-                           logo: true,
-                  onSelectImage: add.addLogo,
-                 ):AddImageShape(title: translator.translate(
+                         AddImageShape(title: translator.translate(
                                 'company_logo'),
                                 images: add.logoImage,
                                 onSelectImage: add.addLogo,
-                            onRemoveImage:  add.removeLogo,):AddImageShape(title: translator.translate(
-                                'company_logo'),
-                              images: add.logoImage,
-                              onSelectImage: add.addLogo,
-                              onRemoveImage:  add.removeLogo,),
+                            onRemoveImage:  add.removeLogo,),
 
-                            add.oldMArket!=null? add.oldMArket['panner']!=null?DefaultImageShape(title: translator.translate(
-                                'main_banner'),
-                              logo: false,
-                              onSelectImage: add.addImageBanner,
-                            ): AddImageShape(title: translator.translate(
+                           AddImageShape(title: translator.translate(
                                 'main_banner'),
                               images: add.bannerImage,
                               onSelectImage: add.addImageBanner,
                             onRemoveImage: add.removeImageBanner,
-                            ):AddImageShape(title: translator.translate(
-                                'main_banner'),
-                              images: add.bannerImage,
-                              onSelectImage: add.addImageBanner,
-                              onRemoveImage: add.removeImageBanner,
                             ),
 
 
