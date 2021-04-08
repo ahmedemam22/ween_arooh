@@ -87,9 +87,15 @@ class AddRateShape extends StatelessWidget {
            await Provider.of<MarketDetailsProvider>(context, listen: false).addRate(
                 _commentCon.text,);
 
+
           /* await Dialogs().FN_showDetails_Dialog(context, translator.translate('success'), translator.translate('success_rate'),
            );*/
-           Navigator.pop(context);
+           Navigator.pop(context, true);    /*  await Dialogs().awsomeDialog(context: context,
+      title: translator.translate('success'),
+      type: DialogType.SUCCES,
+      desc: translator.translate('success_rate'),onClick:()=>Navigator.pop(context) );*/
+      
+
 
           },
 

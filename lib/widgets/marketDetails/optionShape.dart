@@ -15,6 +15,8 @@ class OptionShape extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -44,11 +46,13 @@ class OptionShape extends StatelessWidget {
                       desc: translator.translate('valid_login'),onClick: ()=>Navigator.pushNamed(context, '/login') );
                 }
                 else {
-                  await Dialogs().rateDialog(context);
-                  await Dialogs().awsomeDialog(context: context,
-                      title: translator.translate('success'),
-                      type: DialogType.SUCCES,
-                      desc: translator.translate('success_rate'));
+                bool check=  await Dialogs().rateDialog(context);
+
+               if(check) Dialogs().awsomeDialog(context: context,
+                    title: translator.translate('success'),
+                    type: DialogType.SUCCES,
+                    desc: translator.translate('success_rate'));
+
                 }
               },
               child: shape(translator.translate('add_rate'),"favorite")),

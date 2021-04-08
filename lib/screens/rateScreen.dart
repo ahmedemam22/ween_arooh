@@ -73,10 +73,14 @@ class _RateScreenState extends State<RateScreen> {
     child: InkWell(
     onTap: ()async{
 
-   await Dialogs().rateDialog(context);
-   await Dialogs().awsomeDialog(context:context, title:translator.translate('success'), type:DialogType.SUCCES,desc:translator.translate('success_rate'),
-   onClick: Provider.of<MarketDetailsProvider>(context,listen: false).getRates()
-   );
+      bool check=  await Dialogs().rateDialog(context);
+
+      if(check) Dialogs().awsomeDialog(context: context,
+          title: translator.translate('success'),
+          type: DialogType.SUCCES,
+          desc: translator.translate('success_rate'));
+
+
 
 
     },

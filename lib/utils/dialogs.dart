@@ -14,11 +14,13 @@ class Dialogs{
       dialogType:type,
       animType: AnimType.BOTTOMSLIDE,
       title: title,
+
       desc: desc,
       btnOkText: translator.translate('ok'),
 
 
       btnOkOnPress: () {
+        print('cliccccccccccck');
         onClick;
 
       },
