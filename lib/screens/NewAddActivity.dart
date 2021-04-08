@@ -64,6 +64,10 @@ class _NewAddActivityState extends State<NewAddActivity> {
   bool waitAddActivity=false;
   List<File> _bannerImage;
   List<File> _logoImage;
+  int _oldlogoImageId=-1;
+  String _oldlogoImageurl=null;
+  List<Images> _oldbannerImage=[];
+  List<int> _oldImages=[];
   List<Asset> images = List<Asset>();
   bool validCompanyName=true;
   bool validActivity=true;
@@ -75,7 +79,6 @@ class _NewAddActivityState extends State<NewAddActivity> {
   bool validMainPhoto=true;
   bool validBannerPhoto=true;
   bool validData=true;
-
   @override
   void initState() {
 
@@ -599,7 +602,6 @@ class _NewAddActivityState extends State<NewAddActivity> {
         TitleInputText(translator.translate('company_logo'), true,validMainPhoto),
         space(),
         DataInputType(
-
               Row(
                 children: [
                   InkWell(
@@ -609,7 +611,7 @@ class _NewAddActivityState extends State<NewAddActivity> {
                       child: Image.asset("assets/images/add.png")
                   ),
                   SizedBox(width: SizeConfig.screenWidth*s20,),
-                  if(imageURICompany != null)Expanded(
+                  if(imageURICompany != null|| _oldlogoImageId != -1)Expanded(
                     child: Container(
                       height: SizeConfig.screenWidth*s60,
                       child:  Stack(
@@ -623,10 +625,7 @@ class _NewAddActivityState extends State<NewAddActivity> {
                                     width: SizeConfig.screenWidth*s60,
                                      height: SizeConfig.screenWidth*s60,
                                     decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            fit: BoxFit.fill,
-                                            image: FileImage(imageURICompany)
-                                        )
+                                        image: logo_image(),
                                     )
                                     )
                                 ),
@@ -637,6 +636,19 @@ class _NewAddActivityState extends State<NewAddActivity> {
                                     onTap: (){
                                       setState(() {
                                         imageURICompany= null;
+                                        _oldlogoImageurl= null;
+                                        if(_oldlogoImageId != -1)
+                                          {
+                                            try
+                                                {
+                                                  _oldImages.remove(_oldlogoImageId);
+                                                }
+                                                catch(e){
+
+                                                }
+
+                                          }
+                                        _oldlogoImageId=-1;
                                       });
 
                                     },
@@ -678,18 +690,35 @@ class _NewAddActivityState extends State<NewAddActivity> {
                     child: Image.asset("assets/images/add.png")
                 ),
                 SizedBox(width: SizeConfig.screenWidth*s10,),
-                if(images != null)Expanded(
+  Expanded(
+  child:Container(
+  height: (images != null && images.length>0 && _oldImages != null && _oldImages.length>0)? SizeConfig.screenWidth*s120:SizeConfig.screenWidth*s60,
+      child: Column(
+    //crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    if(_oldImages != null&& _oldImages.length>0)Expanded(
+                      child: Container(
+                          height: SizeConfig.screenWidth*s60,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount:_oldbannerImage.length,
+                            itemBuilder: (ctx, i) => MainCategoryShape2(_oldbannerImage[i]),
+                          )
+
+                      ),
+                    ),
+                    if(images != null && images.length>0)Expanded(
                   child: Container(
                     height: SizeConfig.screenWidth*s60,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-  itemCount:images.length,
-    itemBuilder: (ctx, i) => MainCategoryShape(images[i]),
+                      itemCount:images.length,
+                      itemBuilder: (ctx, i) => MainCategoryShape(images[i]),
     )
 
                   ),
-                )
-
+                ),
+                  ])))
               ],
 
             )
@@ -701,7 +730,27 @@ class _NewAddActivityState extends State<NewAddActivity> {
 
   }
 
+  DecorationImage logo_image()
+  {
+    //case1 old image
+    if(_oldlogoImageId != -1)
+      {
+        return  DecorationImage(
+            fit: BoxFit.fill,
+            image: NetworkImage(_oldlogoImageurl)
+        );
+      }
+    //case 2 pick image
+    if(imageURICompany != null)
+    {
+      return  DecorationImage(
+          fit: BoxFit.fill,
+          image: FileImage(imageURICompany)
+      );
+    }
 
+
+  }
   underline()
   {
     return Style.continer;
@@ -737,6 +786,7 @@ class _NewAddActivityState extends State<NewAddActivity> {
     );
   }
 
+// new banner images
   MainCategoryShape(asset)
   {
     return Container(
@@ -765,6 +815,49 @@ class _NewAddActivityState extends State<NewAddActivity> {
     );
 
   }
+//old banner images
+  MainCategoryShape2(Images data)
+  {
+    return Container(
+        margin: const EdgeInsets.fromLTRB(10,0,10,0),
+        child:  Stack(
+          children: [
+            ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(8.0),
+                  topRight: Radius.circular(8.0),
+                ),
+                child:Container(
+                    width: SizeConfig.screenWidth*s60,
+                    height: SizeConfig.screenWidth*s60,
+                    decoration: BoxDecoration(
+                      image:    DecorationImage(
+                    fit: BoxFit.fill,
+                          image: NetworkImage(data.path)),
+                    )
+                )
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: InkWell(
+                child: Icon(Icons.close,color: Colors.red,size: SizeConfig.screenWidth*s20,),
+                onTap: (){
+                  setState(() {
+                    _oldbannerImage.remove(data);
+                    _oldImages.remove(data.id);
+                  });
+
+                },
+              ),
+            ),
+          ],
+        ),
+
+
+    );
+
+  }
+
 
   openDrawer() {
     _scaffoldKey.currentState.openDrawer();
@@ -786,12 +879,50 @@ class _NewAddActivityState extends State<NewAddActivity> {
   }
 
   Future getImageFromGallery() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      setState(() {
+        imageURICompany = image;
+        _oldlogoImageurl= null;
+        if(_oldlogoImageId != -1)
+        {
+          try
+          {
+            _oldImages.remove(_oldlogoImageId);
+          }
+          catch(e){
 
-    var image = await ImagePicker().getImage(source: ImageSource.gallery);
+          }
 
+        }
+        _oldlogoImageId=-1;
+        print(imageURICompany.path);
+      });
+    }
+  }
+
+
+  Future<void> pickImages() async {
+    List<Asset> resultList = List<Asset>();
+
+    try {
+      images = List<Asset>();
+      resultList = await MultiImagePicker.pickImages(
+        maxImages: 5,
+        enableCamera: false,
+        selectedAssets: images,
+        materialOptions: MaterialOptions(
+            actionBarTitle: "select images",
+            actionBarColor: "grey",
+            statusBarColor: "grey",
+            selectCircleStrokeColor: "red"
+        ),
+      );
+    } on Exception catch (e) {
+      print(e);
+    }
     setState(() {
-      imageURICompany = File(image.path);
-      print(imageURICompany.path);
+      images = resultList;
     });
   }
 
@@ -851,37 +982,19 @@ class _NewAddActivityState extends State<NewAddActivity> {
 
   }
 
-  Future<void> pickImages() async {
-    List<Asset> resultList = List<Asset>();
-
-    try {
-      images = List<Asset>();
-      resultList = await MultiImagePicker.pickImages(
-        maxImages: 5,
-        enableCamera: false,
-        selectedAssets: images,
-        materialOptions: MaterialOptions(
-            actionBarTitle: "select images",
-            actionBarColor: "grey",
-            statusBarColor: "grey",
-            selectCircleStrokeColor: "red"
-        ),
-      );
-    } on Exception catch (e) {
-      print(e);
-    }
-    setState(() {
-      images = resultList;
-    });
-  }
 
   Future<List<MultipartFile>>getData(List list)async{
+
     List<MultipartFile>item=[];
-    for(int i=0;i<list.length;i++){
-      item.add(await MultipartFile.fromFile(list[i].path, filename:list[i].path.split('/').last,));
-
+    if(list != null ) {
+      for (int i = 0; i < list.length; i++) {
+        item.add(
+            await MultipartFile.fromFile(list[i].path, filename: list[i].path
+                .split('/')
+                .last,));
+        print(item[i]);
+      }
     }
-
     return item;
   }
 
@@ -893,7 +1006,7 @@ class _NewAddActivityState extends State<NewAddActivity> {
     });
     print('1');
     if(validation()) {
-      if (images != null) {
+      if (images != null ) {
         _bannerImage = [];
         for (Asset asset in images) {
           final filePath = await FlutterAbsolutePath.getAbsolutePath(
@@ -902,7 +1015,7 @@ class _NewAddActivityState extends State<NewAddActivity> {
         }
       }
       print('2');
-      if (imageURICompany != null) {
+      if (imageURICompany != null ) {
         _logoImage = [];
         _logoImage.add(imageURICompany);
       }
@@ -926,6 +1039,8 @@ class _NewAddActivityState extends State<NewAddActivity> {
         print(twitterName.text);
         print(CategoryType.toString());
         print(GlopalApp.user.id);
+        print(_oldImages);
+
         FormData formData = FormData.fromMap({
           'region_id': _CityID.toString(),
           'city_id': _CityID.toString(),
@@ -945,8 +1060,10 @@ class _NewAddActivityState extends State<NewAddActivity> {
           'category_id': CategoryType.toString(),
           'admin_id': GlopalApp.user.id,
           'banners': await getData(_bannerImage),
-          'logos': await getData(_logoImage)
+          'logos': await getData(_logoImage),
+          'oldimages': _oldImages,
         });
+
         print('3');
         print({GlopalApp.token});
         var response = await Dio().post(BASE_URL + ADD_ACTIVITY, data: formData,
@@ -1063,23 +1180,48 @@ class _NewAddActivityState extends State<NewAddActivity> {
 
   void setData(NewUserMarketModelResult item)
   {
-    setState(() {
-      companyName.text= item.title;
-      _CityLongitude= item.longitude;
-      _CityLatitude= item.latitude;
-      LocationName.text= item.location;
-      _CityID = item.cityId;
-      _Cityselection=_Cityitems.where((element) => element.id==item.cityId).first.nameAr;
-      mobileName.text=item.mobile;
-      emailName.text=item.email;
-      websiteName.text=item.siteLink;
-      facebookName.text= item.facebook;
-      twitterName.text =item.twitter;
-      youtubeName.text =item.youtube;
-      linkedinName.text =item.linkedin;
-      brief_descriptionName.text=item.minDecAr;
-      detailed_descriptionName.text=item.decAr;
-    });
+    try {
+      setState(() {
+        companyName.text = item.title;
+        _CityLongitude = item.longitude;
+        _CityLatitude = item.latitude;
+        LocationName.text = item.location;
+        _CityID = item.cityId;
+        _Cityselection = _Cityitems
+            .where((element) => element.id == item.cityId)
+            .first
+            .nameAr;
+        mobileName.text = item.mobile;
+        emailName.text = item.email;
+        websiteName.text = item.siteLink;
+        facebookName.text = item.facebook;
+        twitterName.text = item.twitter;
+        youtubeName.text = item.youtube;
+        linkedinName.text = item.linkedin;
+        brief_descriptionName.text = item.minDecAr;
+        detailed_descriptionName.text = item.decAr;
+        if (item.images != null && item.images.length > 0) {
+          _oldbannerImage = [];
+          _oldImages = [];
+          bool firstlogo = false;
+          for (var imagedata in item.images) {
+            //type 2 logo , type 1 banner
+
+            if (imagedata.type == 2 && firstlogo == false) {
+              _oldlogoImageId = imagedata.id;
+              _oldlogoImageurl = imagedata.path;
+              _oldImages.add(imagedata.id);
+              firstlogo = true;
+            }
+            else if (imagedata.type == 1) {
+              _oldbannerImage.add(imagedata);
+              _oldImages.add(imagedata.id);
+            }
+          }
+        }
+      });
+    }
+    catch(e){}
   }
 
   void setEmptyData()
@@ -1102,6 +1244,10 @@ class _NewAddActivityState extends State<NewAddActivity> {
       detailed_descriptionName.text='';
       images=[];
      imageURICompany=null;
+     _oldImages=[];
+     _oldbannerImage=[];
+     _oldlogoImageId=-1;
+     _oldlogoImageurl=null;
     });
   }
 
@@ -1128,14 +1274,14 @@ class _NewAddActivityState extends State<NewAddActivity> {
         validData=false;//not valid
       });
     }
-    if(images == null || images.length==0)
+    if( _oldbannerImage == null && _oldbannerImage.length==0 && images == null && images.length==0 )
     {
       setState(() {
         validBannerPhoto=false;
         validData=false;//not valid
       });
     }
-    if(imageURICompany == null || imageURICompany.length==0)
+    if( _oldlogoImageId==-1 && imageURICompany == null && imageURICompany.length==0 )
     {
       setState(() {
         validMainPhoto=false;

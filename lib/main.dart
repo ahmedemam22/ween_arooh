@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/screens/NewAddActivity.dart';
+import 'package:ween_arooh/screens/NewAddOffer.dart';
 import 'screens/addOffersScreen.dart';
 import 'services/provider/AddOffersProvider.dart';
 import 'package:ween_arooh/screens/settingScreen.dart';
@@ -49,11 +50,13 @@ import 'screens/rateScreen.dart';
 Future<void> main() async {
   // if your flutter > 1.7.8 :  ensure flutter activated
   WidgetsFlutterBinding.ensureInitialized();
-  await translator.init(
+ /* await translator.init(
     localeDefault: LocalizationDefaultType.device,
     languagesList: <String>['ar', 'en'],
     assetsDirectory: 'assets/lang/',
-  );
+  );*/
+  LIST_OF_LANGS = ['ar', 'en'];  LANGS_DIR = 'assets/lang/'; // define directory
+   await translator.init();
  // intialize
 
   runApp(

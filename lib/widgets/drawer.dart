@@ -125,6 +125,7 @@ else{
             desc: translator.translate('valid_login'),onClick: ()=>Navigator.pushNamed(_context, '/login') );
       }
       else{
+        Navigator.pop(context);
       Navigator.pushNamed(_context, '/setting');}
     }
     else if (name == "offers") {
