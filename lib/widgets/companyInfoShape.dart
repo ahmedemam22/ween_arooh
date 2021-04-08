@@ -32,6 +32,10 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
 
   TextEditingController _countryCon=TextEditingController();
   TextEditingController _adminstrationCon=TextEditingController();
+  TextEditingController _faceCon=TextEditingController();
+  TextEditingController _twitterCon=TextEditingController();
+  TextEditingController _linkedCon=TextEditingController();
+  TextEditingController _youtubeCon=TextEditingController();
 
   TextEditingController _telphoneCon=TextEditingController();
 
@@ -118,7 +122,26 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
 
               ),
 
-          AddSocialMedia(),
+               Padding(
+              padding:  EdgeInsets.symmetric(vertical:8.0),
+            child: Container(
+            color: Colors.white,
+            child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+            Text(translator.translate('social_media')),
+            shape('facebook', _faceCon, 'facebook'),
+            shape('youtube', _youtubeCon, 'youtube'),
+            shape('linkedin', _linkedCon, 'linkedin'),
+            shape('twitter', _twitterCon, 'twitter'),
+            SizedBox(height: 15,)
+
+
+            ],
+            ),
+            ),
+            ),
 
           Padding(
             padding:  EdgeInsets.symmetric(vertical:8.0),
@@ -143,34 +166,17 @@ class _CompanyInfoShapeState extends State<CompanyInfoShape> {
                         child: Column(
                           children: [
 
-                            add.oldMArket!=null? add.oldMArket['logo']!=null?DefaultImageShape(title: translator.translate(
-                  'company_logo'),
-                           logo: true,
-                  onSelectImage: add.addLogo,
-                 ):AddImageShape(title: translator.translate(
+                         AddImageShape(title: translator.translate(
                                 'company_logo'),
                                 images: add.logoImage,
                                 onSelectImage: add.addLogo,
-                            onRemoveImage:  add.removeLogo,):AddImageShape(title: translator.translate(
-                                'company_logo'),
-                              images: add.logoImage,
-                              onSelectImage: add.addLogo,
-                              onRemoveImage:  add.removeLogo,),
+                            onRemoveImage:  add.removeLogo,),
 
-                            add.oldMArket!=null? add.oldMArket['panner']!=null?DefaultImageShape(title: translator.translate(
-                                'main_banner'),
-                              logo: false,
-                              onSelectImage: add.addImageBanner,
-                            ): AddImageShape(title: translator.translate(
+                           AddImageShape(title: translator.translate(
                                 'main_banner'),
                               images: add.bannerImage,
                               onSelectImage: add.addImageBanner,
                             onRemoveImage: add.removeImageBanner,
-                            ):AddImageShape(title: translator.translate(
-                                'main_banner'),
-                              images: add.bannerImage,
-                              onSelectImage: add.addImageBanner,
-                              onRemoveImage: add.removeImageBanner,
                             ),
 
 

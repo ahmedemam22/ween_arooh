@@ -9,7 +9,8 @@ class Api{
    String tokenn= 'Bearer ${GlopalApp.token}';
 
 
-  Future<Map>get(url,[token])async {
+  Future<Map>get(path,[token])async {
+    var url = Uri.parse(path);
 
     if(token!=null)tokenn='Bearer ${token}';
     print(tokenn);
@@ -23,11 +24,15 @@ class Api{
     return json.decode(response.body);
 
   }
-  dynamic getWithoutHeader(String url) async {
+  dynamic getWithoutHeader(String path) async {
+    var url = Uri.parse(path);
+
     http.Response response = await http.get(url);
     return response;
   }
-  Future<http.Response> post(url, data) async{
+  Future<http.Response> post(path, data) async{
+    var url = Uri.parse(path);
+
     return await http.post(
       url,
       headers: <String, String>{

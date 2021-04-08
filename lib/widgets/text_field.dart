@@ -61,6 +61,7 @@ class _TextFeldState extends State<TextFeld> {
                           )));
                 }
               },
+
               controller: widget.controller,
               readOnly: widget.keyy == "" || widget.keyy == "location",
               validator: (v) {
