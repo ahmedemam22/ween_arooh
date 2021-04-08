@@ -22,7 +22,7 @@ class MainCategoryShape extends StatelessWidget {
         child: Column(
           children: [
           FadeInImage.assetNetwork(
-          placeholder:"assets/images/ic_call.png",
+          placeholder:"",
           image: item.path??"",
 
 
