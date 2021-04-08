@@ -26,8 +26,8 @@ import 'dart:convert';
 import 'package:ween_arooh/utils/glopal_app.dart';
 import 'package:ween_arooh/network/constant.dart';
 import 'package:ween_arooh/network/api.dart';
-/*
 
+/*
 class NewAddOffer extends StatefulWidget {
 
 
@@ -49,8 +49,8 @@ class _NewAddOfferState extends State<NewAddOffer> {
   List<File> _DiscountImage;//data send
   List<Asset> Offerimages = List<Asset>();//data pick
   List<Asset> Discountimages = List<Asset>();// data pick
-  List<Asset> Offerimages = List<Asset>();//data pick
-  List<Asset> Discountimages = List<Asset>();// data pick
+  List<Offers> OldOfferimages = List<Offers>();//data pick
+  List<Offers> OldDiscountimages = List<Offers>();// data pick
   bool validOfferPhoto=true;
   bool validDiscountPhoto=true;
   bool validData=true;
