@@ -21,7 +21,7 @@ List<String>_item;
         CarouselSlider(
             items:List.generate(_item.length!=0?_item.length:1, (index) =>
                 FadeInImage.assetNetwork(
-                  placeholder: 'assets/images/imageSlider1.png',
+                  placeholder: '',
                   image: _item.length!=0?_item[index]??"":"",
                   height: SizeConfig.screenHeight,
                   width: SizeConfig.screenWidth,
@@ -64,11 +64,13 @@ List<String>_item;
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: List.generate( _item.length, (index) {
-            return Container(
-              width: 10,
-              height: 10,
-              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-              decoration: BoxDecoration(shape: BoxShape.circle, color: _cur==index?Colors.white:Colors.grey),
+            return Expanded(
+              child: Container(
+                width: 10,
+                height: 10,
+                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+                decoration: BoxDecoration(shape: BoxShape.circle, color: _cur==index?Colors.white:Colors.grey),
+              ),
             );
           }),
         ),

@@ -25,7 +25,7 @@ class MarketsShape extends StatelessWidget {
           child: Stack(
                     children: <Widget>[
                FadeInImage.assetNetwork(
-               placeholder:"assets/images/image_market.jpg",
+                 placeholder: '',
                  fit: BoxFit.fill,
                  image: _market.panner??"",
 

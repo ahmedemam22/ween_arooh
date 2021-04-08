@@ -95,7 +95,7 @@ class _OffersScreenState extends State<OffersScreen> {
                                         width: SizeConfig.screenWidth * s165,
                                         height: SizeConfig.screenHeight / 3,
                                         child: FadeInImage.assetNetwork(
-                                          placeholder: "assets/images/offers.jpg",
+                                          placeholder: "",
                                           fit: BoxFit.fill,
                                           image: item.offers[0].path ?? "",
 

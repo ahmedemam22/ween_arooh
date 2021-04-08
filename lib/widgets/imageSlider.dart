@@ -32,7 +32,7 @@ class ImageSlider extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/images/imageSlider1.png',
+                        placeholder: '',
                         image: url ?? "",
                         height: SizeConfig.screenHeight,
                         width: SizeConfig.screenWidth,
