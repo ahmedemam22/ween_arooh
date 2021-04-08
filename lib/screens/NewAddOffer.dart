@@ -26,7 +26,7 @@ import 'dart:convert';
 import 'package:ween_arooh/utils/glopal_app.dart';
 import 'package:ween_arooh/network/constant.dart';
 import 'package:ween_arooh/network/api.dart';
-
+/*
 
 class NewAddOffer extends StatefulWidget {
 
@@ -692,3 +692,4 @@ class _NewAddOfferState extends State<NewAddOffer> {
   }
 }
 
+*/
