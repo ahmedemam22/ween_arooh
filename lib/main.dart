@@ -49,11 +49,12 @@ import 'screens/rateScreen.dart';
 Future<void> main() async {
   // if your flutter > 1.7.8 :  ensure flutter activated
   WidgetsFlutterBinding.ensureInitialized();
-  await translator.init(
+ /* await translator.init(
     localeDefault: LocalizationDefaultType.device,
     languagesList: <String>['ar', 'en'],
     assetsDirectory: 'assets/lang/',
-  );
+  );*/
+  LIST_OF_LANGS = ['ar', 'en'];  LANGS_DIR = 'assets/lang/'; // define directory  await translator.init();
  // intialize
 
   runApp(

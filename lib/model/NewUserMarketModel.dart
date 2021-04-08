@@ -64,6 +64,7 @@ class NewUserMarketModelResult {
     this.branches,
     this.recomendations,
     this.category,
+    this.coupons
   });
 
   int id;
@@ -100,7 +101,8 @@ class NewUserMarketModelResult {
   int visitscount;
   int rate;
   List<Images> images;
-  List<dynamic> offers;
+  List<Offers> offers;
+  List<Offers> coupons;
   Admin admin;
   List<dynamic> branches;
   List<dynamic> recomendations;
@@ -140,8 +142,9 @@ class NewUserMarketModelResult {
     panner: json["panner"],
     visitscount: json["visitscount"],
     rate: json["rate"],
-    images: List<Images>.from(json["images"].map((x) => Images.fromJson(x))),
-    offers: List<dynamic>.from(json["offers"].map((x) => x)),
+    images: json["images"]!=null? List<Images>.from(json["images"].map((x) => Images.fromJson(x))):null,
+    offers: json["offers"]!=null? List<Offers>.from(json["offers"].map((x) => x)):null,
+    coupons: json["coupons"]!=null? List<Offers>.from(json["coupons"].map((x) => x)):null,
     admin: Admin.fromJson(json["admin"]),
     branches: List<dynamic>.from(json["branches"].map((x) => x)),
     recomendations: List<dynamic>.from(json["recomendations"].map((x) => x)),
@@ -354,51 +357,43 @@ class Category {
 class Images {
   Images({
     this.id,
-    this.marketId,
-    this.name,
     this.type,
-    this.periority,
-    this.pageLoca,
-    this.createdAt,
-    this.updatedAt,
-    this.deletedAt,
     this.path,
   });
 
   int id;
-  int marketId;
-  String name;
   int type;
-  int periority;
-  String pageLoca;
-  DateTime createdAt;
-  DateTime updatedAt;
-  dynamic deletedAt;
   String path;
 
   factory Images.fromJson(Map<String, dynamic> json) => Images(
     id: json["id"],
-    marketId: json["market_id"],
-    name: json["name"],
     type: json["type"],
-    periority: json["periority"],
-    pageLoca: json["page_loca"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
-    deletedAt: json["deleted_at"],
     path: json["path"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "market_id": marketId,
-    "name": name,
     "type": type,
-    "periority": periority,
-    "page_loca": pageLoca,
-    "created_at": createdAt.toIso8601String(),
-    "updated_at": updatedAt.toIso8601String(),
-    "deleted_at": deletedAt,
     "path": path,
   };
+}
+class Offers {
+  int id;
+  String path;
+
+  Offers(
+      {this.id,
+        this.path});
+
+  Offers.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    path = json['path'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['path'] = this.path;
+    return data;
+  }
 }
