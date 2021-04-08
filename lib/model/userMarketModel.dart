@@ -69,6 +69,7 @@ class Result {
     this.rate,
     this.images,
     this.offers,
+    this.coupons,
     this.admin,
     this.branches,
     this.recomendations,
@@ -78,18 +79,18 @@ class Result {
   int id;
   String titleAr;
   dynamic titleEn;
-  dynamic minDecAr;
+  String minDecAr;
   dynamic minDecEn;
-  dynamic decAr;
+  String decAr;
   dynamic decEn;
   double latitude;
   double longitude;
-  dynamic siteLink;
-  dynamic email;
-  dynamic facebook;
-  dynamic youtube;
-  dynamic twitter;
-  dynamic linkedin;
+  String siteLink;
+  String email;
+  String facebook;
+  String youtube;
+  String twitter;
+  String linkedin;
   int parentId;
   int categoryId;
   int adminId;
@@ -102,35 +103,36 @@ class Result {
   int cityId;
   int regionId;
   String title;
-  dynamic minDec;
-  dynamic dec;
+  String minDec;
+  String dec;
   String logo;
   String panner;
   int visitscount;
   int rate;
   List<Image> images;
-  List<dynamic> offers;
+  List<Offer> offers;
+  List<Coupon> coupons;
   Admin admin;
   List<dynamic> branches;
-  List<dynamic> recomendations;
+  List<Recomendation> recomendations;
   Category category;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     id: json["id"],
     titleAr: json["title_ar"],
     titleEn: json["title_en"],
-    minDecAr: json["min_dec_ar"],
+    minDecAr: json["min_dec_ar"] == null ? null : json["min_dec_ar"],
     minDecEn: json["min_dec_en"],
-    decAr: json["dec_ar"],
+    decAr: json["dec_ar"] == null ? null : json["dec_ar"],
     decEn: json["dec_en"],
     latitude: json["latitude"].toDouble(),
     longitude: json["longitude"].toDouble(),
-    siteLink: json["site_link"],
-    email: json["email"],
-    facebook: json["facebook"],
-    youtube: json["youtube"],
-    twitter: json["twitter"],
-    linkedin: json["linkedin"],
+    siteLink: json["site_link"] == null ? null : json["site_link"],
+    email: json["email"] == null ? null : json["email"],
+    facebook: json["facebook"] == null ? null : json["facebook"],
+    youtube: json["youtube"] == null ? null : json["youtube"],
+    twitter: json["twitter"] == null ? null : json["twitter"],
+    linkedin: json["linkedin"] == null ? null : json["linkedin"],
     parentId: json["parent_id"],
     categoryId: json["category_id"],
     adminId: json["admin_id"],
@@ -143,17 +145,18 @@ class Result {
     cityId: json["city_id"],
     regionId: json["region_id"],
     title: json["title"],
-    minDec: json["min_dec"],
-    dec: json["dec"],
+    minDec: json["min_dec"] == null ? null : json["min_dec"],
+    dec: json["dec"] == null ? null : json["dec"],
     logo: json["logo"],
     panner: json["panner"],
     visitscount: json["visitscount"],
     rate: json["rate"],
     images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
-    offers: List<dynamic>.from(json["offers"].map((x) => x)),
+    offers: List<Offer>.from(json["offers"].map((x) => Offer.fromJson(x))),
+    coupons: List<Coupon>.from(json["coupons"].map((x) => Coupon.fromJson(x))),
     admin: Admin.fromJson(json["admin"]),
     branches: List<dynamic>.from(json["branches"].map((x) => x)),
-    recomendations: List<dynamic>.from(json["recomendations"].map((x) => x)),
+    recomendations: List<Recomendation>.from(json["recomendations"].map((x) => Recomendation.fromJson(x))),
     category: Category.fromJson(json["category"]),
   );
 
@@ -161,18 +164,18 @@ class Result {
     "id": id,
     "title_ar": titleAr,
     "title_en": titleEn,
-    "min_dec_ar": minDecAr,
+    "min_dec_ar": minDecAr == null ? null : minDecAr,
     "min_dec_en": minDecEn,
-    "dec_ar": decAr,
+    "dec_ar": decAr == null ? null : decAr,
     "dec_en": decEn,
     "latitude": latitude,
     "longitude": longitude,
-    "site_link": siteLink,
-    "email": email,
-    "facebook": facebook,
-    "youtube": youtube,
-    "twitter": twitter,
-    "linkedin": linkedin,
+    "site_link": siteLink == null ? null : siteLink,
+    "email": email == null ? null : email,
+    "facebook": facebook == null ? null : facebook,
+    "youtube": youtube == null ? null : youtube,
+    "twitter": twitter == null ? null : twitter,
+    "linkedin": linkedin == null ? null : linkedin,
     "parent_id": parentId,
     "category_id": categoryId,
     "admin_id": adminId,
@@ -185,17 +188,18 @@ class Result {
     "city_id": cityId,
     "region_id": regionId,
     "title": title,
-    "min_dec": minDec,
-    "dec": dec,
+    "min_dec": minDec == null ? null : minDec,
+    "dec": dec == null ? null : dec,
     "logo": logo,
     "panner": panner,
     "visitscount": visitscount,
     "rate": rate,
     "images": List<dynamic>.from(images.map((x) => x.toJson())),
-    "offers": List<dynamic>.from(offers.map((x) => x)),
+    "offers": List<dynamic>.from(offers.map((x) => x.toJson())),
+    "coupons": List<dynamic>.from(coupons.map((x) => x.toJson())),
     "admin": admin.toJson(),
     "branches": List<dynamic>.from(branches.map((x) => x)),
-    "recomendations": List<dynamic>.from(recomendations.map((x) => x)),
+    "recomendations": List<dynamic>.from(recomendations.map((x) => x.toJson())),
     "category": category.toJson(),
   };
 }
@@ -360,6 +364,54 @@ class Category {
   };
 }
 
+class Coupon {
+  Coupon({
+    this.id,
+    this.code,
+    this.image,
+    this.percentage,
+    this.expireDate,
+    this.marketId,
+    this.createdAt,
+    this.updatedAt,
+    this.path,
+  });
+
+  int id;
+  String code;
+  String image;
+  dynamic percentage;
+  dynamic expireDate;
+  int marketId;
+  dynamic createdAt;
+  dynamic updatedAt;
+  String path;
+
+  factory Coupon.fromJson(Map<String, dynamic> json) => Coupon(
+    id: json["id"],
+    code: json["code"],
+    image: json["image"],
+    percentage: json["percentage"],
+    expireDate: json["expire_date"],
+    marketId: json["market_id"],
+    createdAt: json["created_at"],
+    updatedAt: json["updated_at"],
+    path: json["path"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "code": code,
+    "image": image,
+    "percentage": percentage,
+    "expire_date": expireDate,
+    "market_id": marketId,
+    "created_at": createdAt,
+    "updated_at": updatedAt,
+    "path": path,
+  };
+}
+
 class Image {
   Image({
     this.id,
@@ -409,5 +461,101 @@ class Image {
     "updated_at": updatedAt.toIso8601String(),
     "deleted_at": deletedAt,
     "path": path,
+  };
+}
+
+class Offer {
+  Offer({
+    this.id,
+    this.marketId,
+    this.code,
+    this.pic,
+    this.createdAt,
+    this.updatedAt,
+    this.deletedAt,
+    this.order,
+    this.path,
+  });
+
+  int id;
+  int marketId;
+  String code;
+  String pic;
+  DateTime createdAt;
+  DateTime updatedAt;
+  dynamic deletedAt;
+  int order;
+  String path;
+
+  factory Offer.fromJson(Map<String, dynamic> json) => Offer(
+    id: json["id"],
+    marketId: json["market_id"],
+    code: json["code"],
+    pic: json["pic"],
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: DateTime.parse(json["updated_at"]),
+    deletedAt: json["deleted_at"],
+    order: json["order"],
+    path: json["path"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "market_id": marketId,
+    "code": code,
+    "pic": pic,
+    "created_at": createdAt.toIso8601String(),
+    "updated_at": updatedAt.toIso8601String(),
+    "deleted_at": deletedAt,
+    "order": order,
+    "path": path,
+  };
+}
+
+class Recomendation {
+  Recomendation({
+    this.id,
+    this.marketId,
+    this.userId,
+    this.rate,
+    this.comment,
+    this.visitsCount,
+    this.createdAt,
+    this.updatedAt,
+    this.deletedAt,
+  });
+
+  int id;
+  int marketId;
+  int userId;
+  int rate;
+  String comment;
+  int visitsCount;
+  DateTime createdAt;
+  DateTime updatedAt;
+  dynamic deletedAt;
+
+  factory Recomendation.fromJson(Map<String, dynamic> json) => Recomendation(
+    id: json["id"],
+    marketId: json["market_id"],
+    userId: json["user_id"],
+    rate: json["rate"],
+    comment: json["comment"],
+    visitsCount: json["visits_count"],
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: DateTime.parse(json["updated_at"]),
+    deletedAt: json["deleted_at"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "market_id": marketId,
+    "user_id": userId,
+    "rate": rate,
+    "comment": comment,
+    "visits_count": visitsCount,
+    "created_at": createdAt.toIso8601String(),
+    "updated_at": updatedAt.toIso8601String(),
+    "deleted_at": deletedAt,
   };
 }

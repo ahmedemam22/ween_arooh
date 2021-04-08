@@ -53,8 +53,9 @@ class AddOffersScreen extends StatelessWidget {
                               color: lightGray,
                              width: SizeConfig.screenWidth,
                              child:  DropDown(items:Provider.of<AddActivityProvider>(context,listen: false).getUserMArketItems(),hint: translator.translate('choose_market'),
-                               onChange:Provider.of<AddActivityProvider>(context,listen: false).setSelectedMarket
-                                    ,))
+                               onChange:Provider.of<AddActivityProvider>(context,listen: false).setSelectedMarket,
+
+                                    ))
                                   // urgentServices_TextFieldOptions( translator.currentLanguage == "en" ? 'Services Type' : "نوع الخدمة", black),
 
                            ,
@@ -80,11 +81,12 @@ class AddOffersScreen extends StatelessWidget {
                             SizedBox(height: 10,),
 
 
-                            AddImageShape(title: translator.translate(
-                                'add_offers'),
-                                images: add.offerImage,
-                                onSelectImage: add.addOffers,
-                            onRemoveImage: add.removeOffers,),
+ AddImageShape(title: translator.translate(
+                                  'add_offers'),
+                                  images: add.totalOffers,
+                                  onSelectImage: add.addOffers,
+                              onRemoveImage: add.removeOffers,
+                            ),
                             SizedBox(
                               height: SizeConfig.screenWidth * s10,),
 
@@ -96,7 +98,7 @@ class AddOffersScreen extends StatelessWidget {
                         color: Colors.white,
                         child: Padding(
                           padding:  EdgeInsets.symmetric(horizontal:SizeConfig.screenWidth*s20),
-                          child: AddImageShape(title: translator.translate('add_copoun'),addCoupoun: true,images: add.copounImage,onSelectImage: add.addCopoun,
+                          child: AddImageShape(title: translator.translate('add_copoun'),addCoupoun: true,images: add.totalCoupons,onSelectImage: add.addCopoun,
                           onRemoveImage: add.removeCopoun,),
                         ),
 
@@ -109,7 +111,7 @@ class AddOffersScreen extends StatelessWidget {
                             height:  SizeConfig.screenWidth*s70,
                             child:  Center(child:add.waitAddOffer?CircularProgressIndicator(): InkWell(
                                 onTap: ()async{
-                                  if(add.offerImage.length==0&&add.copounImage.length==0){
+                                  if(add.totalOffers.length==0&&add.totalCoupons.length==0){
                                     Dialogs().awsomeDialog(context: context,title: translator.translate('sorry'),desc: translator.translate('valid_offers'),type: DialogType.ERROR);
                                   }
 
