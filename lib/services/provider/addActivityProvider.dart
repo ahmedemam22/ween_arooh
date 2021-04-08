@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:ween_arooh/services/provider/AddOffersProvider.dart';
 import 'dart:convert';
 import 'package:ween_arooh/utils/glopal_app.dart';
 import 'package:ween_arooh/utils/dialogs.dart';
@@ -221,6 +222,8 @@ print(branches.length);
   }
   setSelectedMarket(value,context){
     _selectedMarket=value;
+    Provider.of<AddOffersProvider>(context,listen: false).addTotalOffers(context);
+    Provider.of<AddOffersProvider>(context,listen: false).addTotalCoupons(context);
     notifyListeners();
 
 

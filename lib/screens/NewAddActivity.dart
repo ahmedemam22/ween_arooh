@@ -787,10 +787,10 @@ class _NewAddActivityState extends State<NewAddActivity> {
 
   Future getImageFromGallery() async {
 
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    var image = await ImagePicker().getImage(source: ImageSource.gallery);
 
     setState(() {
-      imageURICompany = image;
+      imageURICompany = File(image.path);
       print(imageURICompany.path);
     });
   }

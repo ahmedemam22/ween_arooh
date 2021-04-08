@@ -14,7 +14,7 @@ class AddImageShape extends StatelessWidget {
   final bool addCoupoun;
   final Function onSelectImage;
   final Function onRemoveImage;
-  final List<File>images;
+  final List<dynamic>images;
 
   const AddImageShape({Key key, this.title, this.addCoupoun=false, this.onSelectImage, this.images, this.onRemoveImage}) : super(key: key);
   @override
@@ -77,7 +77,7 @@ class AddImageShape extends StatelessWidget {
                                           decoration: BoxDecoration(
                                       image: DecorationImage(
                                       fit: BoxFit.fill,
-                                          image: FileImage(images[i],))))),
+                                          image:images[i]is String?NetworkImage(images[i]): FileImage(images[i],))))),
                                       Align(
                                         alignment: Alignment.topRight,
                                         child: InkWell(

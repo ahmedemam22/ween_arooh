@@ -30,29 +30,28 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
-  shared_preferences: ^0.5.12+4
-  multi_image_picker: ^4.7.15
+  shared_preferences: ^2.0.5
   flutter_absolute_path: ^1.0.6
-  http: ^0.12.2
+  multi_image_picker: ^4.8.0
 
 dev_dependencies:
 
   flutter_test:
     sdk: flutter
-  localize_and_translate: ^1.1.1+6
+  localize_and_translate: ^4.0.1
   flutter_localizations:
     sdk: flutter
     #translation package
   #provider package
   provider: ^4.3.2+2
   #http package
-  http: ^0.12.2
+  http: ^0.13.1
   #country ocde picker package
   country_code_picker: ^1.4.0
   #verfication code
   pin_code_fields: ^4.0.0
   #pick image from gallery or camera
-  image_picker: ^0.6.7+22
+  image_picker: ^0.7.4
   #make awesome dialog
   awesome_dialog: ^1.3.1
   flutter_dropdown: ^0.0.8
@@ -66,21 +65,21 @@ dev_dependencies:
   #page view
   page_view_indicators: ^1.4.1
   #svg format picture
-  flutter_svg: ^0.18.1
+  flutter_svg: ^0.21.0+1
   #dio
-  dio: ^3.0.10
+  dio: ^4.0.0
   #add rate
   flutter_rating_bar: ^3.2.0
   #launch url
-  url_launcher: ^5.7.10
+  url_launcher: ^6.0.3
   #google map
-  google_maps_flutter: ^1.2.0
-  flutter_launcher_icons: ^0.7.5
+  google_maps_flutter: ^2.0.3
+  flutter_launcher_icons: ^0.9.0
   #share by install apps
   share: 0.6.5+4
   #location
   geolocator: ^5.3.1
-  location: ^3.0.2
+  location: ^4.1.1
   latlong: ^0.6.1
   #display image in dialog
   rflutter_alert: ^1.1.0
@@ -121,20 +120,20 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-     - family: GESS
-       fonts:
-         - asset: assets/fonts/gess/GESS_Bold.otf
-         - asset: assets/fonts/gess/GESS_Light.otf
-         - asset: assets/fonts/gess/GESS_Two_Bold.otf
-  #         style: italic
-     - family: NUMBER
-       fonts:
-         - asset: assets/fonts/number_font.ttf
-     - family: DROID
-       fonts:
-         - asset: assets/fonts/droid-sans-arabic.ttf
-     - family: kARTIKA
-       fonts:
+    - family: GESS
+      fonts:
+        - asset: assets/fonts/gess/GESS_Bold.otf
+        - asset: assets/fonts/gess/GESS_Light.otf
+        - asset: assets/fonts/gess/GESS_Two_Bold.otf
+    #         style: italic
+    - family: NUMBER
+      fonts:
+        - asset: assets/fonts/number_font.ttf
+    - family: DROID
+      fonts:
+        - asset: assets/fonts/droid-sans-arabic.ttf
+    - family: kARTIKA
+      fonts:
         - asset: assets/fonts/kartika.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
