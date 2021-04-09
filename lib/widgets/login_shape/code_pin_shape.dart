@@ -15,7 +15,7 @@ class CodePinShape extends StatelessWidget {
           textDirection: TextDirection.ltr,
           child: PinCodeTextField(
             controller: controller,
-            textInputType: TextInputType.numberWithOptions(),
+            textInputType: TextInputType.phone,
         //    controller: _pinCodeController,
             length: 4,
             obsecureText: false,

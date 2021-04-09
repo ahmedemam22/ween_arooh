@@ -119,7 +119,6 @@ else{
       Provider.of<HomeProvider>(context,listen: false).changeIndex(0);
       Navigator.pushNamed(_context, '/main');}
     } else if (name == "setting") {
-      Navigator.pop(context);
       if(GlopalApp.user==null){
         Dialogs().awsomeDialogWithCancel(context: _context,type: DialogType.ERROR,title: translator.translate('sorry'),
             desc: translator.translate('valid_login'),onClick: ()=>Navigator.pushNamed(_context, '/login') );

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ween_arooh/model/offersModel.dart';
+import 'package:ween_arooh/utils/BoxDecoration.dart';
 import 'package:ween_arooh/utils/size_config.dart';
 import 'package:ween_arooh/utils/size_responsive.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
@@ -85,23 +87,36 @@ class _OffersScreenState extends State<OffersScreen> {
                                     var item = offers.offersSearch != null
                                         ? offers.offersSearch[i]
                                         : offers.offersItems[i];
+
                                     return InkWell(
                                       onTap: () {
                                         Navigator.pushNamed(
                                             context, '/display_image',
-                                            arguments: i);
+                                            arguments:ScreenArguments(item, count, offers.offersSearch != null? offers.offersSearch : offers.offersItems, i),);
                                       },
                                       child: Container(
                                         width: SizeConfig.screenWidth * s165,
                                         height: SizeConfig.screenHeight / 3,
-                                        child: FadeInImage.assetNetwork(
-                                          placeholder: "",
-                                          fit: BoxFit.fill,
-                                          image: item.offers[0].path ?? "",
+                                        child:
+                                        Column(
+                                          children: [
+                                            Expanded(
+                                       child: Container(
+                                          decoration: Style.BoxDecoration2,
+                                          margin: EdgeInsets.fromLTRB(0,0,0,5),
+                                          child:
+                                            FadeInImage.assetNetwork(
+                                              placeholder: "",
+                                              fit: BoxFit.fill,
+                                              image: item.offers[0].path ?? "",
+                                              width: SizeConfig.screenWidth * s165,
+                                              height: SizeConfig.screenHeight / 3,)),
+                                            ),
+                                            Text(item.titleAr )
 
+                                          ],
+                                        )
 
-                                          width: SizeConfig.screenWidth * s165,
-                                          height: SizeConfig.screenHeight / 3,),
 
                                       ),
                                     );

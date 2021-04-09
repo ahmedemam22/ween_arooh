@@ -82,7 +82,7 @@ class _TextFeldState extends State<TextFeld> {
 
 
               keyboardType: widget.keyy == "mobile" ||
-                  widget.keyy == "telephone"
+                  widget.keyy == "telephone" || widget.hintText=="mobile"
                   ? TextInputType.number
                   : TextInputType.name,
               onChanged: (value) {

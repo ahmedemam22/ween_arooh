@@ -1077,16 +1077,19 @@ class _NewAddActivityState extends State<NewAddActivity> {
         Map valueMap = jsonDecode(response.toString());
         if (valueMap["code"] == 200) {
 
-
-          Dialogs().awsomeDialog(context: context,
+          await Dialogs().awsomeDialog(context: context,
               type: DialogType.SUCCES,
               title: "اضف نشاطك",
               desc: "تم اضافة نشاطك بنجاح",
-            //  onClick:   Provider.of<HomeProvider>(context,listen: false).changeIndex(1)
               );
-
+         // Provider.of<HomeProvider>(context,listen: false).changeIndex(0);
           setEmptyData();
           setInit_validation();
+
+          setState(() {
+            _UserMarkets=[];
+            myFuture= getCategoryData();
+          });
         }
         else {
           await Dialogs().awsomeDialog(context: context,

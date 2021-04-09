@@ -10,7 +10,7 @@
 
         android:name="io.flutter.app.FlutterApplication"
         android:requestLegacyExternalStorage="true"
-        android:label="ween_arooh"
+        android:label="وين اروح"
         android:icon="@mipmap/launcher_icon">
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD6H6ofuJN7OpgVmYkwd6bbA6xRaK4UHzE"/>

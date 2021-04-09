@@ -227,3 +227,12 @@ class Offer {
     "path": path,
   };
 }
+
+class ScreenArguments {
+  final Result item;
+  final int ListCount;
+  final int StartIndex;
+  final List<Result> ListData;
+
+  ScreenArguments(this.item, this.ListCount, this.ListData, this.StartIndex);
+}

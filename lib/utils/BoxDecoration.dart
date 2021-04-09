@@ -9,6 +9,15 @@ class Style{
       bottom: BorderSide(width: 1.0, color: const Color(0xffaaaaaa)),
     ),
   );
+  static BoxDecoration BoxDecoration2= BoxDecoration(
+    border: Border(
+      bottom: BorderSide(width: 1.0, color: const Color(0xffaaaaaa)),
+      top: BorderSide(width: 1.0, color: const Color(0xffaaaaaa)),
+      right: BorderSide(width: 1.0, color: const Color(0xffaaaaaa)),
+      left: BorderSide(width: 1.0, color: const Color(0xffaaaaaa)),
+    ),
+  );
+
 
   static InputDecoration InputDecoration1=InputDecoration(
   hintText: '',

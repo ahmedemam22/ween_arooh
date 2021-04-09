@@ -36,7 +36,7 @@ class VerficationCodeScreen extends StatelessWidget {
           ),
           SizedBox(height: SizeConfig.screenWidth*s52,),
           CodePinShape(controller: _mobileController,),
-          Center(
+       /*   Center(
             child: Padding(
                 padding:  EdgeInsets.only(top:SizeConfig.screenWidth*s55),
                 child: Text(translator.translate('code_time_arrive'),
@@ -44,7 +44,7 @@ class VerficationCodeScreen extends StatelessWidget {
                       color: lightGrey
                   ),
                 )),
-          ),
+          ),*/
           SizedBox(height: SizeConfig.screenWidth*s26,),
 
     Consumer<RegisterProvider>(
@@ -59,7 +59,7 @@ class VerficationCodeScreen extends StatelessWidget {
 
     }),
           SizedBox(height: SizeConfig.screenWidth*s26,),
-
+/*
     Consumer<RegisterProvider>(
     builder: (context, register, child) {
          return register.waitResendCode?Center(child:CircularProgressIndicator()):InkWell(
@@ -67,7 +67,7 @@ class VerficationCodeScreen extends StatelessWidget {
               child: ButtonShape(translator.translate('send_code_again'), darkGrey));}
         ),
 
-
+*/
 
         ],
       ),
