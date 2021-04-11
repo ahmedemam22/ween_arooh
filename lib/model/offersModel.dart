@@ -71,6 +71,7 @@ class Result {
     this.visitscount,
     this.rate,
     this.offers,
+    this.coupons
   });
 
   int id;
@@ -107,7 +108,7 @@ class Result {
   int visitscount;
   int rate;
   List<Offer> offers;
-  List<Coupons> coupons;
+  List<CouponsData> coupons;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     id: json["id"],
@@ -144,6 +145,7 @@ class Result {
     visitscount: json["visitscount"],
     rate: json["rate"],
     offers: List<Offer>.from(json["offers"].map((x) => Offer.fromJson(x))),
+    coupons: List<CouponsData>.from(json["coupons"].map((x) => CouponsData.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -228,6 +230,26 @@ class Offer {
     "updated_at": updatedAt,
     "deleted_at": deletedAt,
     "order": order,
+    "path": path,
+  };
+}
+
+class CouponsData {
+  CouponsData({
+    this.id,
+    this.path,
+  });
+
+  int id;
+  String path;
+
+  factory CouponsData.fromJson(Map<String, dynamic> json) => CouponsData(
+    id: json["id"],
+    path: json["path"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
     "path": path,
   };
 }
