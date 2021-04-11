@@ -1070,8 +1070,8 @@ class _NewAddActivityState extends State<NewAddActivity> {
             options: Options(
                 method: 'POST', responseType: ResponseType.json, headers: {
               HttpHeaders.authorizationHeader: 'Bearer ${GlopalApp.token}'
-            }))
-            .timeout(Duration(seconds: 2000));
+            }));
+          //  .timeout(Duration(seconds: 2000));
         print('yeeeeeeeeeeeees');
         print(jsonDecode(response.toString()));
         Map valueMap = jsonDecode(response.toString());

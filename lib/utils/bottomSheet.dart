@@ -57,10 +57,10 @@ showChooses(BuildContext context) {
       });
 }
 _getImage(ImageSource source,context) async{
-  final pickedFile = await ImagePicker().getImage(source:source);
+  final pickedFile = await ImagePicker.pickImage(source:source);
 
     if (pickedFile != null) {
-     Provider.of<UserProvider>(context,listen: false).setImageProfile( File(pickedFile.path));
+     Provider.of<UserProvider>(context,listen: false).setImageProfile(pickedFile);
     }
     Navigator.pop(context);
 

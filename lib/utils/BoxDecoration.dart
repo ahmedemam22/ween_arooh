@@ -32,5 +32,11 @@ class Style{
     margin: const EdgeInsets.fromLTRB(0,0,0,10),
   );
 
+  static Container continer2=Container(
+    width: SizeConfig.screenWidth,
+    height: 1,
+    color: Colors.black12,
+    margin: const EdgeInsets.fromLTRB(0,0,0,10),
+  );
   static TextStyle TextStyle1= TX_STYLE_black_14Point5;
 }

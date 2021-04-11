@@ -93,5 +93,8 @@
   "select_city_invalid": "من فضلك اختر الدولة اولا",
   "add_offers_invalid": "قم بتسجيل نشاط اولا",
   "unknown_user": "غير معروف",
-  "valid_login": "من فضلك سجل اولا"
+  "valid_login": "من فضلك سجل اولا",
+  "add_video": "اضف فيديو",
+  "add_photo": "اضف صور",
+  "discount": "الخصومات"
 }

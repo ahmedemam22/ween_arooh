@@ -43,11 +43,6 @@
   "no_markets": "There are no markets currently",
   "no_offers": "There are no offers currently",
 
-
-
-
-
-
   "sort_by_rate": "By Rate ",
 
   "code_time_arrive": "Code Time Arrive:0 sec",
@@ -103,5 +98,8 @@
   "update_profile": "Your Profile is updated",
   "success": "Success",
   "choose_branch": "Choose Branch",
-  "add_data": "Add data"
+  "add_data": "Add data",
+  "add_video": "Add Videos",
+  "add_photo": "Add Photos",
+  "discount": "Coupons"
 }

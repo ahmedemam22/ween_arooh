@@ -3,6 +3,9 @@
 //     final offersModel = offersModelFromJson(jsonString);
 
 import 'dart:convert';
+import 'dart:io';
+
+import 'package:ween_arooh/model/NewUserMarketModel.dart';
 
 OffersModel offersModelFromJson(String str) => OffersModel.fromJson(json.decode(str));
 
@@ -104,6 +107,7 @@ class Result {
   int visitscount;
   int rate;
   List<Offer> offers;
+  List<Coupons> coupons;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     id: json["id"],
@@ -235,4 +239,12 @@ class ScreenArguments {
   final List<Result> ListData;
 
   ScreenArguments(this.item, this.ListCount, this.ListData, this.StartIndex);
+}
+
+class VideoArguments {
+  final File Fileitem;
+  final bool network;
+  final Offers Offeritem;
+
+  VideoArguments(this.Fileitem, this.network, this.Offeritem);
 }

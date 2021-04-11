@@ -6,6 +6,7 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:provider/provider.dart';
 import 'package:ween_arooh/screens/NewAddActivity.dart';
 import 'package:ween_arooh/screens/NewAddOffer.dart';
+import 'package:ween_arooh/widgets/addVideoShape.dart';
 import 'screens/addOffersScreen.dart';
 import 'services/provider/AddOffersProvider.dart';
 import 'package:ween_arooh/screens/settingScreen.dart';
@@ -126,7 +127,8 @@ class _MyAppState extends State<MyApp> {
             '/add_activity': (context) => NewAddActivity(),
             '/market_details': (context) => MarketDetailsScreen(),
             '/display_image': (context) => DisplayImage(),
-            '/add_offers': (context) => AddOffersScreen(),
+            '/display_video': (context) => VideoPlayerScreen(),
+            '/add_offers': (context) => NewAddOffer(),
 
           },
           debugShowCheckedModeBanner: false,

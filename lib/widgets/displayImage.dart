@@ -11,6 +11,7 @@ class DisplayImage extends StatefulWidget {
 class _DisplayImageState extends State<DisplayImage> {
 int _currentIndex=0;
 int _index=0;
+int _indexCoupon=0;
 List<Result> _market=[];
 int listLength=0;
 String imagePath= "";
@@ -38,12 +39,11 @@ Result item;
               setState(() {
                 print(_currentIndex);
                 print(listLength-1);
-                if(_currentIndex< listLength-1){
+                if(_market[_currentIndex].offers!= null  && _index < _market[_currentIndex].offers.length-1){
                   print('add image');
-                  _currentIndex++;
+                  _index++;
                   imagePath= _market[_currentIndex].offers[_index].path;
                 }
-
                 else Navigator.pop(context);
               });
 

@@ -6,15 +6,15 @@ import 'dart:io';
 import 'package:ween_arooh/services/provider/registerProvider.dart';
 class SelectImage{
   Future getImage(source,context) async {
-    final pickedFile = await ImagePicker().getImage(source: source);
-    Provider.of<RegisterProvider>(context,listen: false).setImage( File(pickedFile.path));
+    final pickedFile = await ImagePicker.pickImage(source: source);
+    Provider.of<RegisterProvider>(context,listen: false).setImage( pickedFile);
     Navigator.pop(context);
 
 
   }
   Future setImage(context,Function add) async {
-    final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
-    add(File(pickedFile.path));
+    final pickedFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+    add(pickedFile);
 
 
 

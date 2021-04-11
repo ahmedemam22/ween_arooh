@@ -106,7 +106,7 @@ class _AppDrawerState extends State<AppDrawer> {
     // widget._changeScreen();
     Navigator.pop(context);
   }
-  _route(String name) {
+  _route(String name) async{
     if (name == 'lang') {
       _changeLanguage();
     } else if (name == "add_activity") {
@@ -133,6 +133,8 @@ else{
             desc: translator.translate('valid_login'),onClick:()=> Navigator.pushNamed(_context, '/login') );
       }
 
+      print('userMarkets.length');
+      print(Provider.of<AddActivityProvider>(_context,listen: false).userMarkets.length);
       if(Provider.of<AddActivityProvider>(_context,listen: false).userMarkets.length==0){
         Dialogs().awsomeDialog(context: _context,type: DialogType.ERROR,title: translator.translate('sorry'),
        desc: translator.translate('add_offers_invalid'),onClick: Navigator.pushNamed(_context, '/add_activity') );
